@@ -1,0 +1,49 @@
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+### IntelliJ IDEA ###
+.idea/
+*.idea
+*.iws
+*.iml
+*.ipr
+
+### VS Code ###
+*.vscode
+
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+.mvn
+
+### Environment properties
+src/main/resources/application-dev.properties
+src/main/resources/application-test.properties
+src/main/resources/application-prod.properties
+
+### React stuff
+src/main/react/build/
+src/main/react/node_modules/
+
+.DS_Store
+src/main/react/.env.local
+src/main/react/.env.development.local
+src/main/react/.env.test.local
+src/main/react/.env.production.local
+
+src/main/react/npm-debug.log*
+src/main/react/yarn-debug.log*
+src/main/react/yarn-error.log*
+/.metadata/
