@@ -1,13 +1,10 @@
 {
   "plugins": [
     "react",
-    "jasmine",
-    "chai-friendly",
     "flowtype"
   ],
   "extends": [
     "airbnb",
-    "plugin:jasmine/recommended",
     "plugin:flowtype/recommended"
   ],
   "rules": {
@@ -24,7 +21,6 @@
     "react/jsx-indent": 0,
     "react/jsx-indent-props": 0,
     "no-unused-expressions": 0,
-    "chai-friendly/no-unused-expressions": 2,
     "react/jsx-filename-extension": [
       1,
       {
@@ -44,8 +40,7 @@
   },
   "env": {
     "browser": true,
-    "commonjs": true,
-    "jasmine": true
+    "commonjs": true
   },
   "parserOptions": {
     "ecmaFeatures": {

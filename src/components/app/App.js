@@ -1,10 +1,11 @@
 // @flow
 import React from 'react';
 import { Provider } from 'react-redux';
+import Home from './home/Home';
 
 const App = ({ store }: any) => (
     <Provider store={store}>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci alias dolor exercitationem officia rem, voluptatibus.</p>
+        <Home />
     </Provider>
 );
 
