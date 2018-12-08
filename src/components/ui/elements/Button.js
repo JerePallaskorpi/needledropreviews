@@ -7,13 +7,14 @@ export const Button = styled.button`
     border: 0;
     padding: 1rem;
     transition: 0.3s;
-    margin: 1em 0;
+    margin: 0.25rem;
     color: ${styles.colorLight};
     background: ${styles.colorMain};
     border-radius: 2px;
     -webkit-box-shadow: ${styles.shadowDefault};
     -moz-box-shadow: ${styles.shadowDefault};
     box-shadow: ${styles.shadowDefault};
+    width: 100%;
     
     ${props => props.flat && css`
         color: ${styles.colorMain};

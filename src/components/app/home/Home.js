@@ -1,6 +1,6 @@
 // @flow
 import React, { Component, Fragment } from 'react';
-import { initClient, getVideoPlaylist } from '../../../api/auth';
+import { getAlbums } from '../../../api/album';
 import { Button } from '../../ui/elements/Button';
 
 type State = {
@@ -11,6 +11,8 @@ type State = {
 const initialState = {
     user: '',
     channel: null,
+    albumReviews: [],
+    filteredReviews: [],
 };
 
 class Home extends Component<null, State> {
@@ -19,48 +21,50 @@ class Home extends Component<null, State> {
         this.state = { ...initialState };
 
         this.handleLoginClick = this.handleLoginClick.bind(this);
-        this.handleLogoutClick = this.handleLogoutClick.bind(this);
     }
 
     async componentDidMount() {
-        const channel = await initClient();
-        this.setState({ channel });
+        const albumReviews = await getAlbums();
+        this.setState({ albumReviews, filteredReviews: albumReviews });
     }
 
-    async handleLoginClick() {
-        this.setState({ user: 'Jere' });
-        const data = await getVideoPlaylist('UUt7fwAhXDy3oNFTAzF2o8Pw');
-        console.log(data);
-        this.setState({
-            albumReviews: data.albumReviews,
-        });
-    }
+    async handleLoginClick(rating: number) {
+        const { albumReviews } = this.state;
 
-    handleLogoutClick() {
-        this.setState({ user: '' });
+        this.setState({ filteredReviews: albumReviews.filter(a => a.details.rating === rating) });
     }
 
     render() {
-        const { user, channel, albumReviews } = this.state;
+        const { filteredReviews } = this.state;
 
         return (
             <Fragment>
-                {channel && <h3>{channel.result.items[0].snippet.title}</h3>}
-                {channel && <p>{channel.result.items[0].snippet.description}</p>}
-                <Button style={{ width: '100%' }} onClick={this.handleLoginClick}>Latest 100</Button>
-                {albumReviews && albumReviews.map(asd => (
-                    <div style={{
-                        padding: '0.5rem', marginTop: '0.5rem', background: '#f1f1f1', display: 'flex', justifyContent: 'space-between',
-                    }}
-                    >
-                        <div>
-                            {`${asd.snippet.title.replace('ALBUM REVIEW', '').trim()}`}
+                <div style={{
+                    padding: '0.5rem', marginTop: '0.5rem', display: 'flex', justifyContent: 'space-between',
+                }}
+                >
+                    <Button onClick={() => this.handleLoginClick(0)}>0</Button>
+                    <Button onClick={() => this.handleLoginClick(1)}>1</Button>
+                    <Button onClick={() => this.handleLoginClick(2)}>2</Button>
+                    <Button onClick={() => this.handleLoginClick(3)}>3</Button>
+                    <Button onClick={() => this.handleLoginClick(4)}>4</Button>
+                    <Button onClick={() => this.handleLoginClick(5)}>5</Button>
+                    <Button onClick={() => this.handleLoginClick(6)}>6</Button>
+                    <Button onClick={() => this.handleLoginClick(7)}>7</Button>
+                    <Button onClick={() => this.handleLoginClick(8)}>8</Button>
+                    <Button onClick={() => this.handleLoginClick(9)}>9</Button>
+                    <Button onClick={() => this.handleLoginClick(10)}>10</Button>
+                </div>
+                {filteredReviews && filteredReviews.map(review => (
+                    <div style={{ display: 'flex', justifyContent: 'space-between', padding: '1rem', background: '#f1f1f1', color: '#282828', borderLeft: '6px solid #FF0000', boxShadow: '0 2px 4px 0 hsla(0, 0%, 0%, 0.4)', margin: '0.75rem' }}>
+                        <div style={{ flex: 1 }}>
+                            {review.details.artist}
                         </div>
-                        <div>
-                            {`${asd.snippet.description
-                                .split('/10')[0]
-                                .substring(asd.snippet.description.split('/10')[0].length - 2)
-                                .trim()}/10`}
+                        <div style={{ flex: 1 }}>
+                            {review.details.album}
+                        </div>
+                        <div style={{ flex: 1, textAlign: 'right' }}>
+                            <span>{review.details.rating}</span>
                         </div>
                     </div>
                 ))}
