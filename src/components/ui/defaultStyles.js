@@ -1,23 +1,24 @@
 import { createGlobalStyle } from 'styled-components';
 
 // Colors
-export const colorMain = '#e42835';
-export const colorDark = '#191414';
-export const colorLight = '#FFFFFF';
+export const colorMain = '#FDF18B';
+export const colorDark = '#282828';
+export const colorLight = '#FAFAFA';
 
-export const colorMainHighlight = '#dd2835';
+export const colorMainHighlight = '#fadd83';
 
 // Shadows
 export const shadowDefault = '0 2px 4px 0 hsla(0, 0%, 0%, 0.4)';
+export const shadowStrong = '0 2px 6px 0 hsla(0, 0%, 0%, 0.6)';
 
 // Global Styles
-createGlobalStyle`
+export const GlobalStyle = createGlobalStyle`
   body {
     margin: 0 auto;
-    font-family: 'Montserrat', Helvetica, Arial, sans-serif;
+    font-family: 'Roboto', Helvetica, Arial, sans-serif;
     font-size: 16px;
-    background: ${colorDark};
-    color: ${colorLight};
+    background: ${colorLight};
+    color: ${colorDark};
 
     input, select, textarea, button {
         font-family: inherit;

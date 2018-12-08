@@ -8,7 +8,7 @@ export const Button = styled.button`
     padding: 1rem;
     transition: 0.3s;
     margin: 0.25rem;
-    color: ${styles.colorLight};
+    color: ${styles.colorDark};
     background: ${styles.colorMain};
     border-radius: 2px;
     -webkit-box-shadow: ${styles.shadowDefault};
