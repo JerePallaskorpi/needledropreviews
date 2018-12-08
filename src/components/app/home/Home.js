@@ -21,6 +21,7 @@ class Home extends Component<null, State> {
         this.state = { ...initialState };
 
         this.handleLoginClick = this.handleLoginClick.bind(this);
+        this.handleTextChange = this.handleTextChange.bind(this);
     }
 
     async componentDidMount() {
@@ -31,7 +32,22 @@ class Home extends Component<null, State> {
     async handleLoginClick(rating: number) {
         const { albumReviews } = this.state;
 
-        this.setState({ filteredReviews: albumReviews.filter(a => a.details.rating === rating) });
+        this.setState({
+            filteredReviews: albumReviews
+                .filter(a => a.details.rating === rating),
+        });
+    }
+
+    handleTextChange(evt: string) {
+        const { albumReviews } = this.state;
+
+        console.log(evt.target.value);
+        console.log(albumReviews);
+
+        this.setState({
+            filteredReviews: albumReviews
+                .filter(a => a.title.toLowerCase().includes(evt.target.value.toLowerCase())),
+        });
     }
 
     render() {
@@ -39,6 +55,19 @@ class Home extends Component<null, State> {
 
         return (
             <Fragment>
+                <div style={{
+                    margin: '0 1rem', display: 'flex', justifyContent: 'space-between',
+                }}
+                >
+                    <input
+                        style={{
+                            padding: '0.5rem', width: '100%',
+                        }}
+                        type="text"
+                        onChange={evt => this.handleTextChange(evt)}
+                    />
+                </div>
+
                 <div style={{
                     padding: '0.5rem', marginTop: '0.5rem', display: 'flex', justifyContent: 'space-between',
                 }}
@@ -56,7 +85,10 @@ class Home extends Component<null, State> {
                     <Button onClick={() => this.handleLoginClick(10)}>10</Button>
                 </div>
                 {filteredReviews && filteredReviews.map(review => (
-                    <div style={{ display: 'flex', justifyContent: 'space-between', padding: '1rem', background: '#f1f1f1', color: '#282828', borderLeft: '6px solid #FF0000', boxShadow: '0 2px 4px 0 hsla(0, 0%, 0%, 0.4)', margin: '0.75rem' }}>
+                    <div style={{
+                        display: 'flex', justifyContent: 'space-between', padding: '1rem', background: '#f1f1f1', color: '#282828', borderLeft: '6px solid #FF0000', boxShadow: '0 2px 4px 0 hsla(0, 0%, 0%, 0.4)', margin: '0.75rem',
+                    }}
+                    >
                         <div style={{ flex: 1 }}>
                             {review.details.artist}
                         </div>
