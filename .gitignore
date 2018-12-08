@@ -19,3 +19,28 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+### IntelliJ IDEA ###
+.idea/
+*.idea
+*.iws
+*.iml
+*.ipr
+
+### VS Code ###
+*.vscode
+
+### NetBeans ###
+nbproject/private/
+build/
