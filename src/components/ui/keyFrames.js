@@ -24,7 +24,7 @@ export const makeItFullscreen = (x, y) => keyframes`
     }
 `;
 
-export const leaveFullscreen = (x, y) => keyframes`
+export const exitFullscreen = (x, y) => keyframes`
     0% {
         position: fixed;
         top: 0;
@@ -42,14 +42,6 @@ export const leaveFullscreen = (x, y) => keyframes`
         position: fixed;
         right: 0;
         width: calc(50% - 2rem);
-        top: calc(${y - 16}px);
-    }
-`;
-
-export const albumInitial = keyframes`
-    from {
-        opacity: 1;
-    } to {
-        opacity: 1;
+        top: calc(${y - 48}px);
     }
 `;

@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import { ratingDetails } from '../../../../utils/rating';
 import * as styles from '../../defaultStyles';
-import { makeItFullscreen, albumInitial, leaveFullscreen } from '../../keyFrames';
+import { makeItFullscreen, exitFullscreen } from '../../keyFrames';
 
 const AlbumWrapper = styled.div`
     display: flex;
@@ -18,7 +18,7 @@ const SingleAlbumWrapper = styled.div`
     box-shadow: ${styles.shadowDefault};
     border-radius: 5px;
     background: #FFFFFF;
-    opacity: ${props => props.hidden ? 0 : 1}
+    opacity: ${props => (props.hidden ? 0 : 1)}
      
     
     ${props => props.fullscreen && css`
@@ -29,10 +29,10 @@ const SingleAlbumWrapper = styled.div`
     `};
     
     ${props => props.leaveFullscreen && css`
-        -webkit-animation: ${leaveFullscreen(props.leaveFullscreen.x, props.leaveFullscreen.y)} 1s;
-        -moz-animation: ${leaveFullscreen(props.leaveFullscreen.x, props.leaveFullscreen.y)} 1s;
-        -o-animation: ${leaveFullscreen(props.leaveFullscreen.x, props.leaveFullscreen.y)} 1s;
-        animation: ${leaveFullscreen(props.leaveFullscreen.x, props.leaveFullscreen.y)} 1s;
+        -webkit-animation: ${exitFullscreen(props.leaveFullscreen.x, props.leaveFullscreen.y)} 1s;
+        -moz-animation: ${exitFullscreen(props.leaveFullscreen.x, props.leaveFullscreen.y)} 1s;
+        -o-animation: ${exitFullscreen(props.leaveFullscreen.x, props.leaveFullscreen.y)} 1s;
+        animation: ${exitFullscreen(props.leaveFullscreen.x, props.leaveFullscreen.y)} 1s;
     `}
     
     &:hover {
@@ -91,7 +91,7 @@ const Cover = styled.div`
         height: 75px;
         width: 75px;
         min-width: 75px;
-    }
+    };
 `;
 
 const Text = styled.div`
@@ -133,9 +133,6 @@ const Rating = styled.div`
         width: 75px;
         min-width: 75px;
     }
-};
-    
-    
 `;
 
 AlbumWrapper.SingleAlbumWrapper = SingleAlbumWrapper;
