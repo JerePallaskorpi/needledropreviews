@@ -7,6 +7,7 @@ export const makeItFullscreen = (x, y) => keyframes`
         right: 0;
         width: calc(50% - 1rem);
         top: calc(${y}px);
+        height: 100px;
     } 50% {
         //top: calc(100px + 4rem);
         //position: fixed;
@@ -43,5 +44,6 @@ export const exitFullscreen = (x, y) => keyframes`
         right: 0;
         width: calc(50% - 2rem);
         top: calc(${y - 48}px);
+        height: 100px;
     }
 `;
