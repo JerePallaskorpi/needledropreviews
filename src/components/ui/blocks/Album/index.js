@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import { ratingDetails } from '../../../../utils/rating';
 import * as styles from '../../defaultStyles';
 import {
-    makeItFullscreen, exitFullscreen, showDetails, exitDetails, albumEnterFullscreen, albumExitFullscreen
+    makeItFullscreen, exitFullscreen, showDetails, exitDetails, albumEnterFullscreen, albumExitFullscreen,
 } from '../../keyFrames';
 
 const AlbumWrapper = styled.div`
@@ -35,7 +35,7 @@ const SingleAlbumWrapper = styled.div`
         -moz-animation: ${exitFullscreen(props.leaveFullscreen.x, props.leaveFullscreen.y)} 0.5;
         -o-animation: ${exitFullscreen(props.leaveFullscreen.x, props.leaveFullscreen.y)} 0.5s;
         animation: ${exitFullscreen(props.leaveFullscreen.x, props.leaveFullscreen.y)} 0.5s;
-    `}
+    `};
     
     @media only screen and (max-width: 1100px) {
         height: 75px;
@@ -82,17 +82,15 @@ const Album = styled.div`
         
         @media only screen and (max-width: 764px) {
             background: ${({ rating, fullscreen }) => (fullscreen
-                ? ratingDetails.some(r => r.score === rating)
+        ? ratingDetails.some(r => r.score === rating)
                     && ratingDetails.find(r => r.score === rating).color
-                : '#FFFFFF')};
+        : '#FFFFFF')};
         } 
     }
     
     @media only screen and (max-width: 1100px) {
         height: 75px;
     }
-    
-
 `;
 
 const Cover = styled.div`
@@ -102,8 +100,9 @@ const Cover = styled.div`
     padding: 0;
     border-radius: 5px 0 0 5px;
     
-    ${({ thumbnail }) => css`
-        background-image: url(${thumbnail});
+    ${({ thumbnail, coverArt }) => css`
+        background-color: ${styles.colorDark};
+        background-image: url(${(coverArt ? thumbnail : 'https://66.media.tumblr.com/avatar_91da58554fa4_128.pnj')});
         background-repeat: no-repeat;
         background-position: center; 
         background-size: cover;
@@ -212,9 +211,18 @@ const Content = styled.div`
     padding: 1rem;
     line-height: 2em;
     overflow: auto;
+    background: ${styles.colorLight};
     
     div {
       overflow: auto;
+    }
+    
+    p {
+        box-shadow: 0 1px 2px 0 hsla(0, 0%, 0%, 0.1);
+        padding: 1em;
+        margin: 2em 0;
+        background: #FFFFFF;
+        border-radius: 10px 0 0 10px;
     }
     
     p:first-of-type {
