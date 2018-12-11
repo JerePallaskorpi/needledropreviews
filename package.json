@@ -16,7 +16,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && jest -u",
+    "build": "react-scripts build",
     "test": "jest -u",
     "eject": "react-scripts eject",
     "flow": "flow",
