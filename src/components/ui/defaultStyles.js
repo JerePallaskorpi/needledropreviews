@@ -2,6 +2,7 @@ import { createGlobalStyle } from 'styled-components';
 
 // Colors
 export const colorMain = '#FDF18B';
+export const colorWorst = '#db2736';
 export const colorDark = '#282828';
 export const colorLight = '#FAFAFA';
 

@@ -1,7 +1,9 @@
 import styled, { css } from 'styled-components';
 import { ratingDetails } from '../../../../utils/rating';
 import * as styles from '../../defaultStyles';
-import { makeItFullscreen, exitFullscreen } from '../../keyFrames';
+import {
+    makeItFullscreen, exitFullscreen, showDetails, exitDetails, albumEnterFullscreen, albumExitFullscreen
+} from '../../keyFrames';
 
 const AlbumWrapper = styled.div`
     display: flex;
@@ -18,27 +20,22 @@ const SingleAlbumWrapper = styled.div`
     box-shadow: ${styles.shadowDefault};
     border-radius: 5px;
     background: #FFFFFF;
-    opacity: ${props => (props.hidden ? 0 : 1)}
-     
+    opacity: ${props => (props.hidden ? 0 : 1)};
+    flex-direction: column;
     
     ${props => props.fullscreen && css`
-        -webkit-animation: ${makeItFullscreen(props.fullscreen.x, props.fullscreen.y)} 0.6s forwards;
-        -moz-animation: ${makeItFullscreen(props.fullscreen.x, props.fullscreen.y)} 0.6s forwards;
-        -o-animation: ${makeItFullscreen(props.fullscreen.x, props.fullscreen.y)} 0.6s forwards;
-        animation: ${makeItFullscreen(props.fullscreen.x, props.fullscreen.y)} 0.6s forwards;
+        -webkit-animation: ${makeItFullscreen(props.fullscreen.x, props.fullscreen.y)} 0.5s forwards;
+        -moz-animation: ${makeItFullscreen(props.fullscreen.x, props.fullscreen.y)} 0.5s forwards;
+        -o-animation: ${makeItFullscreen(props.fullscreen.x, props.fullscreen.y)} 0.5s forwards;
+        animation: ${makeItFullscreen(props.fullscreen.x, props.fullscreen.y)} 0.5s forwards;
     `};
     
     ${props => props.leaveFullscreen && css`
-        -webkit-animation: ${exitFullscreen(props.leaveFullscreen.x, props.leaveFullscreen.y)} 1s;
-        -moz-animation: ${exitFullscreen(props.leaveFullscreen.x, props.leaveFullscreen.y)} 1s;
-        -o-animation: ${exitFullscreen(props.leaveFullscreen.x, props.leaveFullscreen.y)} 1s;
-        animation: ${exitFullscreen(props.leaveFullscreen.x, props.leaveFullscreen.y)} 1s;
+        -webkit-animation: ${exitFullscreen(props.leaveFullscreen.x, props.leaveFullscreen.y)} 0.5;
+        -moz-animation: ${exitFullscreen(props.leaveFullscreen.x, props.leaveFullscreen.y)} 0.5;
+        -o-animation: ${exitFullscreen(props.leaveFullscreen.x, props.leaveFullscreen.y)} 0.5s;
+        animation: ${exitFullscreen(props.leaveFullscreen.x, props.leaveFullscreen.y)} 0.5s;
     `}
-    
-    &:hover {
-        cursor: pointer;
-        box-shadow: ${styles.shadowStrong};
-    }
     
     @media only screen and (max-width: 1100px) {
         height: 75px;
@@ -55,10 +52,47 @@ const Album = styled.div`
     width: 100%;
     display: flex;
     border-radius: 5px;
+    background: ${({ rating, fullscreen }) => fullscreen
+        && ratingDetails.some(r => r.score === rating)
+        && ratingDetails.find(r => r.score === rating).color};
+    
+    
+    ${({ rating, fullscreen }) => fullscreen && css`
+        -webkit-animation: ${albumEnterFullscreen(rating)} 1s;
+        -moz-animation: ${albumEnterFullscreen(rating)} 1s;
+        -o-animation: ${albumEnterFullscreen(rating)} 1s;
+        animation: ${albumEnterFullscreen(rating)} 1s;
+        display: flex;
+    `};
+    
+    ${({ leaveFullscreen }) => leaveFullscreen && css`
+        -webkit-animation: ${albumExitFullscreen()} 1s;
+        -moz-animation: ${albumExitFullscreen()} 1s;
+        -o-animation: ${albumExitFullscreen()} 1s;
+        animation: ${albumExitFullscreen()} 1s;
+        display: flex;
+    `};
+    
+    &:hover {
+        cursor: pointer;
+        background: ${({ rating, fullscreen }) => (fullscreen
+        ? '#ffffff'
+        : ratingDetails.some(r => r.score === rating)
+            && ratingDetails.find(r => r.score === rating).color)};
+        
+        @media only screen and (max-width: 764px) {
+            background: ${({ rating, fullscreen }) => (fullscreen
+                ? ratingDetails.some(r => r.score === rating)
+                    && ratingDetails.find(r => r.score === rating).color
+                : '#FFFFFF')};
+        } 
+    }
     
     @media only screen and (max-width: 1100px) {
         height: 75px;
     }
+    
+
 `;
 
 const Cover = styled.div`
@@ -135,10 +169,92 @@ const Rating = styled.div`
     }
 `;
 
+const VideoWrapper = styled.div`
+    background: black;
+    flex: 1;
+    position: relative;
+    
+    ${props => props.fullscreen && css`
+        -webkit-animation: ${showDetails()} 1s forwards;
+        -moz-animation: ${showDetails()} 1s forwards;
+        -o-animation: ${showDetails()} 1s forwards;
+        animation: ${showDetails()} 1s forwards;
+        display: flex;
+    `};
+
+    ${props => props.leaveFullscreen && css`
+        -webkit-animation: ${exitDetails()} 0.4s forwards;
+        -moz-animation: ${exitDetails()} 0.4s forwards;
+        -o-animation: ${exitDetails()} 0.4s forwards;
+        animation: ${exitDetails()} 0.4s forwards;
+        display: flex;
+    `};
+    
+    iframe {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        
+        &:before {
+            content: '';
+            display: block;
+            padding-top: 56.25%;
+        }
+    }
+`;
+
+const Content = styled.div`
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+    padding: 1rem;
+    line-height: 2em;
+    overflow: auto;
+    
+    div {
+      overflow: auto;
+    }
+    
+    p:first-of-type {
+        border-left: 1rem solid ${styles.colorDark};
+        padding-left: 1rem;
+    }
+    
+    p:nth-of-type(2) {
+        border-left: 1rem solid ${styles.colorMain};
+        padding-left: 1rem;
+    }
+    
+    p:last-of-type {
+        border-left: 1rem solid ${styles.colorWorst};
+        padding-left: 1rem;
+    }
+    
+    ${props => props.fullscreen && css`
+        -webkit-animation: ${showDetails()} 1s forwards;
+        -moz-animation: ${showDetails()} 1s forwards;
+        -o-animation: ${showDetails()} 1s forwards;
+        animation: ${showDetails()} 1s forwards;
+        display: flex;
+    `};
+
+    ${props => props.leaveFullscreen && css`
+        -webkit-animation: ${exitDetails()} 0.4s forwards;
+        -moz-animation: ${exitDetails()} 0.4s forwards;
+        -o-animation: ${exitDetails()} 0.4s forwards;
+        animation: ${exitDetails()} 0.4s forwards;
+        display: flex;
+    `};
+`;
+
 AlbumWrapper.SingleAlbumWrapper = SingleAlbumWrapper;
 AlbumWrapper.Album = Album;
 AlbumWrapper.Album.Cover = Cover;
 AlbumWrapper.Album.Text = Text;
 AlbumWrapper.Album.Rating = Rating;
+AlbumWrapper.Content = Content;
+AlbumWrapper.VideoWrapper = VideoWrapper;
 
 export default AlbumWrapper;

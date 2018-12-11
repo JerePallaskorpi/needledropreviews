@@ -1,10 +1,6 @@
 {
-  "name": "tndreviews",
-  "version": "1.0.0",
-  "description": "The Needledrop Reviews",
-  "engines": {
-    "node": "8.6.0"
-  },
+  "name": "react-starter-kit",
+  "version": "0.1.0",
   "private": true,
   "dependencies": {
     "react": "^16.6.3",
@@ -16,11 +12,10 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && jest -u",
     "test": "jest -u",
     "eject": "react-scripts eject",
-    "flow": "flow",
-    "heroku-postbuild": "npm install && npm install --only=dev --no-shrinkwrap && npm run build"
+    "flow": "flow"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
