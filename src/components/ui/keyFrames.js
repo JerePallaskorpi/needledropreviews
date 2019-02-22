@@ -4,24 +4,26 @@ import { ratingDetails } from '../../utils/rating';
 export const makeItFullscreen = (x, y) => keyframes`
     0% {
         position: fixed;
-        width: calc(100% - 2rem);
-        left: 1rem;
-        margin: 0 0.5rem;
+        max-width: calc(1100px - 2rem);
+        right: 0;
+        left: 0;
+        margin: 0 auto;
         top: calc(${y}px);
         height: 100px;
     } 50% {
-        bottom: 0;
+        top: 0;
+        right: 0;
         left: 0;
-        width: 100%;
-        margin: 0;
+        margin: 0 auto;
+        max-width: 1100px;
     } 100% {
-        //opacity: 0;
         position: fixed;
         top: 0;
         right: 0;
-        width: 100%;
+        left: 0;
+        margin: 0 auto;
+        max-width: 1100px;
         height: 100%;
-        margin: 0;
         z-index: 1;
     }
 `;
