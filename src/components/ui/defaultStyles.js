@@ -20,6 +20,7 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 16px;
     background: ${colorLight};
     color: ${colorDark};
+    max-width: 1100px;
 
     input, select, textarea, button {
         font-family: inherit;
