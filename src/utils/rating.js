@@ -1,34 +1,16 @@
-export const ratingDetails = [{
-    score: 10,
-    color: '#FDF18B',
-}, {
-    score: 9,
-    color: '#fadd83',
-}, {
-    score: 8,
-    color: '#f6c97a',
-}, {
-    score: 7,
-    color: '#f3b472',
-}, {
-    score: 6,
-    color: '#efa069',
-}, {
-    score: 5,
-    color: '#ec8c61',
-}, {
-    score: 4,
-    color: '#e97858',
-}, {
-    score: 3,
-    color: '#e56450',
-}, {
-    score: 2,
-    color: '#e24f47',
-}, {
-    score: 1,
-    color: '#de3b3f',
-}, {
-    score: 0,
-    color: '#db2736',
-}];
+// @flow
+import * as styles from '../components/ui/defaultStyles';
+
+export const ratingDetails = [
+    { score: 10, color: styles.colorScore10 },
+    { score: 9, color: styles.colorScore9 },
+    { score: 8, color: styles.colorScore8 },
+    { score: 7, color: styles.colorScore7 },
+    { score: 6, color: styles.colorScore6 },
+    { score: 5, color: styles.colorScore5 },
+    { score: 4, color: styles.colorScore4 },
+    { score: 3, color: styles.colorScore3 },
+    { score: 2, color: styles.colorScore2 },
+    { score: 1, color: styles.colorScore1 },
+    { score: 0, color: styles.colorScore0 },
+];

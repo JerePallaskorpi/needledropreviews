@@ -2,7 +2,12 @@ import styled, { css } from 'styled-components';
 import { ratingDetails } from '../../../../utils/rating';
 import * as styles from '../../defaultStyles';
 import {
-    makeItFullscreen, exitFullscreen, showDetails, exitDetails, albumEnterFullscreen, albumExitFullscreen,
+    makeItFullscreen,
+    exitFullscreen,
+    showDetails,
+    exitDetails,
+    albumEnterFullscreen,
+    albumExitFullscreen,
 } from '../../keyFrames';
 
 const AlbumWrapper = styled.div`
@@ -24,17 +29,17 @@ const SingleAlbumWrapper = styled.div`
     flex-direction: column;
     
     ${props => props.fullscreen && css`
-        -webkit-animation: ${makeItFullscreen(props.fullscreen.x, props.fullscreen.y)} 0.5s forwards;
-        -moz-animation: ${makeItFullscreen(props.fullscreen.x, props.fullscreen.y)} 0.5s forwards;
-        -o-animation: ${makeItFullscreen(props.fullscreen.x, props.fullscreen.y)} 0.5s forwards;
-        animation: ${makeItFullscreen(props.fullscreen.x, props.fullscreen.y)} 0.5s forwards;
+        -webkit-animation: ${makeItFullscreen(props.fullscreen.originalPos)} 0.5s forwards;
+        -moz-animation: ${makeItFullscreen(props.fullscreen.originalPos)} 0.5s forwards;
+        -o-animation: ${makeItFullscreen(props.fullscreen.originalPos)} 0.5s forwards;
+        animation: ${makeItFullscreen(props.fullscreen.originalPos)} 0.5s forwards;
     `};
     
     ${props => props.leaveFullscreen && css`
-        -webkit-animation: ${exitFullscreen(props.leaveFullscreen.x, props.leaveFullscreen.y)} 0.5;
-        -moz-animation: ${exitFullscreen(props.leaveFullscreen.x, props.leaveFullscreen.y)} 0.5;
-        -o-animation: ${exitFullscreen(props.leaveFullscreen.x, props.leaveFullscreen.y)} 0.5s;
-        animation: ${exitFullscreen(props.leaveFullscreen.x, props.leaveFullscreen.y)} 0.5s;
+        -webkit-animation: ${exitFullscreen(props.leaveFullscreen.originalPos)} 0.5s;
+        -moz-animation: ${exitFullscreen(props.leaveFullscreen.originalPos)} 0.5s;
+        -o-animation: ${exitFullscreen(props.leaveFullscreen.originalPos)} 0.5s;
+        animation: ${exitFullscreen(props.leaveFullscreen.originalPos)} 0.5s;
     `};
     
     @media only screen and (max-width: 1100px) {
@@ -58,18 +63,18 @@ const Album = styled.div`
     
     
     ${({ rating, fullscreen }) => fullscreen && css`
-        -webkit-animation: ${albumEnterFullscreen(rating)} 1s;
-        -moz-animation: ${albumEnterFullscreen(rating)} 1s;
-        -o-animation: ${albumEnterFullscreen(rating)} 1s;
-        animation: ${albumEnterFullscreen(rating)} 1s;
+        -webkit-animation: ${albumEnterFullscreen(rating)} 0.5s;
+        -moz-animation: ${albumEnterFullscreen(rating)} 0.5s;
+        -o-animation: ${albumEnterFullscreen(rating)} 0.5s;
+        animation: ${albumEnterFullscreen(rating)} 0.5s;
         display: flex;
     `};
     
     ${({ leaveFullscreen }) => leaveFullscreen && css`
-        -webkit-animation: ${albumExitFullscreen()} 1s;
-        -moz-animation: ${albumExitFullscreen()} 1s;
-        -o-animation: ${albumExitFullscreen()} 1s;
-        animation: ${albumExitFullscreen()} 1s;
+        -webkit-animation: ${albumExitFullscreen()} 0.5s;
+        -moz-animation: ${albumExitFullscreen()} 0.5s;
+        -o-animation: ${albumExitFullscreen()} 0.5s;
+        animation: ${albumExitFullscreen()} 0.5s;
         display: flex;
     `};
     
@@ -172,12 +177,14 @@ const VideoWrapper = styled.div`
     background: black;
     flex: 1;
     position: relative;
+    justify-content: center;
+    align-items: center;
     
     ${props => props.fullscreen && css`
-        -webkit-animation: ${showDetails()} 1s forwards;
-        -moz-animation: ${showDetails()} 1s forwards;
-        -o-animation: ${showDetails()} 1s forwards;
-        animation: ${showDetails()} 1s forwards;
+        -webkit-animation: ${showDetails()} 0.5s forwards;
+        -moz-animation: ${showDetails()} 0.5s forwards;
+        -o-animation: ${showDetails()} 0.5s forwards;
+        animation: ${showDetails()} 0.5s forwards;
         display: flex;
     `};
 
@@ -186,20 +193,24 @@ const VideoWrapper = styled.div`
         -moz-animation: ${exitDetails()} 0.4s forwards;
         -o-animation: ${exitDetails()} 0.4s forwards;
         animation: ${exitDetails()} 0.4s forwards;
-        display: flex;
+        display: none;
     `};
     
     iframe {
-        height: 100%;
-        width: 100%;
-        position: absolute;
-        top: 0;
-        
-        &:before {
-            content: '';
-            display: block;
-            padding-top: 56.25%;
-        }
+       height: 100%;
+       max-width: 750px;
+       width: 100%;
+       position: absolute;
+       top: 0;
+       left: 0;
+       right: 0;
+       margin: 0 auto;
+
+       &:before {
+           content: '';
+           display: block;
+           padding-top: 56.25%;
+       }
     }
 `;
 
@@ -208,7 +219,6 @@ const Content = styled.div`
     flex-direction: column;
     justify-content: center;
     flex: 1;
-    padding: 1rem;
     line-height: 2em;
     overflow: auto;
     background: ${styles.colorLight};
@@ -241,10 +251,10 @@ const Content = styled.div`
     }
     
     ${props => props.fullscreen && css`
-        -webkit-animation: ${showDetails()} 1s forwards;
-        -moz-animation: ${showDetails()} 1s forwards;
-        -o-animation: ${showDetails()} 1s forwards;
-        animation: ${showDetails()} 1s forwards;
+        -webkit-animation: ${showDetails()} 0.5s forwards;
+        -moz-animation: ${showDetails()} 0.5s forwards;
+        -o-animation: ${showDetails()} 0.5s forwards;
+        animation: ${showDetails()} 0.5s forwards;
         display: flex;
     `};
 
@@ -253,7 +263,7 @@ const Content = styled.div`
         -moz-animation: ${exitDetails()} 0.4s forwards;
         -o-animation: ${exitDetails()} 0.4s forwards;
         animation: ${exitDetails()} 0.4s forwards;
-        display: flex;
+        display: none;
     `};
 `;
 
