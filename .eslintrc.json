@@ -21,6 +21,11 @@
     "react/jsx-indent": 0,
     "react/jsx-indent-props": 0,
     "no-unused-expressions": 0,
+    "no-underscore-dangle": [
+      "error", {
+        "allow": ["_id"]
+      }
+    ],
     "react/jsx-filename-extension": [
       1,
       {

@@ -1,43 +1,79 @@
+// @flow
 import { keyframes } from 'styled-components';
 import { ratingDetails } from '../../utils/rating';
 
-export const makeItFullscreen = (x, y) => keyframes`
+/**
+ * Animation for fullscreening album review.
+ *
+ * @param {Object} originalPos Contains original elements position info.
+ */
+export const makeItFullscreen = (originalPos: Object) => keyframes`
     0% {
         position: fixed;
-        max-width: calc(1100px - 2rem);
-        right: 0;
-        left: 0;
-        margin: 0 auto;
-        top: calc(${y}px);
+        background: #FFFFFF;
         height: 100px;
-    } 50% {
-        top: 0;
-        right: 0;
-        left: 0;
+        width: ${originalPos.width}px;
+        top: ${originalPos.top}px;
+        bottom: ${originalPos.bottom}px;
+        left: ${originalPos.left}px;
+        right: ${originalPos.right}px;
         margin: 0 auto;
-        max-width: 1100px;
+    } 50% {
+        /* ... */
     } 100% {
         position: fixed;
-        top: 0;
-        right: 0;
-        left: 0;
-        margin: 0 auto;
-        max-width: 1100px;
         height: 100%;
-        z-index: 1;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        margin: 0;
     }
 `;
 
-export const albumEnterFullscreen = rating => keyframes`
+/**
+ * Animation for exiting fullscreen album review.
+ *
+ * @param {Object} originalPos Contains original elements position info.
+ */
+export const exitFullscreen = (originalPos: Object) => keyframes`
+    0% {
+        position: fixed;
+        height: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        margin: 0;
+    } 100% {
+        position: fixed;
+        background: #FFFFFF;
+        height: 100px;
+        width: ${originalPos.width}px;
+        top: ${originalPos.top}px;
+        bottom: ${originalPos.bottom}px;
+        left: ${originalPos.left}px;
+        right: ${originalPos.right}px;
+        margin: 0 auto;
+    }
+`;
+
+/**
+ * Album's color animation when entering fullscreen.
+ *
+ * @param {number} rating Score for the album review.
+ */
+export const albumEnterFullscreen = (rating: number) => keyframes`
     0% {
         background: ${ratingDetails.some(r => r.score === rating)
             && ratingDetails.find(r => r.score === rating).color};
     } 100% {
         background: ${ratingDetails.some(r => r.score === rating)
-        && ratingDetails.find(r => r.score === rating).color};
+            && ratingDetails.find(r => r.score === rating).color};
     }
 `;
 
+/** Album's background during exit fullscreen transition */
 export const albumExitFullscreen = () => keyframes`
     0% {
         background: #FFFFFF;
@@ -46,37 +82,24 @@ export const albumExitFullscreen = () => keyframes`
     }
 `;
 
-export const exitFullscreen = (x, y) => keyframes`
-    0% {
-        position: fixed;
-        top: 0;
-        right: 0;
-        width: 100%;
-        height: 100%;
-        margin: 0;
-        z-index: 1;
-        background: #FFFFFF;
-    } 100% {
-        position: fixed;
-        width: calc(100% - 2rem);
-        left: 1rem;
-        margin: 0 0.5rem;
-        top: calc(${y}px - 5rem);
-        height: 100px;
-        background: #FFFFFF;
-    }
-`;
-
+/** Smoother visualization for video wrapper during fullscreen transition */
 export const showDetails = () => keyframes`
     0% {
+        padding: 0;
         opacity: 0;
     } 35% {
+        padding: 0;
         opacity: 0;
+    } 75% {
+        padding: 0;
+        opacity: 0.75;
     } 100% {
+        padding: 1rem;
         opacity: 1;
     }
 `;
 
+/** Smoother visualization for video wrapper during exit fullscreen transition */
 export const exitDetails = () => keyframes`
     0% {
         opacity: 1;
