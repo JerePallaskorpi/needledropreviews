@@ -19,7 +19,6 @@ export const makeItFullscreen = (originalPos: Object) => keyframes`
         right: ${originalPos.right}px;
         margin: 0 auto;
     } 50% {
-        /* ... */
     } 100% {
         position: fixed;
         height: 100%;
