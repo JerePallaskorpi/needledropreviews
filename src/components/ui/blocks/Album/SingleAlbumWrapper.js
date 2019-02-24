@@ -19,6 +19,7 @@ const SingleAlbumWrapper = styled.div`
         -moz-animation: ${makeItFullscreen(props.fullscreen.originalPos)} 0.5s forwards;
         -o-animation: ${makeItFullscreen(props.fullscreen.originalPos)} 0.5s forwards;
         animation: ${makeItFullscreen(props.fullscreen.originalPos)} 0.5s forwards;
+        background: ${styles.colorLight};
     `};
     
     ${props => props.leaveFullscreen && css`

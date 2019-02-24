@@ -10,7 +10,7 @@ const Content = styled.div`
     line-height: 2em;
     overflow: auto;
     background: ${styles.colorLight};
-    max-width: 1100px;
+    max-width: 750px;
     margin: 0 auto;
     
     div {

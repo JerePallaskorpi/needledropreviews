@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import { ratingDetails } from '../../../../../utils/rating';
+import Filter from '../../../../ui/blocks/Filter';
 import { Button } from '../../../../ui/elements/Button';
 
 type Props = {
@@ -8,10 +9,7 @@ type Props = {
 };
 
 const ScoreView = ({ handleScoreClick }: Props) => (
-    <div style={{
-        padding: '0.5rem', marginTop: '0.5rem', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap',
-    }}
-    >
+    <Filter.Score>
         {ratingDetails.map(rating => (
             <Button
                 style={{ background: rating.color, flex: 1 }}
@@ -20,7 +18,7 @@ const ScoreView = ({ handleScoreClick }: Props) => (
                 {rating.score}
             </Button>
         )).reverse()}
-    </div>
+    </Filter.Score>
 );
 
 export default ScoreView;
