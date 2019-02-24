@@ -2,11 +2,12 @@ import styled, { css } from 'styled-components';
 import { showDetails, exitDetails } from '../../keyFrames';
 
 const VideoWrapper = styled.div`
-    background: black;
-    flex: 1;
+    background: #fafafa;
     position: relative;
     justify-content: center;
     align-items: center;
+    margin: 0 auto;
+    display: none;
     
     ${props => props.fullscreen && css`
         -webkit-animation: ${showDetails()} 0.5s forwards;
@@ -25,20 +26,20 @@ const VideoWrapper = styled.div`
     `};
     
     iframe {
-       height: 100%;
-       max-width: 750px;
-       width: 100%;
-       position: absolute;
-       top: 0;
-       left: 0;
-       right: 0;
-       margin: 0 auto;
+        width: 100vw;
+        height: 56.25vw;
+        position: relative;
 
-       &:before {
+        &:before {
            content: '';
            display: block;
            padding-top: 56.25%;
-       }
+        }
+       
+        @media only screen and (min-width: 750px) {
+            height: 421.875px;
+            width: 750px;
+        }
     }
 `;
 

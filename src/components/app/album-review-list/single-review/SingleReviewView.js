@@ -19,15 +19,17 @@ const SingleReviewView = ({
 }: Props) => (
     <>
         <AlbumWrapper.SingleAlbumWrapper
-            leaveFullscreen={leaveFullscreen.id === review._id
-            && leaveFullscreen}
+            leaveFullscreen={leaveFullscreen.id === review._id && leaveFullscreen}
             fullscreen={fullscreen.id === review._id && fullscreen}
         >
-            <AlbumWrapper.VideoWrapper>
+            <AlbumWrapper.VideoWrapper
+                leaveFullscreen={leaveFullscreen.id === review._id && leaveFullscreen}
+                fullscreen={fullscreen.id === review._id && fullscreen}
+            >
                 {fullscreen.id === review._id && (
                     <iframe
                         title={`${review.details.album} ${review.details.rating}`}
-                        src={`https://www.youtube.com/embed/${review.videoId}`}
+                        src={`https://www.youtube.com/embed/${review.videoId}?theme=light`}
                         frameBorder="0"
                         allow="autoplay; encrypted-media"
                         allowFullScreen

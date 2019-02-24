@@ -22,7 +22,7 @@ export const colorScore9 = '#fadd83';
 export const colorScore10 = '#FDF18B';
 
 // Shadows
-export const shadowDefault = '0 2px 4px 0 hsla(0, 0%, 0%, 0.4)';
+export const shadowDefault = '0 2px 2px 0 hsla(0, 0%, 0%, 0.2)';
 export const shadowStrong = '0 2px 6px 0 hsla(0, 0%, 0%, 0.6)';
 
 // Global Styles
@@ -42,4 +42,16 @@ export const GlobalStyle = createGlobalStyle`
     *::-moz-selection { background: ${colorMain}; }
     *::selection { background: ${colorMain}; }
   }
+  
+  .html5-video-player {
+        background: red!important;
+    }
+    
+    .html5-video-player:not(.ytp-transparent) {
+        background: blue!important;
+    }
+    
+    .html5-video-player.unstarted-mode {
+        background: blue!important;
+    }
 `;

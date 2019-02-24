@@ -8,10 +8,15 @@
  *
  * @returns {Object[]} Filtered album review list.
  */
-export const textFilter = (albumReviews: Object[], text: string) => albumReviews
-    .filter(a => a.details.artist.toLowerCase().trim()
-        .includes(text.toLowerCase().trim())
-        || (a.details.album.toLowerCase().trim()
-            .includes(text.toLowerCase().trim()) && !a.details.album.toLowerCase().trim()
-            .includes('self-titled')))
-    .slice(0, 30);
+export const textFilter = (albumReviews: Object[], text: string) => {
+    if (text.trim().length) {
+        return albumReviews
+            .filter(a => a.details.artist.toLowerCase().trim()
+                .includes(text.toLowerCase().trim())
+                || (a.details.album.toLowerCase().trim()
+                    .includes(text.toLowerCase().trim()) && !a.details.album.toLowerCase().trim()
+                    .includes('self-titled')));
+    }
+
+    return albumReviews;
+};

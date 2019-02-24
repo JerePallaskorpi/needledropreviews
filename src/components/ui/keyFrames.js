@@ -21,8 +21,8 @@ export const makeItFullscreen = (originalPos: Object) => keyframes`
     } 50% {
     } 100% {
         position: fixed;
-        height: 100%;
-        top: 0;
+        height: calc(100% - 50px);
+        top: 50px;
         left: 0;
         right: 0;
         width: 100%;
@@ -39,7 +39,7 @@ export const exitFullscreen = (originalPos: Object) => keyframes`
     0% {
         position: fixed;
         height: 100%;
-        top: 0;
+        top: calc(100% - 75px);
         left: 0;
         right: 0;
         width: 100%;
@@ -90,10 +90,8 @@ export const showDetails = () => keyframes`
         padding: 0;
         opacity: 0;
     } 75% {
-        padding: 0;
         opacity: 0.75;
     } 100% {
-        padding: 1rem;
         opacity: 1;
     }
 `;
