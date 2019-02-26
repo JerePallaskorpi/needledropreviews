@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import AlbumWrapper from '../../../ui/blocks/Album';
+import DescriptionView from './description/DescriptionView';
 
 type Props = {
     review: Object,
@@ -41,11 +42,11 @@ const SingleReviewView = ({
                 && leaveFullscreen}
                 fullscreen={fullscreen.id === review._id && fullscreen}
             >
-                <div>
-                    <p>{descDetails.description}</p>
-                    <p>{descDetails.favTracks}</p>
-                    <p>{descDetails.leastFavTracks}</p>
-                </div>
+                <DescriptionView
+                    summary={descDetails.summary}
+                    favTracks={descDetails.favTracks}
+                    leastFavTracks={descDetails.leastFavTracks}
+                />
             </AlbumWrapper.Content>
             <AlbumWrapper.Album
                 id={review._id}

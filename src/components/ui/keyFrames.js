@@ -19,6 +19,13 @@ export const makeItFullscreen = (originalPos: Object) => keyframes`
         right: ${originalPos.right}px;
         margin: 0 auto;
     } 50% {
+        //height: 100px;
+        //position: fixed;
+        //top: calc(100% - 150px);
+        //left: 0;
+        //right: 0;
+        //width: 100%;
+        //margin: 0;
     } 100% {
         position: fixed;
         height: calc(100% - 50px);
@@ -38,8 +45,8 @@ export const makeItFullscreen = (originalPos: Object) => keyframes`
 export const exitFullscreen = (originalPos: Object) => keyframes`
     0% {
         position: fixed;
-        height: 100%;
-        top: calc(100% - 75px);
+        height: ${originalPos.height}px;
+        top: calc(100% - 150px);
         left: 0;
         right: 0;
         width: 100%;
@@ -47,7 +54,7 @@ export const exitFullscreen = (originalPos: Object) => keyframes`
     } 100% {
         position: fixed;
         background: #FFFFFF;
-        height: 100px;
+        height: ${originalPos.height}px;
         width: ${originalPos.width}px;
         top: ${originalPos.top}px;
         bottom: ${originalPos.bottom}px;

@@ -12,17 +12,28 @@ type Props = {
 const SingleReview = ({
     review, fullscreen, leaveFullscreen, handleAlbumClick,
 }: Props) => {
-    const [descDetails, setDescDetails] = useState({ description: '', favTracks: '', leastFavTracks: '' });
+    const [descDetails, setDescDetails] = useState({ summary: '', favTracks: [], leastFavTracks: [] });
 
     useEffect(() => {
         const descriptionSplit = review.description.split('\n');
+        const summary = descriptionSplit
+            .find(line => !line.includes('http') && line.length > 20);
+        const favTracks = descriptionSplit
+            .some(line => line.substring(0, 3).toLowerCase() === 'fav')
+            && descriptionSplit
+                .find(line => line.substring(0, 3).toLowerCase() === 'fav')
+                .split(':')[1]
+                .split(',');
+        const leastFavTracks = descriptionSplit
+            .some(line => line.substring(0, 5).toLowerCase() === 'least')
+            && descriptionSplit
+                .find(line => line.substring(0, 5).toLowerCase() === 'least')
+                .split(':')[1]
+                .split(',');
 
-        setDescDetails({
-            description: descriptionSplit
-                .find(line => !line.includes('http') && line.length > 10),
-            favTracks: descriptionSplit.find(line => line.substring(0, 3).toLowerCase() === 'fav'),
-            leastFavTracks: descriptionSplit.find(line => line.substring(0, 5).toLowerCase() === 'least'),
-        });
+        console.log(favTracks);
+
+        setDescDetails({ summary, favTracks, leastFavTracks });
     }, [review]);
 
     return (

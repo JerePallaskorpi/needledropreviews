@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import * as styles from '../../defaultStyles';
 import { showDetails, exitDetails } from '../../keyFrames';
 
 const VideoWrapper = styled.div`
@@ -8,6 +9,7 @@ const VideoWrapper = styled.div`
     align-items: center;
     margin: 0 auto;
     display: none;
+    box-shadow: ${styles.shadowStrong}
     
     ${props => props.fullscreen && css`
         -webkit-animation: ${showDetails()} 0.5s forwards;
@@ -15,6 +17,7 @@ const VideoWrapper = styled.div`
         -o-animation: ${showDetails()} 0.5s forwards;
         animation: ${showDetails()} 0.5s forwards;
         display: flex;
+        box-shadow: ${styles.shadowStrong}
     `};
 
     ${props => props.leaveFullscreen && css`

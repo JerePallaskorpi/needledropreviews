@@ -17,35 +17,13 @@ const Content = styled.div`
       overflow: auto;
     }
     
-    p {
-        box-shadow: 0 1px 2px 0 hsla(0, 0%, 0%, 0.1);
-        padding: 1em;
-        margin: 2em 0;
-        background: #FFFFFF;
-        border-radius: 10px 0 0 10px;
-    }
-    
-    p:first-of-type {
-        border-left: 1rem solid ${styles.colorDark};
-        padding-left: 1rem;
-    }
-    
-    p:nth-of-type(2) {
-        border-left: 1rem solid ${styles.colorMain};
-        padding-left: 1rem;
-    }
-    
-    p:last-of-type {
-        border-left: 1rem solid ${styles.colorWorst};
-        padding-left: 1rem;
-    }
-    
     ${props => props.fullscreen && css`
         -webkit-animation: ${showDetails()} 0.5s forwards;
         -moz-animation: ${showDetails()} 0.5s forwards;
         -o-animation: ${showDetails()} 0.5s forwards;
         animation: ${showDetails()} 0.5s forwards;
         display: flex;
+        margin-top: 1rem;
     `};
 
     ${props => props.leaveFullscreen && css`
@@ -56,5 +34,24 @@ const Content = styled.div`
         display: none;
     `};
 `;
+
+const Description = styled.div`
+
+`;
+
+const Favs = styled.div`
+    :first-of-type {
+        color: red;
+    }
+    
+    color: blue;
+`;
+
+const LeastFavs = styled.div`
+
+`;
+
+Content.Description = Description;
+Content.Description.Favs = Favs;
 
 export default Content;
