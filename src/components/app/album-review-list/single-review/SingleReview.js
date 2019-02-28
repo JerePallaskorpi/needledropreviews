@@ -23,15 +23,15 @@ const SingleReview = ({
             && descriptionSplit
                 .find(line => line.substring(0, 3).toLowerCase() === 'fav')
                 .split(':')[1]
-                .split(',');
+                .split(',')
+                .map(favTrack => favTrack.toLowerCase());
         const leastFavTracks = descriptionSplit
             .some(line => line.substring(0, 5).toLowerCase() === 'least')
             && descriptionSplit
                 .find(line => line.substring(0, 5).toLowerCase() === 'least')
                 .split(':')[1]
-                .split(',');
-
-        console.log(favTracks);
+                .split(',')
+                .map(leastFavTrack => leastFavTrack.toLowerCase());
 
         setDescDetails({ summary, favTracks, leastFavTracks });
     }, [review]);

@@ -12,6 +12,7 @@ const AlbumWrapper = styled.div`
     flex-wrap: wrap;
     justify-content: space-between;
     margin-top: 50px;
+    margin-bottom: 250px;
 `;
 
 AlbumWrapper.Album = Album;
