@@ -1,6 +1,6 @@
 // @flow
 import React, { useEffect, useState } from 'react';
-import { getAlbums } from '../../../api/album';
+import { getAlbums, getApi } from '../../../api/album';
 import { shuffleArray, sortNumber } from '../../../utils/arrays';
 import { textFilter } from '../../../utils/reviewFilter';
 import AlbumReviewListView from './AlbumReviewListView';
@@ -36,6 +36,7 @@ const AlbumReviewList = () => {
 
     /** Gets the album reviews from backend */
     const getAlbumList = async () => getAlbums();
+    // const getApiTest = async () => getApi();
 
     /**
      * Handles rating score click. Filter's out album review's that doesn't include given number.
@@ -97,7 +98,14 @@ const AlbumReviewList = () => {
 
     /** Calls method for getting album reviews during first mount */
     useEffect(async () => {
+        console.log('haloo');
+        fetch('/');
+        // const apiTestRes = await getApiTest();
+        // console.log(apiTestRes);
+        console.log('asddasasd');
+
         const albumReviewsRes = await getAlbumList();
+        console.log(albumReviewsRes);
 
         setAlbumReviews(albumReviewsRes);
         setFilteredReviews(shuffleArray(albumReviewsRes)
