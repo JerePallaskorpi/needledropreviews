@@ -1,6 +1,6 @@
 // @flow
 import React, { useEffect, useState } from 'react';
-import { getAlbums, getApi } from '../../../api/album';
+import { getAlbums } from '../../../api/album';
 import { shuffleArray, sortNumber } from '../../../utils/arrays';
 import { textFilter } from '../../../utils/reviewFilter';
 import AlbumReviewListView from './AlbumReviewListView';
@@ -94,19 +94,12 @@ const AlbumReviewList = () => {
         }
     };
 
+    /** Handles logo click. Reset's all filtering options */
     const handleLogoClick = () => setActiveFilters(initialState.activeFilters);
 
     /** Calls method for getting album reviews during first mount */
     useEffect(async () => {
-        console.log('haloo');
-        fetch('/');
-        // const apiTestRes = await getApiTest();
-        // console.log(apiTestRes);
-        console.log('asddasasd');
-
         const albumReviewsRes = await getAlbumList();
-        console.log(albumReviewsRes);
-
         setAlbumReviews(albumReviewsRes);
         setFilteredReviews(shuffleArray(albumReviewsRes)
             .slice(0, 30));

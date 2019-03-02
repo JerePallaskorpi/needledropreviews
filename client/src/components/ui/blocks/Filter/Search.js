@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import * as styles from '../../defaultStyles';
 
 const Search = styled.div`
     margin: 1rem;

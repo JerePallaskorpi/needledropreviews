@@ -20,6 +20,13 @@ const SingleAlbumWrapper = styled.div`
         -o-animation: ${makeItFullscreen(props.fullscreen.originalPos)} 0.5s forwards;
         animation: ${makeItFullscreen(props.fullscreen.originalPos)} 0.5s forwards;
         background: ${styles.colorLight};
+        position: fixed;
+        height: calc(100% - 50px);
+        top: 50px;
+        left: 0;
+        right: 0;
+        width: 100%;
+        margin: 0;
     `};
     
     ${props => props.leaveFullscreen && css`
@@ -27,6 +34,15 @@ const SingleAlbumWrapper = styled.div`
         -moz-animation: ${exitFullscreen(props.leaveFullscreen.originalPos)} 0.5s;
         -o-animation: ${exitFullscreen(props.leaveFullscreen.originalPos)} 0.5s;
         animation: ${exitFullscreen(props.leaveFullscreen.originalPos)} 0.5s;
+        position: fixed;
+        background: #FFFFFF;
+        height: ${props.leaveFullscreen.originalPos.height}px;
+        width: ${props.leaveFullscreen.originalPos.width}px;
+        top: ${props.leaveFullscreen.originalPos.top}px;
+        bottom: ${props.leaveFullscreen.originalPos.bottom}px;
+        left: ${props.leaveFullscreen.originalPos.left}px;
+        right: ${props.leaveFullscreen.originalPos.right}px;
+        margin: 0 auto;
     `};
     
     @media only screen and (max-width: 1100px) {

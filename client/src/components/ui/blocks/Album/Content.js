@@ -8,13 +8,13 @@ const Content = styled.div`
     justify-content: center;
     flex: 1;
     line-height: 2em;
-    overflow: auto;
+    overflow: hidden;
     background: ${styles.colorLight};
     max-width: 750px;
     margin: 0 auto;
     
     div {
-      overflow: auto;
+        overflow: auto;
     }
     
     ${props => props.fullscreen && css`
@@ -34,10 +34,28 @@ const Content = styled.div`
         animation: ${exitDetails()} 0.4s forwards;
         display: none;
     `};
+    
+    @media only screen and (max-width: 750px) {
+        margin: 0;
+        padding: 1rem;
+    }
 `;
 
 const Description = styled.div`
-    padding: 0.5rem;
+    width: 750px;
+    height: 100%;
+    margin-right: -50px; /* maximum width of scrollbar */
+    padding-right: 50px; /* maximum width of scrollbar */
+    overflow-y: scroll;
+  
+    p {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    @media only screen and (max-width: 750px) {
+        width: 100%;
+    }
 `;
 
 const Tracks = styled.div`
@@ -53,9 +71,6 @@ const Summary = styled.div`
         
         margin: 0;
     };
-    
-    //padding: 0 1rem;
-    //border-left: 5px solid ${styles.colorDark};
 `;
 
 const Favs = styled.div`
@@ -63,8 +78,7 @@ const Favs = styled.div`
         :first-of-type {
             font-weight: 600;
         };
-        
-        margin: 0;
+        line-height: initial;
     };
     
     flex: 1;
@@ -79,8 +93,7 @@ const LeastFavs = styled.div`
         :first-of-type {
             font-weight: 600;
         };
-        
-        margin: 0;
+        line-height: initial;
     };
     
     flex: 1;
