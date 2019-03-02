@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { ratingDetails } from '../../../../utils/rating';
-import { albumEnterFullscreen, albumExitFullscreen } from '../../keyFrames';
+import { albumEnterFullscreen, albumExitFullscreen } from './keyFrames';
 
 const Album = styled.div`
     height: 100px;

@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import * as styles from '../../defaultStyles';
-import { makeItFullscreen, exitFullscreen } from '../../keyFrames';
+import { makeItFullscreen, exitFullscreen } from './keyFrames';
 
 const SingleAlbumWrapper = styled.div`
     min-width: 500px;

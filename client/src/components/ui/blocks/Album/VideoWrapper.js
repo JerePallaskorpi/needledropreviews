@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import * as styles from '../../defaultStyles';
-import { showDetails, exitDetails } from '../../keyFrames';
+import { showDetails, exitDetails } from './keyFrames';
 
 const VideoWrapper = styled.div`
     background: #fafafa;

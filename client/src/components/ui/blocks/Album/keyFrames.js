@@ -1,6 +1,6 @@
 // @flow
 import { keyframes } from 'styled-components';
-import { ratingDetails } from '../../utils/rating';
+import { ratingDetails } from '../../../../utils/rating';
 
 /**
  * Animation for fullscreening album review.
