@@ -19,9 +19,7 @@ const DescriptionView = ({ summary, favTracks, leastFavTracks }: Props) => (
                 <p>Favs</p>
                 {favTracks.length > 0
                     ? favTracks.map(favTrack => (
-                        <p>
-                            {favTrack}
-                        </p>
+                        <p key={favTrack}>{favTrack}</p>
                     ))
                     : <p>-</p>}
             </Content.Description.Favs>
@@ -29,9 +27,7 @@ const DescriptionView = ({ summary, favTracks, leastFavTracks }: Props) => (
                 <p>Least Favs</p>
                 {leastFavTracks.length > 0
                     ? leastFavTracks.map(leastFavTrack => (
-                        <p>
-                            {leastFavTrack}
-                        </p>
+                        <p key={leastFavTrack}>{leastFavTrack}</p>
                     ))
                     : <p>-</p>}
             </Content.Description.LeastFavs>

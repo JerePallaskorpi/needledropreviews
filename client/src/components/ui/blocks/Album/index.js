@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import Album from './Album';
 import Content from './Content';
 import Cover from './Cover';
@@ -13,6 +13,13 @@ const AlbumWrapper = styled.div`
     justify-content: space-between;
     margin-top: 50px;
     margin-bottom: 250px;
+    background: ${({ theme }) => theme.background};
+    color: ${({ theme }) => theme.color};
+    
+    ${({ theme }) => theme && css`
+        background: ${theme.background};
+        color: ${theme.color};
+    `};
 `;
 
 AlbumWrapper.Album = Album;

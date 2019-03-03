@@ -5,7 +5,8 @@ const Header = styled.div`
     display: flex;
     align-items: center;
     position: fixed;
-    background: ${styles.colorLight};
+    background: ${props => props.theme.background};
+    color: ${props => props.theme.color};
     width: 100%;
     height: 50px;
     top: 0;
@@ -14,6 +15,12 @@ const Header = styled.div`
     -webkit-box-shadow: ${styles.shadowDefault};
     -moz-box-shadow: ${styles.shadowDefault};
     box-shadow: ${styles.shadowDefault};
+    
+    svg {
+        &:hover {
+            cursor: pointer;
+        }
+    }
 `;
 
 export default Header;

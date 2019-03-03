@@ -1,0 +1,11 @@
+{
+    "development": {
+        "port": 5000
+    },
+    "paths": {
+        "public": "/client/public",
+        "routes": "/server/routes",
+        "views": "/client/views",
+        "config": "/server/config"
+    }
+}

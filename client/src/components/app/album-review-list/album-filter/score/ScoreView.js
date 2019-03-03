@@ -12,6 +12,7 @@ const ScoreView = ({ handleScoreClick }: Props) => (
     <Filter.Score>
         {ratingDetails.map(rating => (
             <Button
+                key={rating}
                 style={{ background: rating.color, flex: 1 }}
                 onClick={() => handleScoreClick(rating.score)}
             >
