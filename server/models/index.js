@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 
 const { connect } = mongoose;
-connect(process.env.PROD_MONGODB || 'mongodb://localhost/tndreviews', { useNewUrlParser: true, useCreateIndex: true });
+connect(process.env.PROD_MONGODB || process.env.DEV_MONGODB, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+});
 
-module.exports.Video = require('./video');
+module.exports.Video = require('./Video');

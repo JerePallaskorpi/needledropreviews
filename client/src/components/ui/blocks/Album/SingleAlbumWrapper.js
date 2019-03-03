@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import * as styles from '../../defaultStyles';
-import { makeItFullscreen, exitFullscreen } from '../../keyFrames';
+import { makeItFullscreen, exitFullscreen } from './keyFrames';
 
 const SingleAlbumWrapper = styled.div`
     min-width: 500px;
@@ -12,6 +12,7 @@ const SingleAlbumWrapper = styled.div`
     border-radius: 5px;
     background: #FFFFFF;
     opacity: ${props => (props.hidden ? 0 : 1)};
+    z-index: ${props => (props.hidden ? -1 : 'initial')};
     flex-direction: column;
     
     ${props => props.fullscreen && css`
@@ -27,6 +28,7 @@ const SingleAlbumWrapper = styled.div`
         right: 0;
         width: 100%;
         margin: 0;
+        border-radius: 0;
     `};
     
     ${props => props.leaveFullscreen && css`
@@ -39,9 +41,9 @@ const SingleAlbumWrapper = styled.div`
         height: ${props.leaveFullscreen.originalPos.height}px;
         width: ${props.leaveFullscreen.originalPos.width}px;
         top: ${props.leaveFullscreen.originalPos.top}px;
-        bottom: ${props.leaveFullscreen.originalPos.bottom}px;
+        bottom: ${window.innerHeight - props.leaveFullscreen.originalPos.bottom}px;
         left: ${props.leaveFullscreen.originalPos.left}px;
-        right: ${props.leaveFullscreen.originalPos.right}px;
+        right: ${window.innerWidth - props.leaveFullscreen.originalPos.right}px;
         margin: 0 auto;
     `};
     

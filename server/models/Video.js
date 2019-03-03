@@ -3,26 +3,27 @@ const mongoose = require('mongoose');
 const { Schema, model } = mongoose;
 
 /**
- * Video model definition.
+ * Album review video model definition.
  * @typedef {Object} Video
  *
- * @property {string} title Youtube review title.
- * @property {string} description Youtube review description.
- * @property {Date} date Youtube review publishedAt date.
- * @property {VideoDetails} date Youtube review publishedAt date.
+ * @property {string} title Youtube video's album review title.
+ * @property {string} description Youtube video's album review description.
+ * @property {Date} date Youtube video's album review publish date.
+ * @property {AlbumReviewDetails} details Youtube video's album review details.
  */
 
 /**
- * Video model details definition.
- * @typedef {Object} VideoDetails
+ * Album review video details model definition.
+ * @typedef {Object} AlbumReviewDetails
  *
- * @property {string} artist Artist name.
- * @property {string} album Album name.
+ * @property {string} artist Artist's name.
+ * @property {string} album Album's name.
  * @property {number} rating Rating for the album between 0 and 10.
+ * @property {string} albumCover Url for the album cover.
  */
 
 /**
- * Video schema.
+ * Album review schema.
  * @constructor Video
  */
 const videoSchema = new Schema({
@@ -47,6 +48,7 @@ const videoSchema = new Schema({
         artist: {
             type: String,
             index: true,
+            lowercase: true,
         },
         album: {
             type: String,

@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import * as styles from '../../defaultStyles';
-import { showDetails, exitDetails } from '../../keyFrames';
+import { showDetails, exitDetails } from './keyFrames';
 
 const Content = styled.div`
     display: none;
@@ -77,7 +77,13 @@ const Favs = styled.div`
     p {
         :first-of-type {
             font-weight: 600;
+            margin-top: 0;
         };
+        
+        :last-of-type {
+            margin-bottom: 0;
+        };
+        
         line-height: initial;
     };
     
@@ -85,14 +91,20 @@ const Favs = styled.div`
     margin: 1rem 0;
     padding: 0 1rem;
     text-transform: capitalize;
-    border-left: 5px solid ${styles.colorScore10};
+    border-left: 10px solid ${styles.colorScore10};
 `;
 
 const LeastFavs = styled.div`
     p {
         :first-of-type {
             font-weight: 600;
+            margin-top: 0;
         };
+        
+        :last-of-type {
+            margin-bottom: 0;
+        };
+        
         line-height: initial;
     };
     
@@ -100,7 +112,7 @@ const LeastFavs = styled.div`
     margin: 1rem 0;
     padding: 0 1rem;
     text-transform: capitalize;
-    border-right: 5px solid ${styles.colorScore0};
+    border-right: 10px solid ${styles.colorScore0};
     text-align: right;
 `;
 
