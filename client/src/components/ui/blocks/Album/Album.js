@@ -7,10 +7,10 @@ const Album = styled.div`
     width: 100%;
     display: flex;
     border-radius: 5px;
+    background: ${({ theme }) => theme.background};
     background: ${({ rating, fullscreen }) => fullscreen
     && ratingDetails.some(r => r.score === rating)
     && ratingDetails.find(r => r.score === rating).color};
-    
     
     ${({ rating, fullscreen }) => fullscreen && css`
         -webkit-animation: ${albumEnterFullscreen(rating)} 0.5s;

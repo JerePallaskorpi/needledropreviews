@@ -1,4 +1,5 @@
 // @flow
+import moment from 'moment';
 
 /**
  * Filters album reviews that contain given text in artist or album name.
@@ -19,4 +20,19 @@ export const textFilter = (albumReviews: Object[], text: string) => {
     }
 
     return albumReviews;
+};
+
+export const dateFilter = (review: Object, date: number, reviewYears: number[]) => {
+    if (date && reviewYears.some(year => year === date)) {
+        return moment(review.date).year() === date;
+    }
+    return true;
+};
+
+export const scoreFilter = (review: Object, score: number) => {
+    if (score.length) {
+        return score.some(s => s === review.details.rating);
+    }
+
+    return true;
 };

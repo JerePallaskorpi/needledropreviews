@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
-const Search = styled.div`
+const Date = styled.div`
     margin: 1rem;
-    flex: 2;
+    flex: 1;
 `;
 
-const Input = styled.input`
+const Select = styled.select`
     width: 100%;
     padding: 0.5rem;
     background: #fff;
@@ -13,6 +13,6 @@ const Input = styled.input`
     border: 1px solid #ccc;
 `;
 
-Search.Input = Input;
+Date.Select = Select;
 
-export default Search;
+export default Date;

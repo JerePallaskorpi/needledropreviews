@@ -2,7 +2,6 @@ import { createGlobalStyle } from 'styled-components';
 
 // Colors
 export const colorMain = '#FDF18B';
-export const colorWorst = '#db2736';
 export const colorDark = '#282828';
 export const colorLight = '#FAFAFA';
 
@@ -33,7 +32,6 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 16px;
     background: ${colorLight};
     color: ${colorDark};
-    max-width: 1100px;
 
     input, select, textarea, button {
         font-family: inherit;
@@ -42,16 +40,4 @@ export const GlobalStyle = createGlobalStyle`
     *::-moz-selection { background: ${colorMain}; }
     *::selection { background: ${colorMain}; }
   }
-  
-  .html5-video-player {
-        background: red!important;
-    }
-    
-    .html5-video-player:not(.ytp-transparent) {
-        background: blue!important;
-    }
-    
-    .html5-video-player.unstarted-mode {
-        background: blue!important;
-    }
 `;

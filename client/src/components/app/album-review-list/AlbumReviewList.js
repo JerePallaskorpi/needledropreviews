@@ -1,8 +1,11 @@
 // @flow
 import React, { useEffect, useState } from 'react';
+import { ThemeProvider } from 'styled-components';
+import moment from 'moment';
 import { getAlbums } from '../../../api/album';
 import { shuffleArray, sortNumber } from '../../../utils/arrays';
-import { textFilter } from '../../../utils/reviewFilter';
+import { textFilter, dateFilter, scoreFilter } from '../../../utils/reviewFilter';
+import { themeLight } from '../../../utils/themes';
 import AlbumReviewListView from './AlbumReviewListView';
 
 const initialState = {
@@ -23,8 +26,10 @@ const initialState = {
     activeFilters: {
         search: '',
         score: [],
-        time: null,
+        date: '',
     },
+    fetching: true,
+    reviewYears: [],
 };
 
 const AlbumReviewList = () => {
@@ -33,10 +38,9 @@ const AlbumReviewList = () => {
     const [fullscreen, setFullscreen] = useState(initialState.fullscreen);
     const [leaveFullscreen, setLeaveFullscreen] = useState(initialState.leaveFullscreen);
     const [activeFilters, setActiveFilters] = useState(initialState.activeFilters);
-
-    /** Gets the album reviews from backend */
-    const getAlbumList = async () => getAlbums();
-    // const getApiTest = async () => getApi();
+    const [fetching, setFetching] = useState(initialState.fetching);
+    const [theme] = useState(themeLight);
+    const [reviewYears, setReviewYears] = useState(initialState.reviewYears);
 
     /**
      * Handles rating score click. Filter's out album review's that doesn't include given number.
@@ -61,6 +65,26 @@ const AlbumReviewList = () => {
         setActiveFilters({
             ...activeFilters,
             search,
+        });
+    };
+
+    /**
+     * Handles date select change.
+     *
+     * @param {Object} evt Select's event. Contains selected year or time range.
+     */
+    const handleDateChange = (evt: Object) => {
+        const date = evt.target.value;
+        setActiveFilters({
+            ...activeFilters,
+            date: parseInt(date, 10),
+        });
+    };
+
+    const handleResetFilter = (filterName: string) => {
+        setActiveFilters({
+            ...activeFilters,
+            [filterName]: initialState.activeFilters[filterName],
         });
     };
 
@@ -97,12 +121,19 @@ const AlbumReviewList = () => {
     /** Handles logo click. Reset's all filtering options */
     const handleLogoClick = () => setActiveFilters(initialState.activeFilters);
 
-    /** Calls method for getting album reviews during first mount */
-    useEffect(async () => {
-        const albumReviewsRes = await getAlbumList();
+    /** Gets the album reviews from backend */
+    const getAlbumList = async () => {
+        const albumReviewsRes = await getAlbums();
+        setFetching(false);
         setAlbumReviews(albumReviewsRes);
+        setReviewYears([...new Set(albumReviewsRes.map(review => moment(review.date).year()))]);
         setFilteredReviews(shuffleArray(albumReviewsRes)
-            .slice(0, 30));
+            .slice(0, 12));
+    };
+
+    /** Calls method for getting album reviews during first mount */
+    useEffect(() => {
+        getAlbumList();
     }, []);
 
     /** Disable body scroll when review fullscrened */
@@ -114,24 +145,35 @@ const AlbumReviewList = () => {
 
     /** Sets the filtered list */
     useEffect(() => {
-        const { search, score } = activeFilters;
+        const {
+            search, score, date,
+        } = activeFilters;
 
-        setFilteredReviews(textFilter(albumReviews, search)
-            .filter(a => (score.length ? score.some(s => s === a.details.rating) : a))
-            .slice(0, 30));
+        setFilteredReviews(textFilter(shuffleArray(albumReviews), search)
+            .filter(review => dateFilter(review, date, reviewYears))
+            .filter(review => scoreFilter(review, score))
+            .slice(0, 12));
+
+        window.scrollTo(0, 0);
     }, [activeFilters]);
 
     return (
-        <AlbumReviewListView
-            handleScoreClick={handleScoreClick}
-            handleTextChange={handleTextChange}
-            handleAlbumClick={handleAlbumClick}
-            filteredReviews={filteredReviews}
-            fullscreen={fullscreen}
-            leaveFullscreen={leaveFullscreen}
-            activeFilters={activeFilters}
-            handleLogoClick={handleLogoClick}
-        />
+        <ThemeProvider theme={theme}>
+            <AlbumReviewListView
+                handleScoreClick={handleScoreClick}
+                handleTextChange={handleTextChange}
+                handleAlbumClick={handleAlbumClick}
+                filteredReviews={filteredReviews}
+                fullscreen={fullscreen}
+                leaveFullscreen={leaveFullscreen}
+                activeFilters={activeFilters}
+                handleLogoClick={handleLogoClick}
+                fetching={fetching}
+                handleDateChange={handleDateChange}
+                reviewYears={reviewYears}
+                handleResetFilter={handleResetFilter}
+            />
+        </ThemeProvider>
     );
 };
 
