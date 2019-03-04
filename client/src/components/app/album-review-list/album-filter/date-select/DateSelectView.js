@@ -1,6 +1,8 @@
 // @flow
 import React from 'react';
+import Select from 'react-select';
 import Filter from '../../../../ui/blocks/Filter';
+import { colorScore10, colorScore0 } from '../../../../ui/defaultStyles';
 
 type Props = {
     handleDateChange: (evt: Object) => void,
@@ -8,15 +10,28 @@ type Props = {
     reviewYears: string[],
 };
 
+const defaultValue = { value: 'haloo', label: 'haloo' };
+
 const DateSelectView = ({ handleDateChange, date, reviewYears }: Props) => (
     <Filter.Date>
-        <Filter.Date.Select
-            onChange={evt => handleDateChange(evt)}
+        <Select
+            onChange={handleDateChange}
             value={date}
-        >
-            <option />
-            { reviewYears.map(year => <option key={year} value={year}>{year}</option>)}
-        </Filter.Date.Select>
+            options={reviewYears.map(year => ({ value: year, label: year }))}
+            menuPlacement="top"
+            isSearchable={false}
+            isClearable
+            placeholder="Year..."
+            closeMenuOnSelect
+            theme={theme => ({
+                ...theme,
+                colors: {
+                    ...theme.colors,
+                    primary25: colorScore10,
+                    primary: colorScore0,
+                },
+            })}
+        />
     </Filter.Date>
 );
 

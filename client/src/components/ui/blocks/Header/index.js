@@ -7,20 +7,38 @@ const Header = styled.div`
     position: fixed;
     background: ${props => props.theme.background};
     color: ${props => props.theme.color};
-    width: 100%;
+    width: calc(100% - 2rem);
     height: 50px;
     top: 0;
     left: 0;
-    padding-left: 0.5rem;
+    padding: 0 1rem;
     -webkit-box-shadow: ${styles.shadowDefault};
     -moz-box-shadow: ${styles.shadowDefault};
     box-shadow: ${styles.shadowDefault};
+    justify-content: space-between;
+`;
+
+const Logo = styled.div`
+    &:hover {
+        cursor: pointer;
+    }
+`;
+
+const Sort = styled.div`
+    font-size: 1.25rem;
     
-    svg {
-        &:hover {
-            cursor: pointer;
+    display: flex;
+    
+    div {
+        margin-right: 1rem;
+        
+        :last-of-type {
+            margin: 0;
         }
     }
 `;
+
+Header.Logo = Logo;
+Header.Sort = Sort;
 
 export default Header;

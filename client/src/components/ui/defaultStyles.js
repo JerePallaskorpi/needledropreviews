@@ -22,7 +22,7 @@ export const colorScore10 = '#FDF18B';
 
 // Shadows
 export const shadowDefault = '0 2px 2px 0 hsla(0, 0%, 0%, 0.2)';
-export const shadowStrong = '0 2px 6px 0 hsla(0, 0%, 0%, 0.6)';
+export const shadowStrong = '0 2px 5px 0 hsla(0, 0%, 0%, 0.5)';
 
 // Global Styles
 export const GlobalStyle = createGlobalStyle`

@@ -26,10 +26,11 @@ const initialState = {
     activeFilters: {
         search: '',
         score: [],
-        date: '',
+        date: null,
     },
     fetching: true,
     reviewYears: [],
+    foundResults: 0,
 };
 
 const AlbumReviewList = () => {
@@ -41,6 +42,7 @@ const AlbumReviewList = () => {
     const [fetching, setFetching] = useState(initialState.fetching);
     const [theme] = useState(themeLight);
     const [reviewYears, setReviewYears] = useState(initialState.reviewYears);
+    const [foundResults, setFoundResults] = useState(initialState.foundResults);
 
     /**
      * Handles rating score click. Filter's out album review's that doesn't include given number.
@@ -71,13 +73,17 @@ const AlbumReviewList = () => {
     /**
      * Handles date select change.
      *
-     * @param {Object} evt Select's event. Contains selected year or time range.
+     * @param {Object} date Selected date's value and label.
      */
-    const handleDateChange = (evt: Object) => {
-        const date = evt.target.value;
+    const handleDateChange = (date: Object) => {
         setActiveFilters({
             ...activeFilters,
-            date: parseInt(date, 10),
+            date: date
+                ? {
+                    ...date,
+                    value: parseInt(date.value, 10),
+                }
+                : date,
         });
     };
 
@@ -119,14 +125,17 @@ const AlbumReviewList = () => {
     };
 
     /** Handles logo click. Reset's all filtering options */
-    const handleLogoClick = () => setActiveFilters(initialState.activeFilters);
+    const resetFilters = () => setActiveFilters(initialState.activeFilters);
 
     /** Gets the album reviews from backend */
     const getAlbumList = async () => {
         const albumReviewsRes = await getAlbums();
         setFetching(false);
         setAlbumReviews(albumReviewsRes);
-        setReviewYears([...new Set(albumReviewsRes.map(review => moment(review.date).year()))]);
+        setFoundResults(albumReviewsRes.length);
+        setReviewYears([...new Set(albumReviewsRes
+            .map(review => moment(review.date).year()))]
+            .reverse());
         setFilteredReviews(shuffleArray(albumReviewsRes)
             .slice(0, 12));
     };
@@ -138,10 +147,10 @@ const AlbumReviewList = () => {
 
     /** Disable body scroll when review fullscrened */
     useEffect(() => {
-        fullscreen.id
+        fullscreen.id || fetching
             ? document.body.style.overflow = 'hidden'
             : document.body.style.overflow = 'auto';
-    }, [fullscreen]);
+    }, [fullscreen, fetching]);
 
     /** Sets the filtered list */
     useEffect(() => {
@@ -149,10 +158,12 @@ const AlbumReviewList = () => {
             search, score, date,
         } = activeFilters;
 
-        setFilteredReviews(textFilter(shuffleArray(albumReviews), search)
-            .filter(review => dateFilter(review, date, reviewYears))
-            .filter(review => scoreFilter(review, score))
-            .slice(0, 12));
+        const foundFilteredReviews = textFilter(albumReviews, search)
+            .filter(review => dateFilter(review, date && date.value, reviewYears))
+            .filter(review => scoreFilter(review, score));
+
+        setFoundResults(foundFilteredReviews.length);
+        setFilteredReviews(shuffleArray(foundFilteredReviews).slice(0, 12));
 
         window.scrollTo(0, 0);
     }, [activeFilters]);
@@ -167,11 +178,12 @@ const AlbumReviewList = () => {
                 fullscreen={fullscreen}
                 leaveFullscreen={leaveFullscreen}
                 activeFilters={activeFilters}
-                handleLogoClick={handleLogoClick}
+                resetFilters={resetFilters}
                 fetching={fetching}
                 handleDateChange={handleDateChange}
                 reviewYears={reviewYears}
                 handleResetFilter={handleResetFilter}
+                foundResults={foundResults}
             />
         </ThemeProvider>
     );

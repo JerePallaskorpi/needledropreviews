@@ -11,9 +11,9 @@ export const Button = styled.button`
     color: ${styles.colorDark};
     background: ${styles.colorMain};
     border-radius: 2px;
-    -webkit-box-shadow: ${styles.shadowDefault};
-    -moz-box-shadow: ${styles.shadowDefault};
-    box-shadow: ${styles.shadowDefault};
+    -webkit-box-shadow: ${styles.shadowStrong};
+    -moz-box-shadow: ${styles.shadowStrong};
+    box-shadow: ${styles.shadowStrong};
     width: 100%;
     
     ${props => props.flat && css`
@@ -24,6 +24,12 @@ export const Button = styled.button`
         box-shadow: none;
     `}
     
+    ${({ active }) => active && css`
+        -webkit-box-shadow: inset ${styles.shadowDefault};
+        -moz-box-shadow: inset ${styles.shadowDefault};
+        box-shadow: inset ${styles.shadowDefault};
+    `}
+    
     ${props => props.disabled && css`
          opacity: 0.5;
     `}
@@ -31,9 +37,9 @@ export const Button = styled.button`
     &:hover {
         cursor: pointer;
         background: ${styles.colorMainHighlight};
-        -webkit-box-shadow: none;
-        -moz-box-shadow: none;
-        box-shadow: none;
+        -webkit-box-shadow: inset ${styles.shadowDefault};
+        -moz-box-shadow: inset ${styles.shadowDefault};
+        box-shadow: inset ${styles.shadowDefault};
         
         ${props => props.disabled && css`
             opacity: 0.5;

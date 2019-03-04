@@ -16,11 +16,11 @@ type Props = {
     leaveFullscreen: Object,
     handleAlbumClick: (evt: Object, reviewId: string) => void,
     activeFilters: Object,
-    handleLogoClick: () => void,
+    resetFilters: () => void,
     fetching: boolean,
     handleDateChange: (evt: Object) => void,
     reviewYears: string[],
-    handleResetFilter: (filterName: string) => void,
+    foundResults: number,
 };
 
 const AlbumReviewListView = ({
@@ -31,11 +31,11 @@ const AlbumReviewListView = ({
     leaveFullscreen,
     handleAlbumClick,
     activeFilters,
-    handleLogoClick,
+    resetFilters,
     fetching,
     handleDateChange,
     reviewYears,
-    handleResetFilter,
+    foundResults,
 }: Props) => (
     <>
         {fetching && (
@@ -49,7 +49,12 @@ const AlbumReviewListView = ({
             </FullscreenBlock>
         )}
         <Header>
-            {smallLogo(handleLogoClick)}
+            <Header.Logo>
+                {smallLogo(() => {})}
+            </Header.Logo>
+            <Header.Sort>
+                <div><i className="fas fa-dice" /></div>
+            </Header.Sort>
         </Header>
         <AlbumFilterView
             handleScoreClick={handleScoreClick}
@@ -57,7 +62,9 @@ const AlbumReviewListView = ({
             activeFilters={activeFilters}
             handleDateChange={handleDateChange}
             reviewYears={reviewYears}
-            handleResetFilter={handleResetFilter}
+            resetFilters={resetFilters}
+            foundResults={foundResults}
+            fetching={fetching}
         />
         <AlbumWrapper>
             {filteredReviews && filteredReviews.map(review => (

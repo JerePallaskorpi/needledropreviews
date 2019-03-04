@@ -4,6 +4,20 @@ import * as styles from '../../defaultStyles';
 const ActiveFilters = styled.div`
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 1rem 1rem 0;
+    font-size: 14px;
+`;
+
+const ResetFilters = styled.div`
+    &:hover {
+        cursor: pointer;
+    }
+    
+    .fas, .fa-times {
+        margin-left: 0.5rem;
+        color: ${styles.colorScore0};
+    }
 `;
 
 const Pill = styled.div`
@@ -28,6 +42,7 @@ const Pill = styled.div`
     }
 `;
 
+ActiveFilters.ResetFilters = ResetFilters;
 ActiveFilters.Pill = Pill;
 
 export default ActiveFilters;

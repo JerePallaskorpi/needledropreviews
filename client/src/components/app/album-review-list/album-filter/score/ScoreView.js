@@ -6,13 +6,15 @@ import { Button } from '../../../../ui/elements/Button';
 
 type Props = {
     handleScoreClick: (score: number) => void,
+    activeFilters: Object,
 };
 
-const ScoreView = ({ handleScoreClick }: Props) => (
+const ScoreView = ({ handleScoreClick, activeFilters }: Props) => (
     <Filter.Score>
         {ratingDetails.map(rating => (
             <Button
-                key={rating}
+                active={activeFilters.score.some(score => score === rating.score)}
+                key={rating.score}
                 style={{ background: rating.color, flex: 1 }}
                 onClick={() => handleScoreClick(rating.score)}
             >

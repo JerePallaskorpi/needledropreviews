@@ -2,8 +2,8 @@
 import React from 'react';
 import Filter from '../../../ui/blocks/Filter';
 import DateSelectView from './date-select/DateSelectView';
+import ResetFilterView from './reset-filter/ResetFilterView';
 import ScoreView from './score/ScoreView';
-import SingleActiveFilter from './single-active-filter/SingleActiveFilter';
 import TextSearchView from './text-search/TextSearchView';
 
 type Props = {
@@ -12,7 +12,9 @@ type Props = {
     handleDateChange: (evt: Object) => void,
     activeFilters: Object,
     reviewYears: string[],
-    handleResetFilter: (filterName: string) => void,
+    resetFilters: () => void,
+    foundResults: number,
+    fetching: boolean,
 };
 
 const AlbumFilterView = ({
@@ -21,13 +23,23 @@ const AlbumFilterView = ({
     handleDateChange,
     activeFilters,
     reviewYears,
-    handleResetFilter,
+    resetFilters,
+    foundResults,
+    fetching,
 }: Props) => (
     <Filter>
         <Filter.ActiveFilters>
-            <SingleActiveFilter title="" filters={activeFilters.score.join(', ')} handleResetFilter={() => handleResetFilter('score')} />
-            <SingleActiveFilter title="" filters={activeFilters.search.trim()} handleResetFilter={() => handleResetFilter('search')} />
-            <SingleActiveFilter title="" filters={activeFilters.date && activeFilters.date.toString()} handleResetFilter={() => handleResetFilter('date')} />
+            <div>
+                {!fetching ? `Results found: ${foundResults}` : '...'}
+            </div>
+            <Filter.ActiveFilters.ResetFilters>
+                {!fetching && (
+                    <ResetFilterView
+                        activeFilters={activeFilters}
+                        resetFilters={resetFilters}
+                    />
+                )}
+            </Filter.ActiveFilters.ResetFilters>
         </Filter.ActiveFilters>
         <Filter.Inputs>
             <TextSearchView handleTextChange={handleTextChange} search={activeFilters.search} />
@@ -37,7 +49,7 @@ const AlbumFilterView = ({
                 reviewYears={reviewYears}
             />
         </Filter.Inputs>
-        <ScoreView handleScoreClick={handleScoreClick} />
+        <ScoreView handleScoreClick={handleScoreClick} activeFilters={activeFilters} />
     </Filter>
 );
 
