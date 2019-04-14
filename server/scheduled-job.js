@@ -1,7 +1,7 @@
 const dotenv = require('dotenv');
-const { updateReviewData } = require('./helpers/updateReviewData');
 
 dotenv.load();
+const { updateReviewData } = require('./helpers/updateReviewData');
 
 // Scheduled job to run with heroku-scheduler
 updateReviewData();

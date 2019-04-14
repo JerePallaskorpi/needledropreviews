@@ -1,5 +1,7 @@
 const fetch = require('node-fetch');
 
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
 /**
  * Parses text for comparison.
  *
@@ -36,6 +38,7 @@ const parsifyArtistParam = text => text.toLowerCase()
 const getAlbumCover = async (artistName, albumName) => {
     let artistId = await fetch(`http://musicbrainz.org/ws/2/artist/?query=${parsifyArtistParam(artistName)}&fmt=json`)
         .then(res => res.json()).catch(() => null);
+    await sleep(1000); // Await sleep to not get blocked from api
     let foundArtist = artistId && artistId.artists && artistId.artists
         .find(artist => artist.name === artistName);
 
@@ -52,6 +55,7 @@ const getAlbumCover = async (artistName, albumName) => {
     }
 
     let releaseGroupId = await fetch(`http://musicbrainz.org/ws/2/artist/${artistId}?inc=release-groups&fmt=json`).then(res => res.json()).catch(() => null);
+    await sleep(1000); // Await sleep to not get blocked from api
     let foundReleaseGroup = releaseGroupId && releaseGroupId['release-groups'] && releaseGroupId['release-groups']
         .find(releaseGroup => releaseGroup.title === albumName);
 
