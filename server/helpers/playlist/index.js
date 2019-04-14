@@ -55,15 +55,15 @@ const getPlaylistData = async (playlistId, auth) => {
     /* eslint-disable */
     let queryLoop = 0;
     while (queryLoop < videos.length) {
-        let coverUrls = await videos.slice(queryLoop, queryLoop + 5).map(video => getAlbumCover(video.details.artist, video.details.album));
+        let coverUrls = await videos.slice(queryLoop, queryLoop + 1).map(video => getAlbumCover(video.details.artist, video.details.album));
         coverUrls = await Promise.all(coverUrls);
         coverUrls.forEach((url, index) => {
             if (url) videos[queryLoop + index].details.albumCover = url;
         });
 
-        await sleep(10000);
+        await sleep(2000);
 
-        queryLoop += 5;
+        queryLoop += 1;
     }
     /* eslint-disable */
 
