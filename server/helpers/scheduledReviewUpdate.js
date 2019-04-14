@@ -1,8 +1,8 @@
 const schedule = require('node-schedule');
 const { updateReviewData } = require('./updateReviewData');
 
-// Runs every 5 minutes
-const scheduledReviewUpdate = () => schedule.scheduleJob('*/5 * * * *', () => {
+// Runs every hour at :30 minutes
+const scheduledReviewUpdate = () => schedule.scheduleJob('30 * * * *', () => {
     updateReviewData();
 }).schedule();
 

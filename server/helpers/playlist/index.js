@@ -48,6 +48,7 @@ const getPlaylistData = async (playlistId, auth) => {
     }
 
     const videos = filterAlbumReviews(playlistItems);
+    console.log(`Found playlist videos to be added ${videos.length}`);
 
     // API has query limit, so doing 5 at a time for now and wait 10 seconds between new queries.
     // Should change later to keep querying until error, after error wait some time and repeat.
