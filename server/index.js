@@ -60,7 +60,6 @@ if (!isDev && cluster.isMaster) {
     });
 
     // Scheduled tasks
-    updateReviewData();
     scheduledReviewUpdate();
 
     app.listen(PORT);

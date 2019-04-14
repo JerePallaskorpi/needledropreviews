@@ -64,6 +64,7 @@ const getAlbumCover = async (artistName, albumName) => {
         releaseGroupId = foundReleaseGroup.id;
     } else {
         console.log(`FAIL releaseGroupId: ${albumName}`);
+        console.log(releaseGroupId);
         releaseGroupId = null;
     }
 
