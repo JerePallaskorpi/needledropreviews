@@ -53,18 +53,18 @@ const getPlaylistData = async (playlistId, auth) => {
     // API has query limit, so doing 5 at a time for now and wait 10 seconds between new queries.
     // Should change later to keep querying until error, after error wait some time and repeat.
     /* eslint-disable */
-    let queryLoop = 0;
-    while (queryLoop < videos.length) {
-        let coverUrls = await videos.slice(queryLoop, queryLoop + 1).map(video => getAlbumCover(video.details.artist, video.details.album));
-        coverUrls = await Promise.all(coverUrls);
-        coverUrls.forEach((url, index) => {
-            if (url) videos[queryLoop + index].details.albumCover = url;
-        });
-
-        await sleep(2000);
-
-        queryLoop += 1;
-    }
+    // let queryLoop = 0;
+    // while (queryLoop < videos.length) {
+    //     let coverUrls = await videos.slice(queryLoop, queryLoop + 5).map(video => getAlbumCover(video.details.artist, video.details.album));
+    //     coverUrls = await Promise.all(coverUrls);
+    //     coverUrls.forEach((url, index) => {
+    //         if (url) videos[queryLoop + index].details.albumCover = url;
+    //     });
+    //
+    //     await sleep(10000);
+    //
+    //     queryLoop += 5;
+    // }
     /* eslint-disable */
 
     await dbVideoCreate(videos);
