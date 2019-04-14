@@ -6,8 +6,6 @@ const cors = require('cors');
 const path = require('path');
 const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
-const { updateReviewData } = require('./helpers/updateReviewData');
-const { scheduledReviewUpdate } = require('./helpers/scheduledReviewUpdate');
 const db = require('./models');
 const config = require('./config');
 
@@ -58,9 +56,6 @@ if (!isDev && cluster.isMaster) {
     app.get('*', (req, res) => {
         res.sendfile(path.join(`${__dirname}\\../client/build/index.html`));
     });
-
-    // Scheduled tasks
-    scheduledReviewUpdate();
 
     app.listen(PORT);
 }

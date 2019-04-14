@@ -1,11 +1,13 @@
-const schedule = require('node-schedule');
-const { updateReviewData } = require('./updateReviewData');
+// const schedule = require('node-schedule');
+// const { updateReviewData } = require('./updateReviewData');
 
 // Runs every 5 minutes
-const scheduledReviewUpdate = () => schedule.scheduleJob('*/5 * * * *', () => {
-    updateReviewData();
-}).schedule();
+// const scheduledReviewUpdate = () => schedule.scheduleJob('* * * * *', () => {
+//     updateReviewData();
+// }).schedule();
+//
+// module.exports = {
+//     scheduledReviewUpdate,
+// };
 
-module.exports = {
-    scheduledReviewUpdate,
-};
+// updateReviewData();

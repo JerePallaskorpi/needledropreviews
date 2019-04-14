@@ -6,6 +6,7 @@ const { OAuth2 } = google.auth;
 const { TOKEN_SECRET, CLIENT_SECRET } = process.env;
 
 const updateReviewData = async () => {
+    console.log('STARTED REVIEW UPDATE');
     const credentials = JSON.parse(CLIENT_SECRET);
     const clientSecret = credentials.installed.client_secret;
     const clientId = credentials.installed.client_id;
