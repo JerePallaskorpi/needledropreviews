@@ -54,7 +54,10 @@ const AlbumReviewListView = ({
             <Header.Logo>
                 {smallLogo(() => {})}
             </Header.Logo>
-            <Header.Sort onClick={handleRandomizeClick}>
+            <Header.Sort
+                fullscreen={fullscreen.id}
+                onClick={!fullscreen.id && handleRandomizeClick}
+            >
                 <div>
                     <span>Random</span>
                     <i className="fas fa-dice" />
