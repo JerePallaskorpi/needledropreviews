@@ -11,17 +11,17 @@ const Content = styled.div`
     overflow: hidden;
     background: ${styles.colorLight};
     max-width: 750px;
-    margin: 0 auto;
+    margin: 0 auto 100px;
     
     div {
         overflow: auto;
     }
     
     ${props => props.fullscreen && css`
-        -webkit-animation: ${showDetails()} 0.5s forwards;
-        -moz-animation: ${showDetails()} 0.5s forwards;
-        -o-animation: ${showDetails()} 0.5s forwards;
-        animation: ${showDetails()} 0.5s forwards;
+        -webkit-animation: ${showDetails()} 1.2s forwards;
+        -moz-animation: ${showDetails()} 1.2s forwards;
+        -o-animation: ${showDetails()} 1.2s forwards;
+        animation: ${showDetails()} 1.2s forwards;
         display: flex;
         padding: 0 1rem;
         margin-top: 0.5rem;
@@ -36,7 +36,7 @@ const Content = styled.div`
     `};
     
     @media only screen and (max-width: 750px) {
-        margin: 0;
+        margin: 0 0 75px;
         padding: 1rem;
     }
 `;

@@ -12,10 +12,10 @@ const VideoWrapper = styled.div`
     box-shadow: ${styles.shadowStrong}
     
     ${props => props.fullscreen && css`
-        -webkit-animation: ${showDetails()} 0.5s forwards;
-        -moz-animation: ${showDetails()} 0.5s forwards;
-        -o-animation: ${showDetails()} 0.5s forwards;
-        animation: ${showDetails()} 0.5s forwards;
+        -webkit-animation: ${showDetails()} 1.2s forwards;
+        -moz-animation: ${showDetails()} 1.2s forwards;
+        -o-animation: ${showDetails()} 1.2s forwards;
+        animation: ${showDetails()} 1.2s forwards;
         display: flex;
         box-shadow: ${styles.shadowStrong}
     `};
