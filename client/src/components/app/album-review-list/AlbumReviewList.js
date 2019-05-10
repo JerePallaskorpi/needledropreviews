@@ -87,13 +87,6 @@ const AlbumReviewList = () => {
         });
     };
 
-    const handleResetFilter = (filterName: string) => {
-        setActiveFilters({
-            ...activeFilters,
-            [filterName]: initialState.activeFilters[filterName],
-        });
-    };
-
     /**
      * Handle's album click. Transition album into fullscreen view.
      *
@@ -129,7 +122,7 @@ const AlbumReviewList = () => {
         setFilteredReviews(shuffleArray(filteredReviews).slice(0, 36));
     };
 
-    /** Handles logo click. Reset's all filtering options */
+    /** Reset's all filtering options on click */
     const resetFilters = () => setActiveFilters(initialState.activeFilters);
 
     /** Gets the album reviews from backend */
@@ -186,7 +179,6 @@ const AlbumReviewList = () => {
                 fetching={fetching}
                 handleDateChange={handleDateChange}
                 reviewYears={reviewYears}
-                handleResetFilter={handleResetFilter}
                 foundResults={foundResults}
                 handleRandomizeClick={handleRandomizeClick}
             />
