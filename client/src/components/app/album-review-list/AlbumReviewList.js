@@ -134,7 +134,9 @@ const AlbumReviewList = () => {
         setReviewYears([...new Set(albumReviewsRes
             .map(review => moment(review.date).year()))]
             .sort((a, b) => b - a));
-        setFilteredReviews(albumReviewsRes.slice(0, 36));
+        setFilteredReviews(albumReviewsRes
+            .sort((a, b) => b.date - a.date)
+            .slice(0, 36));
     };
 
     /** Calls method for getting album reviews during first mount */
@@ -160,7 +162,9 @@ const AlbumReviewList = () => {
             .filter(review => scoreFilter(review, score));
 
         setFoundResults(foundFilteredReviews.length);
-        setFilteredReviews(foundFilteredReviews.slice(0, 36));
+        setFilteredReviews(foundFilteredReviews
+            .sort((a, b) => b.date - a.date)
+            .slice(0, 36));
 
         window.scrollTo(0, 0);
     }, [activeFilters]);
