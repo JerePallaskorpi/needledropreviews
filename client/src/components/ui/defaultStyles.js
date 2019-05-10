@@ -4,6 +4,7 @@ import { createGlobalStyle } from 'styled-components';
 export const colorMain = '#FDF18B';
 export const colorDark = '#282828';
 export const colorLight = '#FAFAFA';
+export const colorGray = 'rgba(17, 17, 17, 0.6)';
 
 export const colorMainHighlight = '#fadd83';
 

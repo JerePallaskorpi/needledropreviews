@@ -46,6 +46,7 @@ const SingleReviewView = ({
                     summary={descDetails.summary}
                     favTracks={descDetails.favTracks}
                     leastFavTracks={descDetails.leastFavTracks}
+                    review={review}
                 />
             </AlbumWrapper.Content>
             <AlbumWrapper.Album
