@@ -6,7 +6,7 @@ const Cover = styled.div`
     width: 100px;
     min-width: 100px;
     padding: 0;
-    border-radius: 5px 0 0 5px;
+    border-radius: ${props => (props.fullscreen ? '0' : '5px 0 0 5px')};
     
     ${({ thumbnail, coverArt }) => css`
         background-color: ${styles.colorDark};
