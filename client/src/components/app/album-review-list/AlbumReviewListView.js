@@ -76,7 +76,7 @@ const AlbumReviewListView = ({
                     handleAlbumClick={handleAlbumClick}
                 />
             ))}
-            {fetching && Array.from({ length: 12 }).map(() => (
+            {fetching && Array.from({ length: 36 }).map(() => (
                 <SingleReview
                     review={{ _id: 0, description: '', details: { rating: '-', artist: '', album: '' } }}
                     fullscreen={fullscreen}

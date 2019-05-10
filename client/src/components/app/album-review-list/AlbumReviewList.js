@@ -137,7 +137,7 @@ const AlbumReviewList = () => {
             .map(review => moment(review.date).year()))]
             .reverse());
         setFilteredReviews(shuffleArray(albumReviewsRes)
-            .slice(0, 12));
+            .slice(0, 36));
     };
 
     /** Calls method for getting album reviews during first mount */
