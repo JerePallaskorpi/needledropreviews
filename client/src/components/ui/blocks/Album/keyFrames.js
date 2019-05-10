@@ -68,14 +68,24 @@ export const exitFullscreen = (originalPos: Object) => keyframes`
  * Album's color animation when entering fullscreen.
  *
  * @param {number} rating Score for the album review.
+ * @param {Object} originalPos Original position of the album element.
  */
-export const albumEnterFullscreen = (rating: number) => keyframes`
+export const albumEnterFullscreen = (rating: number, originalPos: Object) => keyframes`
     0% {
         background: ${ratingDetails.some(r => r.score === rating)
             && ratingDetails.find(r => r.score === rating).color};
+        position: fixed;
+        width: ${originalPos.width}px;
+        bottom: ${window.innerHeight - originalPos.bottom}px;
+        left: ${originalPos.left}px;
+        right: ${window.innerWidth - originalPos.right}px;
     } 100% {
         background: ${ratingDetails.some(r => r.score === rating)
             && ratingDetails.find(r => r.score === rating).color};
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        top: auto;
     }
 `;
 
@@ -91,13 +101,9 @@ export const albumExitFullscreen = () => keyframes`
 /** Smoother visualization for video wrapper during fullscreen transition */
 export const showDetails = () => keyframes`
     0% {
-        padding: 0;
         opacity: 0;
     } 35% {
-        padding: 0;
         opacity: 0;
-    } 75% {
-        opacity: 0.75;
     } 100% {
         opacity: 1;
     }

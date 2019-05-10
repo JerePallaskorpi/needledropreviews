@@ -12,12 +12,11 @@ const Album = styled.div`
     && ratingDetails.some(r => r.score === rating)
     && ratingDetails.find(r => r.score === rating).color};
     
-    ${({ rating, fullscreen }) => fullscreen && css`
-        -webkit-animation: ${albumEnterFullscreen(rating)} 0.5s;
-        -moz-animation: ${albumEnterFullscreen(rating)} 0.5s;
-        -o-animation: ${albumEnterFullscreen(rating)} 0.5s;
-        animation: ${albumEnterFullscreen(rating)} 0.5s;
-        display: flex;
+    ${({ rating, fullscreen, originalPos }) => fullscreen && css`
+        -webkit-animation: ${albumEnterFullscreen(rating, originalPos)} 0.5s forwards;
+        -moz-animation: ${albumEnterFullscreen(rating, originalPos)} 0.5s forwards;
+        -o-animation: ${albumEnterFullscreen(rating, originalPos)} 0.5s forwards;
+        animation: ${albumEnterFullscreen(rating, originalPos)} 0.5s forwards;
     `};
     
     ${({ leaveFullscreen }) => leaveFullscreen && css`

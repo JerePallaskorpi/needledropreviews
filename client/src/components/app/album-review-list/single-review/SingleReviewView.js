@@ -55,10 +55,12 @@ const SingleReviewView = ({
                 fullscreen={fullscreen.id === review._id}
                 leaveFullscreen={leaveFullscreen.id === review._id
                 && leaveFullscreen}
+                originalPos={fullscreen.originalPos}
             >
                 <AlbumWrapper.Album.Cover
                     thumbnail={review.thumbnail}
                     coverArt={review.details.albumCover}
+                    fullscreen={fullscreen.id === review._id}
                 >
                     <div />
                 </AlbumWrapper.Album.Cover>
@@ -70,7 +72,10 @@ const SingleReviewView = ({
                     </span>
                     <span>{review.details.artist}</span>
                 </AlbumWrapper.Album.Text>
-                <AlbumWrapper.Album.Rating rating={review.details.rating}>
+                <AlbumWrapper.Album.Rating
+                    rating={review.details.rating}
+                    fullscreen={fullscreen.id === review._id}
+                >
                     <span>{review.details.rating}</span>
                 </AlbumWrapper.Album.Rating>
             </AlbumWrapper.Album>
