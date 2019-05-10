@@ -26,11 +26,30 @@ const Logo = styled.div`
 
 const Sort = styled.div`
     font-size: 1.25rem;
-    
     display: flex;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    outline: none;
+    
+    &:focus {
+        outline: none;
+    }
+    
+    &:hover {
+        cursor: pointer;
+        color: ${styles.colorScore0};
+    }
     
     div {
         margin-right: 1rem;
+        display: flex;
+        
+        span {
+            font-size: 1rem;
+            padding-right: 0.5rem;
+        }
         
         :last-of-type {
             margin: 0;

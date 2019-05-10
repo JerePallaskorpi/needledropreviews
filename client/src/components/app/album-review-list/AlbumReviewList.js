@@ -87,13 +87,6 @@ const AlbumReviewList = () => {
         });
     };
 
-    const handleResetFilter = (filterName: string) => {
-        setActiveFilters({
-            ...activeFilters,
-            [filterName]: initialState.activeFilters[filterName],
-        });
-    };
-
     /**
      * Handle's album click. Transition album into fullscreen view.
      *
@@ -124,7 +117,12 @@ const AlbumReviewList = () => {
         }
     };
 
-    /** Handles logo click. Reset's all filtering options */
+    /** Randomizes current list */
+    const handleRandomizeClick = () => {
+        setFilteredReviews(shuffleArray(filteredReviews).slice(0, 36));
+    };
+
+    /** Reset's all filtering options on click */
     const resetFilters = () => setActiveFilters(initialState.activeFilters);
 
     /** Gets the album reviews from backend */
@@ -135,9 +133,8 @@ const AlbumReviewList = () => {
         setFoundResults(albumReviewsRes.length);
         setReviewYears([...new Set(albumReviewsRes
             .map(review => moment(review.date).year()))]
-            .reverse());
-        setFilteredReviews(shuffleArray(albumReviewsRes)
-            .slice(0, 12));
+            .sort((a, b) => b - a));
+        setFilteredReviews(albumReviewsRes.slice(0, 36));
     };
 
     /** Calls method for getting album reviews during first mount */
@@ -163,7 +160,7 @@ const AlbumReviewList = () => {
             .filter(review => scoreFilter(review, score));
 
         setFoundResults(foundFilteredReviews.length);
-        setFilteredReviews(shuffleArray(foundFilteredReviews).slice(0, 12));
+        setFilteredReviews(foundFilteredReviews.slice(0, 36));
 
         window.scrollTo(0, 0);
     }, [activeFilters]);
@@ -182,8 +179,8 @@ const AlbumReviewList = () => {
                 fetching={fetching}
                 handleDateChange={handleDateChange}
                 reviewYears={reviewYears}
-                handleResetFilter={handleResetFilter}
                 foundResults={foundResults}
+                handleRandomizeClick={handleRandomizeClick}
             />
         </ThemeProvider>
     );
