@@ -163,7 +163,7 @@ const AlbumReviewList = () => {
             .filter(review => scoreFilter(review, score));
 
         setFoundResults(foundFilteredReviews.length);
-        setFilteredReviews(shuffleArray(foundFilteredReviews).slice(0, 12));
+        setFilteredReviews(shuffleArray(foundFilteredReviews).slice(0, 36));
 
         window.scrollTo(0, 0);
     }, [activeFilters]);
