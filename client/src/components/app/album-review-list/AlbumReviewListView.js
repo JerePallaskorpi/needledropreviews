@@ -22,6 +22,7 @@ type Props = {
     reviewYears: string[],
     foundResults: number,
     handleRandomizeClick: () => void,
+    sortBy: string,
 };
 
 const AlbumReviewListView = ({
@@ -38,6 +39,7 @@ const AlbumReviewListView = ({
     reviewYears,
     foundResults,
     handleRandomizeClick,
+    sortBy,
 }: Props) => (
     <>
         {fetching && (
@@ -57,10 +59,10 @@ const AlbumReviewListView = ({
             <Header.Sort
                 fullscreen={fullscreen.id}
                 onClick={!fullscreen.id && handleRandomizeClick}
+                active={sortBy === 'random'}
             >
                 <div>
-                    <span>Random</span>
-                    <i className="fas fa-dice" />
+                    <i className="fas fa-random" />
                 </div>
             </Header.Sort>
         </Header>

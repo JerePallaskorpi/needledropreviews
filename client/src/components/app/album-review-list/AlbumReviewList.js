@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 import moment from 'moment';
 import { getAlbums } from '../../../api/album';
-import { shuffleArray, sortNumber } from '../../../utils/arrays';
+import { shuffleArray, sortNumber, sortFilteredList } from '../../../utils/arrays';
 import { textFilter, dateFilter, scoreFilter } from '../../../utils/reviewFilter';
 import { themeLight } from '../../../utils/themes';
 import AlbumReviewListView from './AlbumReviewListView';
@@ -31,6 +31,7 @@ const initialState = {
     fetching: true,
     reviewYears: [],
     foundResults: 0,
+    sortBy: 'newest',
 };
 
 const AlbumReviewList = () => {
@@ -43,6 +44,7 @@ const AlbumReviewList = () => {
     const [theme] = useState(themeLight);
     const [reviewYears, setReviewYears] = useState(initialState.reviewYears);
     const [foundResults, setFoundResults] = useState(initialState.foundResults);
+    const [sortBy, setSortBy] = useState(initialState.sortBy);
 
     /**
      * Handles rating score click. Filter's out album review's that doesn't include given number.
@@ -119,7 +121,11 @@ const AlbumReviewList = () => {
 
     /** Randomizes current list */
     const handleRandomizeClick = () => {
-        setFilteredReviews(shuffleArray(filteredReviews).slice(0, 36));
+        if (sortBy === 'random') {
+            setSortBy(initialState.sortBy);
+        } else {
+            setSortBy('random');
+        }
     };
 
     /** Reset's all filtering options on click */
@@ -134,8 +140,7 @@ const AlbumReviewList = () => {
         setReviewYears([...new Set(albumReviewsRes
             .map(review => moment(review.date).year()))]
             .sort((a, b) => b - a));
-        setFilteredReviews(albumReviewsRes
-            .sort((a, b) => new Date(b.date) - new Date(a.date))
+        setFilteredReviews(sortFilteredList(albumReviewsRes, sortBy)
             .slice(0, 36));
     };
 
@@ -162,12 +167,11 @@ const AlbumReviewList = () => {
             .filter(review => scoreFilter(review, score));
 
         setFoundResults(foundFilteredReviews.length);
-        setFilteredReviews(foundFilteredReviews
-            .sort((a, b) => new Date(b.date) - new Date(a.date))
+        setFilteredReviews(sortFilteredList(foundFilteredReviews, sortBy)
             .slice(0, 36));
 
         window.scrollTo(0, 0);
-    }, [activeFilters]);
+    }, [activeFilters, sortBy]);
 
     return (
         <ThemeProvider theme={theme}>
@@ -185,6 +189,7 @@ const AlbumReviewList = () => {
                 reviewYears={reviewYears}
                 foundResults={foundResults}
                 handleRandomizeClick={handleRandomizeClick}
+                sortBy={sortBy}
             />
         </ThemeProvider>
     );

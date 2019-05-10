@@ -32,6 +32,7 @@ const Sort = styled.div`
     -ms-user-select: none;
     user-select: none;
     outline: none;
+    color: ${props => props.active && styles.colorScore0};
     color: ${props => props.fullscreen && styles.colorGray};
     
     &:focus {
@@ -40,7 +41,6 @@ const Sort = styled.div`
     
     &:hover {
         cursor: ${props => (props.fullscreen ? styles.colorGray : 'pointer')};
-        color: ${props => (props.fullscreen ? styles.colorGray : styles.colorScore0)};
     }
     
     div {
