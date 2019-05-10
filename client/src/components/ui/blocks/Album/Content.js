@@ -12,6 +12,7 @@ const Content = styled.div`
     background: ${styles.colorLight};
     max-width: 750px;
     margin: 0 auto 100px;
+    padding: 1rem;
     
     div {
         overflow: auto;
@@ -23,7 +24,6 @@ const Content = styled.div`
         -o-animation: ${showDetails()} 1.2s forwards;
         animation: ${showDetails()} 1.2s forwards;
         display: flex;
-        padding: 0 1rem;
         margin-top: 0.5rem;
     `};
 
@@ -37,7 +37,6 @@ const Content = styled.div`
     
     @media only screen and (max-width: 750px) {
         margin: 0 0 75px;
-        padding: 1rem;
     }
 `;
 
@@ -116,10 +115,15 @@ const LeastFavs = styled.div`
     text-align: right;
 `;
 
+const Date = styled.div`
+    color: ${styles.colorGray};
+`;
+
 Content.Description = Description;
 Content.Description.Tracks = Tracks;
 Content.Description.Summary = Summary;
 Content.Description.Favs = Favs;
 Content.Description.LeastFavs = LeastFavs;
+Content.Description.Date = Date;
 
 export default Content;
