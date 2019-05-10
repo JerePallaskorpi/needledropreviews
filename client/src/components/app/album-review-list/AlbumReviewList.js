@@ -124,6 +124,11 @@ const AlbumReviewList = () => {
         }
     };
 
+    /** Randomizes current list */
+    const handleRandomizeClick = () => {
+        setFilteredReviews(shuffleArray(filteredReviews).slice(0, 36));
+    };
+
     /** Handles logo click. Reset's all filtering options */
     const resetFilters = () => setActiveFilters(initialState.activeFilters);
 
@@ -136,8 +141,7 @@ const AlbumReviewList = () => {
         setReviewYears([...new Set(albumReviewsRes
             .map(review => moment(review.date).year()))]
             .sort((a, b) => b - a));
-        setFilteredReviews(shuffleArray(albumReviewsRes)
-            .slice(0, 36));
+        setFilteredReviews(albumReviewsRes.slice(0, 36));
     };
 
     /** Calls method for getting album reviews during first mount */
@@ -163,7 +167,7 @@ const AlbumReviewList = () => {
             .filter(review => scoreFilter(review, score));
 
         setFoundResults(foundFilteredReviews.length);
-        setFilteredReviews(shuffleArray(foundFilteredReviews).slice(0, 36));
+        setFilteredReviews(foundFilteredReviews.slice(0, 36));
 
         window.scrollTo(0, 0);
     }, [activeFilters]);
@@ -184,6 +188,7 @@ const AlbumReviewList = () => {
                 reviewYears={reviewYears}
                 handleResetFilter={handleResetFilter}
                 foundResults={foundResults}
+                handleRandomizeClick={handleRandomizeClick}
             />
         </ThemeProvider>
     );

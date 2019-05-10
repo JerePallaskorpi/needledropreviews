@@ -21,6 +21,7 @@ type Props = {
     handleDateChange: (evt: Object) => void,
     reviewYears: string[],
     foundResults: number,
+    handleRandomizeClick: () => void,
 };
 
 const AlbumReviewListView = ({
@@ -36,6 +37,7 @@ const AlbumReviewListView = ({
     handleDateChange,
     reviewYears,
     foundResults,
+    handleRandomizeClick,
 }: Props) => (
     <>
         {fetching && (
@@ -52,8 +54,11 @@ const AlbumReviewListView = ({
             <Header.Logo>
                 {smallLogo(() => {})}
             </Header.Logo>
-            <Header.Sort>
-                <div><i className="fas fa-dice" /></div>
+            <Header.Sort onClick={handleRandomizeClick}>
+                <div>
+                    <span>Random</span>
+                    <i className="fas fa-dice" />
+                </div>
             </Header.Sort>
         </Header>
         <AlbumFilterView
