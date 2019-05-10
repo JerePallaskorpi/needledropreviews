@@ -135,7 +135,7 @@ const AlbumReviewList = () => {
         setFoundResults(albumReviewsRes.length);
         setReviewYears([...new Set(albumReviewsRes
             .map(review => moment(review.date).year()))]
-            .reverse());
+            .sort((a, b) => b - a));
         setFilteredReviews(shuffleArray(albumReviewsRes)
             .slice(0, 36));
     };
