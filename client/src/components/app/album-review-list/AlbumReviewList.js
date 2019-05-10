@@ -135,7 +135,7 @@ const AlbumReviewList = () => {
             .map(review => moment(review.date).year()))]
             .sort((a, b) => b - a));
         setFilteredReviews(albumReviewsRes
-            .sort((a, b) => b.date - a.date)
+            .sort((a, b) => new Date(b.date) - new Date(a.date))
             .slice(0, 36));
     };
 
@@ -163,7 +163,7 @@ const AlbumReviewList = () => {
 
         setFoundResults(foundFilteredReviews.length);
         setFilteredReviews(foundFilteredReviews
-            .sort((a, b) => b.date - a.date)
+            .sort((a, b) => new Date(b.date) - new Date(a.date))
             .slice(0, 36));
 
         window.scrollTo(0, 0);
