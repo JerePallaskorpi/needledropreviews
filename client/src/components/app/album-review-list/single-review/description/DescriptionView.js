@@ -1,15 +1,22 @@
 // @flow
 import React from 'react';
+import moment from 'moment';
 import Content from '../../../../ui/blocks/Album/Content';
 
 type Props = {
     summary: string,
     favTracks: string[],
     leastFavTracks: string[],
+    review: Object,
 };
 
-const DescriptionView = ({ summary, favTracks, leastFavTracks }: Props) => (
+const DescriptionView = ({
+    summary, favTracks, leastFavTracks, review,
+}: Props) => (
     <Content.Description>
+        <Content.Description.Date>
+            <span>{moment(review.date).format('MMMM Do, YYYY')}</span>
+        </Content.Description.Date>
         <Content.Description.Summary>
             <p>Summary</p>
             <p>{summary}</p>
