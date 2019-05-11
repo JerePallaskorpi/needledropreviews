@@ -41,7 +41,9 @@ const SingleReview = ({
 
     useEffect(() => {
         const descriptionSplit = review.description.split('\n');
-        const summary = descriptionSplit.find(line => !line.includes('http') && line.length > 10);
+        const summary = descriptionSplit.find(line => !line.includes('http')
+            && !line.toLowerCase().includes('cymbal')
+            && line.length > 10);
         const favTracks = splitTracks(descriptionSplit, 'fav', 3);
         const leastFavTracks = splitTracks(descriptionSplit, 'least', 5);
 
