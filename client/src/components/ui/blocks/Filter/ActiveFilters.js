@@ -5,18 +5,48 @@ const ActiveFilters = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    padding: 1rem 1rem 0;
-    font-size: 14px;
+    align-items: center;
+    padding: 1rem;
+    font-size: 1rem;
+    
+    div:last-of-type {
+        display: flex;
+        align-items: center;
+    }
 `;
 
 const ResetFilters = styled.div`
+    margin-left: 0.5rem;
+    color: ${styles.colorScore2};
+    font-size: 1.25rem;
+    
+    div, i {
+        outline: none;
+        
+        &:focus {
+            outline: none;
+        }
+    }
+    
     &:hover {
         cursor: pointer;
     }
+`;
+
+const ToggleFilters = styled.div`
+    margin-left: 2rem;
+    font-size: 1.5rem;
     
-    .fas, .fa-times {
-        margin-left: 0.5rem;
-        color: ${styles.colorScore0};
+    div, i {
+        outline: none;
+        
+        &:focus {
+            outline: none;
+        }
+    }
+    
+    &:hover {
+        cursor: pointer;
     }
 `;
 
@@ -43,6 +73,7 @@ const Pill = styled.div`
 `;
 
 ActiveFilters.ResetFilters = ResetFilters;
+ActiveFilters.ToggleFilters = ToggleFilters;
 ActiveFilters.Pill = Pill;
 
 export default ActiveFilters;

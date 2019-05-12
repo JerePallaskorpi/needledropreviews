@@ -3,6 +3,7 @@ import React from 'react';
 import Filter from '../../../ui/blocks/Filter';
 import DateSelectView from './date-select/DateSelectView';
 import ResetFilterView from './reset-filter/ResetFilterView';
+import ToggleFilterView from './toggle-filter/ToggleFilterView';
 import ScoreView from './score/ScoreView';
 import TextSearchView from './text-search/TextSearchView';
 
@@ -15,6 +16,8 @@ type Props = {
     resetFilters: () => void,
     foundResults: number,
     fetching: boolean,
+    filterBarActive: boolean,
+    handleFilterToggleClick: () => void,
 };
 
 const AlbumFilterView = ({
@@ -26,30 +29,45 @@ const AlbumFilterView = ({
     resetFilters,
     foundResults,
     fetching,
+    filterBarActive,
+    handleFilterToggleClick,
 }: Props) => (
     <Filter>
         <Filter.ActiveFilters>
             <div>
-                {!fetching ? `Results found: ${foundResults}` : '...'}
+                {!fetching ? `${foundResults}` : '...'}
             </div>
-            <Filter.ActiveFilters.ResetFilters>
-                {!fetching && (
-                    <ResetFilterView
-                        activeFilters={activeFilters}
-                        resetFilters={resetFilters}
+            <div>
+                <Filter.ActiveFilters.ResetFilters>
+                    {!fetching && (
+                        <ResetFilterView
+                            activeFilters={activeFilters}
+                            resetFilters={resetFilters}
+                        />
+                    )}
+                </Filter.ActiveFilters.ResetFilters>
+                <Filter.ActiveFilters.ToggleFilters>
+                    <ToggleFilterView
+                        filterBarActive={filterBarActive}
+                        handleFilterToggleClick={handleFilterToggleClick}
                     />
-                )}
-            </Filter.ActiveFilters.ResetFilters>
+                </Filter.ActiveFilters.ToggleFilters>
+            </div>
         </Filter.ActiveFilters>
-        <Filter.Inputs>
-            <TextSearchView handleTextChange={handleTextChange} search={activeFilters.search} />
-            <DateSelectView
-                handleDateChange={handleDateChange}
-                date={activeFilters.date}
-                reviewYears={reviewYears}
-            />
-        </Filter.Inputs>
-        <ScoreView handleScoreClick={handleScoreClick} activeFilters={activeFilters} />
+        <Filter.FilterOptions
+            id="filterOptions"
+            filterBarActive={filterBarActive}
+        >
+            <Filter.FilterOptions.Inputs>
+                <TextSearchView handleTextChange={handleTextChange} search={activeFilters.search} />
+                <DateSelectView
+                    handleDateChange={handleDateChange}
+                    date={activeFilters.date}
+                    reviewYears={reviewYears}
+                />
+            </Filter.FilterOptions.Inputs>
+            <ScoreView handleScoreClick={handleScoreClick} activeFilters={activeFilters} />
+        </Filter.FilterOptions>
     </Filter>
 );
 
