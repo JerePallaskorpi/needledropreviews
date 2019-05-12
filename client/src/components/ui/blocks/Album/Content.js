@@ -38,6 +38,15 @@ const Content = styled.div`
     @media only screen and (max-width: 750px) {
         margin: 0 0 75px;
     }
+    
+    @media only screen and (max-width: 1100px) and (max-height: 500px) {
+        position: fixed;
+        left: 50%;
+        top: 50px;
+        height: calc(100% - 125px);
+        width: calc(50% - 2rem);
+        padding: 0 1rem;
+    }
 `;
 
 const Description = styled.div`
