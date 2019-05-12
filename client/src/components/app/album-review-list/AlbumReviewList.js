@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 import moment from 'moment';
 import { getAlbums } from '../../../api/album';
-import { shuffleArray, sortNumber, sortFilteredList } from '../../../utils/arrays';
+import { sortNumber, sortFilteredList } from '../../../utils/arrays';
 import { textFilter, dateFilter, scoreFilter } from '../../../utils/reviewFilter';
 import { themeLight } from '../../../utils/themes';
 import AlbumReviewListView from './AlbumReviewListView';
