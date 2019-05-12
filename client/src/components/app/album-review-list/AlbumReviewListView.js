@@ -46,30 +46,6 @@ const AlbumReviewListView = ({
     handleFilterToggleClick,
 }: Props) => (
     <>
-        {fetching && (
-            <FullscreenBlock>
-                <LoadingIcon>
-                    <div />
-                    <div />
-                    <div />
-                    <div />
-                </LoadingIcon>
-            </FullscreenBlock>
-        )}
-        <Header>
-            <Header.Logo>
-                {smallLogo(() => {})}
-            </Header.Logo>
-            <Header.Sort
-                fullscreen={fullscreen.id}
-                onClick={!fullscreen.id ? handleRandomizeClick : () => {}}
-                active={sortBy === 'random'}
-            >
-                <div>
-                    <i className="fas fa-random" />
-                </div>
-            </Header.Sort>
-        </Header>
         <AlbumFilterView
             handleScoreClick={handleScoreClick}
             handleTextChange={handleTextChange}

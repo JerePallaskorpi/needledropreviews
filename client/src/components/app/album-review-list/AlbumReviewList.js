@@ -6,10 +6,11 @@ import { getAlbums } from '../../../api/album';
 import { sortNumber, sortFilteredList } from '../../../utils/arrays';
 import { textFilter, dateFilter, scoreFilter } from '../../../utils/reviewFilter';
 import { themeLight } from '../../../utils/themes';
+import YearRatingChart from '../chart/victoryChart';
 import AlbumReviewListView from './AlbumReviewListView';
 
 const initialState = {
-    albumReviews: [],
+    // albumReviews: [],
     filteredReviews: [],
     fullscreen: {
         id: '',
@@ -35,8 +36,8 @@ const initialState = {
     filterBarActive: true,
 };
 
-const AlbumReviewList = () => {
-    const [albumReviews, setAlbumReviews] = useState(initialState.albumReviews);
+const AlbumReviewList = ({ albumReviews }) => {
+    // const [albumReviews, setAlbumReviews] = useState(initialState.albumReviews);
     const [filteredReviews, setFilteredReviews] = useState(initialState.filteredReviews);
     const [fullscreen, setFullscreen] = useState(initialState.fullscreen);
     const [leaveFullscreen, setLeaveFullscreen] = useState(initialState.leaveFullscreen);
@@ -139,22 +140,34 @@ const AlbumReviewList = () => {
     const resetFilters = () => setActiveFilters(initialState.activeFilters);
 
     /** Gets the album reviews from backend */
-    const getAlbumList = async () => {
-        const albumReviewsRes = await getAlbums();
-        setFetching(false);
-        setAlbumReviews(albumReviewsRes);
-        setFoundResults(albumReviewsRes.length);
-        setReviewYears([...new Set(albumReviewsRes
-            .map(review => moment(review.date).year()))]
-            .sort((a, b) => b - a));
-        setFilteredReviews(sortFilteredList(albumReviewsRes, sortBy)
-            .slice(0, 36));
-    };
+    // const getAlbumList = async () => {
+    //     const albumReviewsRes = await getAlbums();
+    //     setFetching(false);
+    //     setAlbumReviews(albumReviewsRes);
+    //     setFoundResults(albumReviewsRes.length);
+    //     setReviewYears([...new Set(albumReviewsRes
+    //         .map(review => moment(review.date).year()))]
+    //         .sort((a, b) => b - a));
+    //     setFilteredReviews(sortFilteredList(albumReviewsRes, sortBy)
+    //         .slice(0, 36));
+    // };
+
+    useEffect(() => {
+        if (albumReviews.length) {
+            setFetching(false);
+            setFoundResults(albumReviews.length);
+            setReviewYears([...new Set(albumReviews
+                .map(review => moment(review.date).year()))]
+                .sort((a, b) => b - a));
+            setFilteredReviews(sortFilteredList(albumReviews, sortBy)
+                .slice(0, 36));
+        }
+    }, [albumReviews]);
 
     /** Calls method for getting album reviews during first mount */
-    useEffect(() => {
-        getAlbumList();
-    }, []);
+    // useEffect(() => {
+    //     getAlbumList();
+    // }, []);
 
     /** Disable body scroll when review fullscrened */
     useEffect(() => {
@@ -179,6 +192,8 @@ const AlbumReviewList = () => {
 
         window.scrollTo(0, 0);
     }, [activeFilters, sortBy]);
+
+    // return <YearRatingChart />;
 
     return (
         <ThemeProvider theme={theme}>

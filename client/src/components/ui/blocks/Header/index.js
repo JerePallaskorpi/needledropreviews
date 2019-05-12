@@ -16,6 +16,7 @@ const Header = styled.div`
     -moz-box-shadow: ${styles.shadowDefault};
     box-shadow: ${styles.shadowDefault};
     justify-content: space-between;
+    z-index: 99;
 `;
 
 const Logo = styled.div`
@@ -25,7 +26,7 @@ const Logo = styled.div`
 `;
 
 const Sort = styled.div`
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     display: flex;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -46,6 +47,10 @@ const Sort = styled.div`
     div {
         margin-right: 1rem;
         display: flex;
+        
+        :first-of-type {
+            color: ${styles.colorScore0};
+        }
         
         span {
             font-size: 1rem;
