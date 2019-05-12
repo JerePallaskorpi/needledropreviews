@@ -22,7 +22,7 @@ const Cover = styled.div`
             background-repeat: no-repeat;
             background-position: center; 
             background-size: cover;
-            border-radius: 5px 0 0 5px;
+            border-radius: ${props => (props.fullscreen ? '0' : '5px 0 0 5px')};
             height: 100%;
             width: 100%;
         }
