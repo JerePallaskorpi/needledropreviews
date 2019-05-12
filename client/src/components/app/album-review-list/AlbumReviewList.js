@@ -32,6 +32,7 @@ const initialState = {
     reviewYears: [],
     foundResults: 0,
     sortBy: 'newest',
+    filterBarActive: true,
 };
 
 const AlbumReviewList = () => {
@@ -45,6 +46,7 @@ const AlbumReviewList = () => {
     const [reviewYears, setReviewYears] = useState(initialState.reviewYears);
     const [foundResults, setFoundResults] = useState(initialState.foundResults);
     const [sortBy, setSortBy] = useState(initialState.sortBy);
+    const [filterBarActive, setFilterBarActive] = useState(initialState.sortBy);
 
     /**
      * Handles rating score click. Filter's out album review's that doesn't include given number.
@@ -128,6 +130,11 @@ const AlbumReviewList = () => {
         }
     };
 
+    /** Toggles filter bar */
+    const handleFilterToggleClick = () => {
+        filterBarActive ? setFilterBarActive(false) : setFilterBarActive(true);
+    };
+
     /** Reset's all filtering options on click */
     const resetFilters = () => setActiveFilters(initialState.activeFilters);
 
@@ -190,6 +197,8 @@ const AlbumReviewList = () => {
                 foundResults={foundResults}
                 handleRandomizeClick={handleRandomizeClick}
                 sortBy={sortBy}
+                filterBarActive={filterBarActive}
+                handleFilterToggleClick={handleFilterToggleClick}
             />
         </ThemeProvider>
     );

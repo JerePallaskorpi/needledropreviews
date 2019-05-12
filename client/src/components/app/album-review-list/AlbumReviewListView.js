@@ -23,6 +23,8 @@ type Props = {
     foundResults: number,
     handleRandomizeClick: () => void,
     sortBy: string,
+    filterBarActive: boolean,
+    handleFilterToggleClick: () => void,
 };
 
 const AlbumReviewListView = ({
@@ -40,6 +42,8 @@ const AlbumReviewListView = ({
     foundResults,
     handleRandomizeClick,
     sortBy,
+    filterBarActive,
+    handleFilterToggleClick,
 }: Props) => (
     <>
         {fetching && (
@@ -75,8 +79,10 @@ const AlbumReviewListView = ({
             resetFilters={resetFilters}
             foundResults={foundResults}
             fetching={fetching}
+            filterBarActive={filterBarActive}
+            handleFilterToggleClick={handleFilterToggleClick}
         />
-        <AlbumWrapper>
+        <AlbumWrapper filterBarActive={filterBarActive}>
             {filteredReviews && filteredReviews.map(review => (
                 <SingleReview
                     key={review._id}
