@@ -62,7 +62,7 @@ const AlbumReviewListView = ({
             </Header.Logo>
             <Header.Sort
                 fullscreen={fullscreen.id}
-                onClick={!fullscreen.id && handleRandomizeClick}
+                onClick={!fullscreen.id ? handleRandomizeClick : () => {}}
                 active={sortBy === 'random'}
             >
                 <div>
@@ -92,8 +92,9 @@ const AlbumReviewListView = ({
                     handleAlbumClick={handleAlbumClick}
                 />
             ))}
-            {fetching && Array.from({ length: 36 }).map(() => (
+            {fetching && Array.from({ length: 36 }).map((a, index) => (
                 <SingleReview
+                    key={index} //eslint-disable-line
                     review={{ _id: 0, description: '', details: { rating: '-', artist: '', album: '' } }}
                     fullscreen={fullscreen}
                     leaveFullscreen={leaveFullscreen}

@@ -10,8 +10,6 @@ type Props = {
     reviewYears: string[],
 };
 
-const defaultValue = { value: 'haloo', label: 'haloo' };
-
 const DateSelectView = ({ handleDateChange, date, reviewYears }: Props) => (
     <Filter.Date>
         <Select
