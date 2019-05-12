@@ -43,6 +43,14 @@ const VideoWrapper = styled.div`
             height: 421.875px;
             width: 750px;
         }
+        
+        @media only screen and (max-width: 1100px) and (max-height: 500px) {
+            position: fixed;
+            left: 0;
+            top: 50px;
+            width: calc(50vw - 1rem);
+            height: calc(100% - 125px);
+        }
     }
 `;
 
