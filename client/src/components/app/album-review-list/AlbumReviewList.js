@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 import moment from 'moment';
 import { getAlbums } from '../../../api/album';
-import { shuffleArray, sortNumber, sortFilteredList } from '../../../utils/arrays';
+import { sortNumber, sortFilteredList } from '../../../utils/arrays';
 import { textFilter, dateFilter, scoreFilter } from '../../../utils/reviewFilter';
 import { themeLight } from '../../../utils/themes';
 import AlbumReviewListView from './AlbumReviewListView';
@@ -32,6 +32,7 @@ const initialState = {
     reviewYears: [],
     foundResults: 0,
     sortBy: 'newest',
+    filterBarActive: true,
 };
 
 const AlbumReviewList = () => {
@@ -45,6 +46,7 @@ const AlbumReviewList = () => {
     const [reviewYears, setReviewYears] = useState(initialState.reviewYears);
     const [foundResults, setFoundResults] = useState(initialState.foundResults);
     const [sortBy, setSortBy] = useState(initialState.sortBy);
+    const [filterBarActive, setFilterBarActive] = useState(initialState.sortBy);
 
     /**
      * Handles rating score click. Filter's out album review's that doesn't include given number.
@@ -128,6 +130,11 @@ const AlbumReviewList = () => {
         }
     };
 
+    /** Toggles filter bar */
+    const handleFilterToggleClick = () => {
+        filterBarActive ? setFilterBarActive(false) : setFilterBarActive(true);
+    };
+
     /** Reset's all filtering options on click */
     const resetFilters = () => setActiveFilters(initialState.activeFilters);
 
@@ -190,6 +197,8 @@ const AlbumReviewList = () => {
                 foundResults={foundResults}
                 handleRandomizeClick={handleRandomizeClick}
                 sortBy={sortBy}
+                filterBarActive={filterBarActive}
+                handleFilterToggleClick={handleFilterToggleClick}
             />
         </ThemeProvider>
     );

@@ -13,10 +13,7 @@ const ResetFilterView = ({ activeFilters, resetFilters }: Props) => (
             || activeFilters.date)
         && (
             <div role="button" tabIndex={0} onKeyDown={resetFilters} onClick={resetFilters}>
-                <span>
-                    {'Reset filters'}
-                </span>
-                <i className="fas fa-times" />
+                <i className="fas fa-redo" />
             </div>
         )}
     </>

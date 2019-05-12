@@ -23,6 +23,8 @@ type Props = {
     foundResults: number,
     handleRandomizeClick: () => void,
     sortBy: string,
+    filterBarActive: boolean,
+    handleFilterToggleClick: () => void,
 };
 
 const AlbumReviewListView = ({
@@ -40,6 +42,8 @@ const AlbumReviewListView = ({
     foundResults,
     handleRandomizeClick,
     sortBy,
+    filterBarActive,
+    handleFilterToggleClick,
 }: Props) => (
     <>
         {fetching && (
@@ -58,7 +62,7 @@ const AlbumReviewListView = ({
             </Header.Logo>
             <Header.Sort
                 fullscreen={fullscreen.id}
-                onClick={!fullscreen.id && handleRandomizeClick}
+                onClick={!fullscreen.id ? handleRandomizeClick : () => {}}
                 active={sortBy === 'random'}
             >
                 <div>
@@ -75,8 +79,10 @@ const AlbumReviewListView = ({
             resetFilters={resetFilters}
             foundResults={foundResults}
             fetching={fetching}
+            filterBarActive={filterBarActive}
+            handleFilterToggleClick={handleFilterToggleClick}
         />
-        <AlbumWrapper>
+        <AlbumWrapper filterBarActive={filterBarActive}>
             {filteredReviews && filteredReviews.map(review => (
                 <SingleReview
                     key={review._id}
@@ -86,8 +92,9 @@ const AlbumReviewListView = ({
                     handleAlbumClick={handleAlbumClick}
                 />
             ))}
-            {fetching && Array.from({ length: 36 }).map(() => (
+            {fetching && Array.from({ length: 36 }).map((a, index) => (
                 <SingleReview
+                    key={index} //eslint-disable-line
                     review={{ _id: 0, description: '', details: { rating: '-', artist: '', album: '' } }}
                     fullscreen={fullscreen}
                     leaveFullscreen={leaveFullscreen}

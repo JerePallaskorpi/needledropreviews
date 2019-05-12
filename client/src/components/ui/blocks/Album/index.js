@@ -12,14 +12,19 @@ const AlbumWrapper = styled.div`
     flex-wrap: wrap;
     justify-content: space-between;
     margin-top: 50px;
-    margin-bottom: 250px;
+    margin-bottom: ${props => (props.filterBarActive ? '240px' : '50px')};
     background: ${({ theme }) => theme.background};
     color: ${({ theme }) => theme.color};
+    transition: 0.4s;
     
     ${({ theme }) => theme && css`
         background: ${theme.background};
         color: ${theme.color};
     `};
+    
+    @media only screen and (min-width: 600px) {
+        margin-bottom: ${props => (props.filterBarActive ? '180px' : '50px')};
+    }
 `;
 
 AlbumWrapper.Album = Album;

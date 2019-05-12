@@ -18,12 +18,24 @@ const Filter = styled.div`
     box-shadow: ${styles.shadowStrong};
 `;
 
-const Inputs = styled.div`
-    display: flex;
+const FilterOptions = styled.div`
+    transition: 0.4s;
+    height: auto;
+    max-height: ${props => (props.filterBarActive ? '190px' : 0)};
+    
+    @media only screen and (min-width: 600px) {
+        max-height: ${props => (props.filterBarActive ? '130px' : 0)};
+    }
 `;
 
+const Inputs = styled.div`
+    display: flex;
+    margin-top: -1rem;
+`;
+
+Filter.FilterOptions = FilterOptions;
+Filter.FilterOptions.Inputs = Inputs;
 Filter.Score = Score;
-Filter.Inputs = Inputs;
 Filter.Search = Search;
 Filter.Date = Date;
 Filter.ActiveFilters = ActiveFilters;
