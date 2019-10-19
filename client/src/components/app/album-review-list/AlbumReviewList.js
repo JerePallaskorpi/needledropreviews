@@ -33,8 +33,10 @@ const initialState = {
     foundResults: 0,
     sortBy: 'newest',
     filterBarActive: true,
+    pagination: 1,
 };
 
+let lastScrollTop = 0;
 const AlbumReviewList = () => {
     const [albumReviews, setAlbumReviews] = useState(initialState.albumReviews);
     const [filteredReviews, setFilteredReviews] = useState(initialState.filteredReviews);
@@ -47,18 +49,28 @@ const AlbumReviewList = () => {
     const [foundResults, setFoundResults] = useState(initialState.foundResults);
     const [sortBy, setSortBy] = useState(initialState.sortBy);
     const [filterBarActive, setFilterBarActive] = useState(initialState.sortBy);
+    const [pagination, setPagination] = useState(initialState.pagination);
+
+    /** Shared handler for when any of the filters' changes */
+    const handleFilterChange = () => {
+        window.scrollTo(0, 0);
+        setPagination(initialState.pagination);
+    };
 
     /**
      * Handles rating score click. Filter's out album review's that doesn't include given number.
      *
      * @param {number} score Score number that was clicked.
      */
-    const handleScoreClick = (score: number) => setActiveFilters({
-        ...activeFilters,
-        score: activeFilters.score.some(s => s === score)
-            ? activeFilters.score.filter(s => s !== score).sort(sortNumber)
-            : [...activeFilters.score, score].sort(sortNumber),
-    });
+    const handleScoreClick = (score: number) => {
+        setActiveFilters({
+            ...activeFilters,
+            score: activeFilters.score.some(s => s === score)
+                ? activeFilters.score.filter(s => s !== score).sort(sortNumber)
+                : [...activeFilters.score, score].sort(sortNumber),
+        });
+        handleFilterChange();
+    };
 
     /**
      * Handles album search text change. Filter's out album review's that
@@ -72,6 +84,7 @@ const AlbumReviewList = () => {
             ...activeFilters,
             search,
         });
+        handleFilterChange();
     };
 
     /**
@@ -89,6 +102,7 @@ const AlbumReviewList = () => {
                 }
                 : date,
         });
+        handleFilterChange();
     };
 
     /**
@@ -125,8 +139,10 @@ const AlbumReviewList = () => {
     const handleRandomizeClick = () => {
         if (sortBy === 'random') {
             setSortBy(initialState.sortBy);
+            handleFilterChange();
         } else {
             setSortBy('random');
+            handleFilterChange();
         }
     };
 
@@ -147,14 +163,49 @@ const AlbumReviewList = () => {
         setReviewYears([...new Set(albumReviewsRes
             .map(review => moment(review.date).year()))]
             .sort((a, b) => b - a));
-        setFilteredReviews(sortFilteredList(albumReviewsRes, sortBy)
-            .slice(0, 36));
+        setFilteredReviews(sortFilteredList(albumReviewsRes, sortBy));
+        window.scrollTo(0, 0);
     };
 
     /** Calls method for getting album reviews during first mount */
     useEffect(() => {
         getAlbumList();
+        window.scrollTo(0, 0);
     }, []);
+
+    /** Scoll listener for handling pagination and filter toggle */
+    const scrollListener = () => {
+        const paginationElemOnView = window.document.getElementById('bottom-pagination').getBoundingClientRect().top < window.innerHeight;
+        if (paginationElemOnView) {
+            setPagination(pagination + 1);
+            filteredReviews.slice((pagination - 1) * 36, (pagination - 1) * 36 + 72);
+        }
+
+        if (window.innerWidth < 1000) {
+            const st = window.pageYOffset || document.documentElement.scrollTop;
+            if (st > lastScrollTop) {
+                filteredReviews.length < pagination * 36 && paginationElemOnView
+                    ? !filterBarActive && setFilterBarActive(false)
+                    : filterBarActive && setFilterBarActive(false);
+            } else {
+                filteredReviews.length < pagination * 36 && paginationElemOnView
+                    ? setFilterBarActive(true)
+                    : !filterBarActive && setFilterBarActive(true);
+            }
+
+            lastScrollTop = st <= 0 ? 0 : st;
+        } else {
+            setFilterBarActive(true);
+        }
+    };
+
+    useEffect(() => {
+        window.addEventListener('scroll', scrollListener);
+
+        return () => {
+            window.removeEventListener('scroll', scrollListener);
+        };
+    });
 
     /** Disable body scroll when review fullscrened */
     useEffect(() => {
@@ -174,11 +225,12 @@ const AlbumReviewList = () => {
             .filter(review => scoreFilter(review, score));
 
         setFoundResults(foundFilteredReviews.length);
-        setFilteredReviews(sortFilteredList(foundFilteredReviews, sortBy)
-            .slice(0, 36));
+        setFilteredReviews(sortFilteredList(foundFilteredReviews, sortBy));
 
         window.scrollTo(0, 0);
     }, [activeFilters, sortBy]);
+
+    const pagedFilteredReviews = filteredReviews.slice(0, pagination * 36);
 
     return (
         <ThemeProvider theme={theme}>
@@ -186,7 +238,7 @@ const AlbumReviewList = () => {
                 handleScoreClick={handleScoreClick}
                 handleTextChange={handleTextChange}
                 handleAlbumClick={handleAlbumClick}
-                filteredReviews={filteredReviews}
+                filteredReviews={pagedFilteredReviews}
                 fullscreen={fullscreen}
                 leaveFullscreen={leaveFullscreen}
                 activeFilters={activeFilters}
@@ -199,6 +251,7 @@ const AlbumReviewList = () => {
                 sortBy={sortBy}
                 filterBarActive={filterBarActive}
                 handleFilterToggleClick={handleFilterToggleClick}
+                pagination={pagination}
             />
         </ThemeProvider>
     );
