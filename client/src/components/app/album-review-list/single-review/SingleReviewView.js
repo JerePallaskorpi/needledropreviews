@@ -51,37 +51,6 @@ const SingleReviewView = ({
                             review={review}
                         />
                     </AlbumWrapper.Content>
-                    <AlbumWrapper.Album
-                        id={review._id}
-                        onClick={e => handleAlbumClick(e, review._id)}
-                        rating={review.details.rating}
-                        fullscreen={fullscreen.id === review._id}
-                        leaveFullscreen={leaveFullscreen.id === review._id
-                        && leaveFullscreen}
-                        originalPos={fullscreen.originalPos}
-                    >
-                        <AlbumWrapper.Album.Cover
-                            thumbnail={review.thumbnail}
-                            coverArt={review.details.albumCover}
-                            fullscreen={fullscreen.id === review._id}
-                        >
-                            <AlbumWrapper.Album.Cover.Art coverArt={review.details.albumCover} />
-                        </AlbumWrapper.Album.Cover>
-                        <AlbumWrapper.Album.Text>
-                            <span>
-                                {review.details.album.toLowerCase().includes('self-titled')
-                                    ? review.details.artist
-                                    : review.details.album}
-                            </span>
-                            <span>{review.details.artist}</span>
-                        </AlbumWrapper.Album.Text>
-                        <AlbumWrapper.Album.Rating
-                            rating={review.details.rating}
-                            fullscreen={fullscreen.id === review._id}
-                        >
-                            <span>{review.details.rating}</span>
-                        </AlbumWrapper.Album.Rating>
-                    </AlbumWrapper.Album>
                 </>
             )}
             <AlbumWrapper.Album
