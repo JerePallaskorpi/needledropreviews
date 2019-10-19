@@ -16,6 +16,7 @@ const Filter = styled.div`
     -webkit-box-shadow: ${styles.shadowStrong};
     -moz-box-shadow: ${styles.shadowStrong};
     box-shadow: ${styles.shadowStrong};
+    z-index: 1;
 `;
 
 const FilterOptions = styled.div`
