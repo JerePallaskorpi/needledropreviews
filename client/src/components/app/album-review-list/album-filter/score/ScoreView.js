@@ -2,7 +2,7 @@
 import React from 'react';
 import { ratingDetails } from '../../../../../utils/rating';
 import Filter from '../../../../ui/blocks/Filter';
-import { Button } from '../../../../ui/elements/Button';
+import { ButtonScore } from '../../../../ui/elements/ButtonScore';
 
 type Props = {
     handleScoreClick: (score: number) => void,
@@ -12,14 +12,14 @@ type Props = {
 const ScoreView = ({ handleScoreClick, activeFilters }: Props) => (
     <Filter.Score>
         {ratingDetails.map(rating => (
-            <Button
+            <ButtonScore
                 active={activeFilters.score.some(score => score === rating.score)}
+                rating={rating.score}
                 key={rating.score}
-                style={{ background: rating.color, flex: 1 }}
                 onClick={() => handleScoreClick(rating.score)}
             >
                 {rating.score}
-            </Button>
+            </ButtonScore>
         )).reverse()}
     </Filter.Score>
 );
