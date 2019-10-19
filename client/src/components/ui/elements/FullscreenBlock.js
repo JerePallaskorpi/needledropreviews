@@ -8,7 +8,7 @@ export const FullscreenBlock = styled.div`
     height: 100%;
     background: rgba(44, 44, 44, 0.5);
     position: fixed;
-    z-index: 1;
+    z-index: 999;
     justify-content: center;
     align-items: center;
 `;
