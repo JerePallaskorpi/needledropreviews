@@ -171,7 +171,7 @@ const AlbumReviewList = () => {
     useEffect(() => {
         getAlbumList();
         window.scrollTo(0, 0);
-    }, []);
+    }, []); // eslint-disable-line
 
     /** Scoll listener for handling pagination and filter toggle */
     const scrollListener = () => {
@@ -228,7 +228,7 @@ const AlbumReviewList = () => {
         setFilteredReviews(sortFilteredList(foundFilteredReviews, sortBy));
 
         window.scrollTo(0, 0);
-    }, [activeFilters, sortBy]);
+    }, [activeFilters, sortBy, albumReviews, reviewYears]);
 
     const pagedFilteredReviews = filteredReviews.slice(0, pagination * 36);
 
