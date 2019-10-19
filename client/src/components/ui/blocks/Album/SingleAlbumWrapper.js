@@ -5,7 +5,7 @@ import { makeItFullscreen, exitFullscreen } from './keyFrames';
 const SingleAlbumWrapper = styled.div`
     min-width: 500px;
     padding: 0;
-    margin: 1rem;
+    margin: 0.35rem;
     display: flex;
     flex: 1;
     box-shadow: ${styles.shadowDefault};
@@ -29,6 +29,7 @@ const SingleAlbumWrapper = styled.div`
         width: 100%;
         margin: 0;
         border-radius: 0;
+        z-index: 2;
     `};
     
     ${props => props.leaveFullscreen && css`

@@ -16,6 +16,7 @@ const Header = styled.div`
     -moz-box-shadow: ${styles.shadowDefault};
     box-shadow: ${styles.shadowDefault};
     justify-content: space-between;
+    z-index: 2;
 `;
 
 const Logo = styled.div`

@@ -25,6 +25,7 @@ type Props = {
     sortBy: string,
     filterBarActive: boolean,
     handleFilterToggleClick: () => void,
+    pagination: number,
 };
 
 const AlbumReviewListView = ({
@@ -44,6 +45,7 @@ const AlbumReviewListView = ({
     sortBy,
     filterBarActive,
     handleFilterToggleClick,
+    pagination,
 }: Props) => (
     <>
         {fetching && (
@@ -81,9 +83,10 @@ const AlbumReviewListView = ({
             fetching={fetching}
             filterBarActive={filterBarActive}
             handleFilterToggleClick={handleFilterToggleClick}
+            pagination={pagination}
         />
         <AlbumWrapper filterBarActive={filterBarActive}>
-            {filteredReviews && filteredReviews.map(review => (
+            {filteredReviews.map(review => (
                 <SingleReview
                     key={review._id}
                     review={review}
@@ -92,6 +95,7 @@ const AlbumReviewListView = ({
                     handleAlbumClick={handleAlbumClick}
                 />
             ))}
+            <div id="bottom-pagination" />
             {fetching && Array.from({ length: 36 }).map((a, index) => (
                 <SingleReview
                     key={index} //eslint-disable-line

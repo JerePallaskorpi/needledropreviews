@@ -4,6 +4,7 @@ import ActiveFilters from './ActiveFilters';
 import Score from './Score';
 import Search from './Search';
 import Date from './Date';
+import Handlers from './Handlers';
 
 const Filter = styled.div`
     position: fixed;
@@ -16,16 +17,20 @@ const Filter = styled.div`
     -webkit-box-shadow: ${styles.shadowStrong};
     -moz-box-shadow: ${styles.shadowStrong};
     box-shadow: ${styles.shadowStrong};
+    z-index: 1;
+    height: auto;
+    max-height: ${props => (props.filterBarActive ? '250px' : 0)};
+    transition: 0.4s;
+    
+    @media only screen and (min-width: 600px) {
+        max-height: ${props => (props.filterBarActive ? '250px' : 0)};
+    }
 `;
 
 const FilterOptions = styled.div`
     transition: 0.4s;
     height: auto;
-    max-height: ${props => (props.filterBarActive ? '190px' : 0)};
     
-    @media only screen and (min-width: 600px) {
-        max-height: ${props => (props.filterBarActive ? '130px' : 0)};
-    }
 `;
 
 const Inputs = styled.div`
@@ -39,5 +44,6 @@ Filter.Score = Score;
 Filter.Search = Search;
 Filter.Date = Date;
 Filter.ActiveFilters = ActiveFilters;
+Filter.Handlers = Handlers;
 
 export default Filter;

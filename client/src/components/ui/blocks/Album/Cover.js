@@ -16,23 +16,26 @@ const Cover = styled.div`
         background-size: cover;
     `};
     
-    ${({ coverArt }) => css`
-        div {
-            background-image: url(${coverArt});
-            background-repeat: no-repeat;
-            background-position: center; 
-            background-size: cover;
-            border-radius: ${props => (props.fullscreen ? '0' : '5px 0 0 5px')};
-            height: 100%;
-            width: 100%;
-        }
-    `};  
-    
     @media only screen and (max-width: 1100px) {
         height: 75px;
         width: 75px;
         min-width: 75px;
     };
 `;
+
+const Art = styled.div.attrs(props => ({
+    style: {
+        backgroundImage: `url(${props.coverArt})`,
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+        borderRadius: `${props.fullscreen ? '0' : '5px 0 0 5px'}`,
+        height: '100%',
+        width: '100%',
+    },
+}))`
+`;
+
+Cover.Art = Art;
 
 export default Cover;
