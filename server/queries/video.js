@@ -17,7 +17,7 @@ const dbVideoCreate = async (playlistVideos) => {
     const videosToBeAdded = playlistVideos.filter(video => !existingVideoIds
         .some(videoId => videoId === video.videoId));
 
-    console.log('Reviews to be added');
+    console.log('Reviews to be added:');
     console.log(videosToBeAdded.map(vid => vid.title));
 
     /* eslint-disable */
@@ -29,8 +29,12 @@ const dbVideoCreate = async (playlistVideos) => {
         );
         if (coverUrl) videosToBeAdded[queryIndex].details.albumCover = coverUrl;
 
-        await sleep(10000);
+        coverUrl
+            ? console.info(`Added cover for ${videosToBeAdded[queryIndex].details.artist} - ${videosToBeAdded[queryIndex].details.album} (${queryIndex}/${videosToBeAdded.length})`)
+            : console.error(`No cover found for ${videosToBeAdded[queryIndex].details.artist} - ${videosToBeAdded[queryIndex].details.album} (${queryIndex}/${videosToBeAdded.length})`);
 
+
+        await sleep(10000);
         queryIndex += 1;
     }
     /* eslint-disable */

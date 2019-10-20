@@ -34,7 +34,9 @@ const parseRating = (description, title) => {
  * @returns {string} Parsed artist name.
  */
 const parseArtist = title => title
-    .split(/album review/ig)[0]
+    .split(/ALBUM/g)[0]
+    .split(/EP/g)[0]
+    .split(/MIXTAPE/g)[0]
     .split('- ')[0]
     .trim();
 
@@ -48,13 +50,15 @@ const parseArtist = title => title
  */
 const parseAlbum = (title) => {
     let album = title
-        .split(/album review/ig)[0]
+        .split(/ALBUM/g)[0]
+        .split(/EP/g)[0]
+        .split(/MIXTAPE/g)[0]
         .replace(title.split('- ')[0], '')
         .substring(1).trim();
 
     const textToReplace = replaceStrings.find(string => album.includes(string));
     if (textToReplace) album = album.replace(textToReplace, '');
-    if (album.toLowerCase().includes('self-titled')) return parseArtist(title);
+    if (album.toLowerCase().includes('self-titled')) return album.replace(/self-titled/ig, parseArtist(title));
     return album;
 };
 
@@ -71,8 +75,8 @@ const parseAlbum = (title) => {
  * @returns {Object[]} Filtered and parsed playlist videos.
  */
 const filterAlbumReviews = playlistItems => [].concat(...playlistItems)
-    .filter(item => item.snippet.title.toLowerCase()
-        .includes('album review') && item.snippet.title.includes('- '))
+    .filter(item => ['ALBUM', 'EP', 'MIXTAPE'].some(text => item.snippet.title.includes(text))
+        && item.snippet.title.includes('- '))
     .map(item => ({
         title: item.snippet.title,
         description: item.snippet.description,
@@ -86,8 +90,7 @@ const filterAlbumReviews = playlistItems => [].concat(...playlistItems)
             albumCover: '',
         },
     }))
-    .reduce((x, y) => (x.findIndex(e => e.title === y.title) < 0 ? [...x, y] : x), [])
-    .filter(item => item.details.rating !== null);
+    .reduce((x, y) => (x.findIndex(e => e.title === y.title) < 0 ? [...x, y] : x), []);
 
 module.exports = {
     filterAlbumReviews,
