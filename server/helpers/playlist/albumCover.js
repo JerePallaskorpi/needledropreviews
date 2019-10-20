@@ -50,7 +50,6 @@ const getAlbumCover = async (artistName, albumName) => {
     if (foundArtist) {
         artistId = foundArtist.id;
     } else {
-        console.log(`FAIL artistName: ${artistName}`);
         artistId = null;
     }
 
@@ -67,8 +66,6 @@ const getAlbumCover = async (artistName, albumName) => {
     if (foundReleaseGroup) {
         releaseGroupId = foundReleaseGroup.id;
     } else {
-        console.log(`FAIL releaseGroupId: ${albumName}`);
-        console.log(releaseGroupId);
         releaseGroupId = null;
     }
 
