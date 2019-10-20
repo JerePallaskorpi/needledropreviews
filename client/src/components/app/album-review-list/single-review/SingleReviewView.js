@@ -81,7 +81,7 @@ const SingleReviewView = ({
                     rating={review.details.rating}
                     fullscreen={fullscreen.id === review._id}
                 >
-                    <span>{review.details.rating}</span>
+                    <span>{review.details.rating !== null ? review.details.rating : '-'}</span>
                 </AlbumWrapper.Album.Rating>
             </AlbumWrapper.Album>
 

@@ -13,4 +13,5 @@ export const ratingDetails = [
     { score: 2, color: styles.colorScore2 },
     { score: 1, color: styles.colorScore1 },
     { score: 0, color: styles.colorScore0 },
+    { score: null, color: '#cfdcde' },
 ];

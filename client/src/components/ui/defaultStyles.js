@@ -29,7 +29,7 @@ export const shadowStrong = '0 2px 5px 0 hsla(0, 0%, 0%, 0.5)';
 export const GlobalStyle = createGlobalStyle`
   body {
     margin: 0 auto;
-    font-family: 'Roboto', Helvetica, Arial, sans-serif;
+    font-family: 'Muli', 'Roboto', Helvetica, Arial, sans-serif;
     font-size: 16px;
     background: ${colorLight};
     color: ${colorDark};

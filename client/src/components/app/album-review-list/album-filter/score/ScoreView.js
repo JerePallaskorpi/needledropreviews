@@ -18,7 +18,7 @@ const ScoreView = ({ handleScoreClick, activeFilters }: Props) => (
                 key={rating.score}
                 onClick={() => handleScoreClick(rating.score)}
             >
-                {rating.score}
+                {rating.score !== null ? rating.score : '-'}
             </ButtonScore>
         )).reverse()}
     </Filter.Score>
