@@ -48,7 +48,6 @@ const videoSchema = new Schema({
         artist: {
             type: String,
             index: true,
-            lowercase: true,
         },
         album: {
             type: String,
