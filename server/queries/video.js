@@ -39,12 +39,13 @@ const dbVideoCreate = async (playlistVideos) => {
     }
     /* eslint-disable */
 
+    // Update video details for existing reviews.
+    // Change updateOne values based on what needs to be updated
     // const videosToBeEdited = playlistVideos.filter(video => existingVideoIds
     //     .some(videoId => videoId === video.videoId));
-    // Update video details for existing reviews.
     // videosToBeEdited.forEach((editedVideo) => {
     //     db.Video.updateOne({ videoId: editedVideo.videoId },
-    //         { $set: { details: editedVideo.details } },
+    //         { $set: { 'details.artist': editedVideo.details.artist } },
     //         { upsert: true }, (err) => {
     //             if (err) console.log(err);
     //         });
