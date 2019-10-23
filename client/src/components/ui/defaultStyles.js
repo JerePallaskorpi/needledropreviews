@@ -33,6 +33,7 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 16px;
     background: ${colorLight};
     color: ${colorDark};
+    overflow: hidden;
 
     input, select, textarea, button {
         font-family: inherit;

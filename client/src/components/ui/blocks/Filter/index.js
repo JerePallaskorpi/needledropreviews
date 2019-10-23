@@ -19,11 +19,13 @@ const Filter = styled.div`
     box-shadow: ${styles.shadowStrong};
     z-index: 1;
     height: auto;
-    max-height: ${props => (props.filterBarActive ? '250px' : 0)};
+    // max-height: ${props => (props.filterBarActive ? '250px' : 0)};
+    transform: ${props => (props.filterBarActive ? 'translateY(0)' : 'translateY(100%)')};
+    transform-origin: bottom;
     transition: 0.4s;
     
     @media only screen and (min-width: 600px) {
-        max-height: ${props => (props.filterBarActive ? '250px' : 0)};
+        //max-height: ${props => (props.filterBarActive ? '250px' : 0)};
     }
 `;
 

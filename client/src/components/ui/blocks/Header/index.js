@@ -20,6 +20,8 @@ const Header = styled.div`
 `;
 
 const Logo = styled.div`
+    height: 39px;
+    
     &:hover {
         cursor: pointer;
     }
