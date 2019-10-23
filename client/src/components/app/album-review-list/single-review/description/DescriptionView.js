@@ -1,7 +1,8 @@
 // @flow
 import React from 'react';
 import moment from 'moment';
-import Content from '../../../../ui/blocks/Album/Content';
+import AlbumWrapper from '../../../../ui/blocks/Album';
+import Content from '../../../../ui/blocks/ReviewFullscreen/Content';
 
 type Props = {
     summary: string,
@@ -14,6 +15,25 @@ const DescriptionView = ({
     summary, favTracks, leastFavTracks, review,
 }: Props) => (
     <Content.Description>
+        <Content.Description.Album>
+            <Content.Description.Album.Cover
+                thumbnail={review.thumbnail}
+                coverArt={review.details.albumCover}
+            >
+                <Content.Description.Album.Cover.Art coverArt={review.details.albumCover} />
+            </Content.Description.Album.Cover>
+            <Content.Description.Album.Text>
+                <span>
+                    {review.details.album.toLowerCase().includes('self-titled')
+                        ? review.details.artist
+                        : review.details.album}
+                </span>
+                <span>{review.details.artist}</span>
+            </Content.Description.Album.Text>
+            <Content.Description.Album.Rating rating={review.details.rating}>
+                <span>{review.details.rating !== null ? review.details.rating : '-'}</span>
+            </Content.Description.Album.Rating>
+        </Content.Description.Album>
         <Content.Description.Date>
             <span>{moment(review.date).format('MMMM Do, YYYY')}</span>
         </Content.Description.Date>
@@ -22,22 +42,27 @@ const DescriptionView = ({
             <p>{summary}</p>
         </Content.Description.Summary>
         <Content.Description.Tracks>
-            <Content.Description.Favs>
-                <p>Favs</p>
-                {favTracks.length > 0
-                    ? favTracks.map(favTrack => (
-                        <p key={favTrack}>{favTrack}</p>
-                    ))
-                    : <p>-</p>}
-            </Content.Description.Favs>
-            <Content.Description.LeastFavs>
-                <p>Least Favs</p>
-                {leastFavTracks.length > 0
-                    ? leastFavTracks.map(leastFavTrack => (
-                        <p key={leastFavTrack}>{leastFavTrack}</p>
-                    ))
-                    : <p>-</p>}
-            </Content.Description.LeastFavs>
+            {favTracks.length > 0 && (
+                favTracks.map((track, index) => (
+                    <Content.Description.Tracks.Track
+                        fav
+                        nthTrack={index}
+                        key={track}
+                    >
+                        {track}
+                    </Content.Description.Tracks.Track>
+                ))
+            )}
+            {leastFavTracks.length > 0 && (
+                leastFavTracks.map((track, index) => (
+                    <Content.Description.Tracks.Track
+                        nthTrack={favTracks.length + index}
+                        key={track}
+                    >
+                        {track}
+                    </Content.Description.Tracks.Track>
+                ))
+            )}
         </Content.Description.Tracks>
     </Content.Description>
 );

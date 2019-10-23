@@ -6,7 +6,7 @@ const Cover = styled.div`
     width: 100px;
     min-width: 100px;
     padding: 0;
-    border-radius: ${props => (props.fullscreen ? '0' : '5px 0 0 5px')};
+    border-radius: 5px 0 0 5px;
     
     ${({ thumbnail, coverArt }) => css`
         background-color: ${styles.colorDark};
@@ -29,7 +29,7 @@ const Art = styled.div.attrs(props => ({
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
         backgroundSize: 'cover',
-        borderRadius: `${props.fullscreen ? '0' : '5px 0 0 5px'}`,
+        borderRadius: '5px 0 0 5px',
         height: '100%',
         width: '100%',
     },

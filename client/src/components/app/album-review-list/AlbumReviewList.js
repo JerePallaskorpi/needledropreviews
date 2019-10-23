@@ -1,22 +1,21 @@
 // @flow
 import React, { useEffect, useState } from 'react';
-import { ThemeProvider } from 'styled-components';
-import moment from 'moment';
-import { getAlbums } from '../../../api/album';
 import { sortNumber, sortFilteredList } from '../../../utils/arrays';
 import { textFilter, dateFilter, scoreFilter } from '../../../utils/reviewFilter';
-import { themeLight } from '../../../utils/themes';
+import AlbumFilterView from './album-filter/AlbumFilterView';
 import AlbumReviewListView from './AlbumReviewListView';
+import SingleReviewFullscreen from './single-review-fullscreen/SingleReviewFullscreen';
+
+type Props = {
+    albumReviews: Object[],
+    fetching: boolean,
+    reviewYears: number[],
+};
 
 const initialState = {
     albumReviews: [],
     filteredReviews: [],
-    fullscreen: {
-        id: '',
-        x: 0,
-        y: 0,
-        originalPos: {},
-    },
+    fullscreen: '',
     leaveFullscreen: {
         id: '',
         x: 0,
@@ -29,7 +28,6 @@ const initialState = {
         date: null,
     },
     fetching: true,
-    reviewYears: [],
     foundResults: 0,
     sortBy: 'newest',
     filterBarActive: true,
@@ -37,15 +35,10 @@ const initialState = {
 };
 
 let lastScrollTop = 0;
-const AlbumReviewList = () => {
-    const [albumReviews, setAlbumReviews] = useState(initialState.albumReviews);
+const AlbumReviewList = ({ albumReviews, fetching, reviewYears }: Props) => {
     const [filteredReviews, setFilteredReviews] = useState(initialState.filteredReviews);
     const [fullscreen, setFullscreen] = useState(initialState.fullscreen);
-    const [leaveFullscreen, setLeaveFullscreen] = useState(initialState.leaveFullscreen);
     const [activeFilters, setActiveFilters] = useState(initialState.activeFilters);
-    const [fetching, setFetching] = useState(initialState.fetching);
-    const [theme] = useState(themeLight);
-    const [reviewYears, setReviewYears] = useState(initialState.reviewYears);
     const [foundResults, setFoundResults] = useState(initialState.foundResults);
     const [sortBy, setSortBy] = useState(initialState.sortBy);
     const [filterBarActive, setFilterBarActive] = useState(initialState.sortBy);
@@ -114,36 +107,7 @@ const AlbumReviewList = () => {
     const handleAlbumClick = (evt: Object, id: string) => {
         evt.persist();
 
-        const originalPos = document.getElementById(`${id}_original`)
-            ? document.getElementById(`${id}_original`).getBoundingClientRect()
-            : document.getElementById(id).getBoundingClientRect();
-
-        if (fullscreen.id === id) {
-            setLeaveFullscreen({
-                id, x: fullscreen.x, y: fullscreen.y, originalPos,
-            });
-            setFullscreen(initialState.fullscreen);
-
-            setTimeout(() => {
-                setLeaveFullscreen(initialState.leaveFullscreen);
-                setFullscreen(initialState.fullscreen);
-            }, 500);
-        } else {
-            setFullscreen({
-                id, x: evt.clientX, y: evt.clientY, originalPos,
-            });
-        }
-    };
-
-    /** Randomizes current list */
-    const handleRandomizeClick = () => {
-        if (sortBy === 'random') {
-            setSortBy(initialState.sortBy);
-            handleFilterChange();
-        } else {
-            setSortBy('random');
-            handleFilterChange();
-        }
+        setFullscreen(id);
     };
 
     /** Toggles filter bar */
@@ -154,22 +118,10 @@ const AlbumReviewList = () => {
     /** Reset's all filtering options on click */
     const resetFilters = () => setActiveFilters(initialState.activeFilters);
 
-    /** Gets the album reviews from backend */
-    const getAlbumList = async () => {
-        const albumReviewsRes = await getAlbums();
-        setFetching(false);
-        setAlbumReviews(albumReviewsRes);
-        setFoundResults(albumReviewsRes.length);
-        setReviewYears([...new Set(albumReviewsRes
-            .map(review => moment(review.date).year()))]
-            .sort((a, b) => b - a));
-        setFilteredReviews(sortFilteredList(albumReviewsRes, sortBy));
-        window.scrollTo(0, 0);
-    };
-
     /** Calls method for getting album reviews during first mount */
     useEffect(() => {
-        getAlbumList();
+        setFoundResults(albumReviews.length);
+        setFilteredReviews(sortFilteredList(albumReviews, sortBy));
         window.scrollTo(0, 0);
     }, []); // eslint-disable-line
 
@@ -207,12 +159,12 @@ const AlbumReviewList = () => {
         };
     });
 
-    /** Disable body scroll when review fullscrened */
+    /** Disable body scroll when fullscreen review active */
     useEffect(() => {
-        fullscreen.id || fetching
+        fullscreen
             ? document.body.style.overflow = 'hidden'
             : document.body.style.overflow = 'auto';
-    }, [fullscreen, fetching]);
+    }, [fullscreen]);
 
     /** Sets the filtered list */
     useEffect(() => {
@@ -233,27 +185,34 @@ const AlbumReviewList = () => {
     const pagedFilteredReviews = filteredReviews.slice(0, pagination * 36);
 
     return (
-        <ThemeProvider theme={theme}>
-            <AlbumReviewListView
+        <>
+            <AlbumFilterView
                 handleScoreClick={handleScoreClick}
                 handleTextChange={handleTextChange}
-                handleAlbumClick={handleAlbumClick}
-                filteredReviews={pagedFilteredReviews}
-                fullscreen={fullscreen}
-                leaveFullscreen={leaveFullscreen}
                 activeFilters={activeFilters}
-                resetFilters={resetFilters}
-                fetching={fetching}
                 handleDateChange={handleDateChange}
                 reviewYears={reviewYears}
+                resetFilters={resetFilters}
                 foundResults={foundResults}
-                handleRandomizeClick={handleRandomizeClick}
-                sortBy={sortBy}
+                fetching={fetching}
                 filterBarActive={filterBarActive}
                 handleFilterToggleClick={handleFilterToggleClick}
                 pagination={pagination}
             />
-        </ThemeProvider>
+            <AlbumReviewListView
+                handleAlbumClick={handleAlbumClick}
+                filteredReviews={pagedFilteredReviews}
+                fetching={fetching}
+                filterBarActive={filterBarActive}
+            />
+            { fullscreen && (
+                <SingleReviewFullscreen
+                    review={filteredReviews.find(a => a._id === fullscreen)}
+                    filteredReviews={filteredReviews}
+                    setFullscreen={setFullscreen}
+                />
+            )}
+        </>
     );
 };
 
