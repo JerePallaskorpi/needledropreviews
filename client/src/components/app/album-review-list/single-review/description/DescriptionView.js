@@ -1,7 +1,6 @@
 // @flow
 import React from 'react';
 import moment from 'moment';
-import AlbumWrapper from '../../../../ui/blocks/Album';
 import Content from '../../../../ui/blocks/ReviewFullscreen/Content';
 
 type Props = {
