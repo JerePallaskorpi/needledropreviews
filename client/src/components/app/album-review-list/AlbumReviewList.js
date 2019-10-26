@@ -31,7 +31,7 @@ const initialState = {
     foundResults: 0,
     sortBy: 'newest',
     filterBarActive: true,
-    pagination: 1,
+    pagination: 2,
 };
 
 let lastScrollTop = 0;
