@@ -1,13 +1,7 @@
 // @flow
 import React from 'react';
-import { GlobalStyle } from '../ui/defaultStyles';
-import AlbumReviewList from './album-review-list/AlbumReviewList';
+import Home from './Home';
 
-const App = () => (
-    <>
-        <GlobalStyle />
-        <AlbumReviewList />
-    </>
-);
+const App = () => <Home />;
 
 export default App;

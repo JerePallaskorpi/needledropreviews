@@ -32,7 +32,8 @@ export const GlobalStyle = createGlobalStyle`
     font-family: 'Muli', 'Roboto', Helvetica, Arial, sans-serif;
     font-size: 16px;
     background: ${colorLight};
-    color: ${colorDark};
+    background: ${({ theme }) => theme.backgroundSecondary};
+    overflow: hidden;
 
     input, select, textarea, button {
         font-family: inherit;

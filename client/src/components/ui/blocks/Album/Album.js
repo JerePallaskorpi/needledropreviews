@@ -1,6 +1,8 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { ratingDetails } from '../../../../utils/rating';
-import { albumEnterFullscreen, albumExitFullscreen } from './keyFrames';
+import * as styles from '../../defaultStyles';
+import { FadeInAlbum } from './keyFrames';
+
 
 const Album = styled.div`
     height: 100px;
@@ -11,34 +13,21 @@ const Album = styled.div`
     background: ${({ rating, fullscreen }) => fullscreen
     && ratingDetails.some(r => r.score === rating)
     && ratingDetails.find(r => r.score === rating).color};
-    
-    ${({ rating, fullscreen, originalPos }) => fullscreen && css`
-        -webkit-animation: ${albumEnterFullscreen(rating, originalPos)} 0.5s forwards;
-        -moz-animation: ${albumEnterFullscreen(rating, originalPos)} 0.5s forwards;
-        -o-animation: ${albumEnterFullscreen(rating, originalPos)} 0.5s forwards;
-        animation: ${albumEnterFullscreen(rating, originalPos)} 0.5s forwards;
-    `};
-    
-    ${({ leaveFullscreen }) => leaveFullscreen && css`
-        -webkit-animation: ${albumExitFullscreen()} 0.5s;
-        -moz-animation: ${albumExitFullscreen()} 0.5s;
-        -o-animation: ${albumExitFullscreen()} 0.5s;
-        animation: ${albumExitFullscreen()} 0.5s;
-        display: flex;
-    `};
-    
+            -webkit-animation: ${FadeInAlbum()} 0.4s forwards linear;
+        -moz-animation: ${FadeInAlbum()} 0.4s forwards linear;
+        -o-animation: ${FadeInAlbum()} 0.4s forwards linear;
+        animation: ${FadeInAlbum()} 0.4s forwards linear;
     &:hover {
         cursor: pointer;
         background: ${({ rating, fullscreen }) => (fullscreen
         ? '#ffffff'
         : ratingDetails.some(r => r.score === rating)
-    && ratingDetails.find(r => r.score === rating).color)};
+                && ratingDetails.find(r => r.score === rating).color)};
+        color: ${styles.colorDark};
         
         @media only screen and (max-width: 764px) {
-            background: ${({ rating, fullscreen }) => (fullscreen
-        ? ratingDetails.some(r => r.score === rating)
-    && ratingDetails.find(r => r.score === rating).color
-        : '#FFFFFF')};
+            background: ${({ theme }) => theme.background};
+            color: ${({ theme }) => theme.color};
         } 
     }
     

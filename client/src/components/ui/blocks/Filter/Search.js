@@ -1,21 +1,21 @@
 import styled from 'styled-components';
-import * as styles from '../../defaultStyles';
 
 const Search = styled.div`
     margin: 1rem;
-    flex: 2;
+    flex: 3;
     font-size: 14px;
+    display: flex;
+    align-items: center;
 `;
 
 const Input = styled.input`
     width: 100%;
-    padding: 0 16px;
+    padding: 0 0.5rem;
     -webkit-align-items: center;
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    background-color: hsl(0,0%,100%);
-    border-radius: 4px;
+    background: ${({ theme }) => theme.backgroundSecondary};
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -30,17 +30,44 @@ const Input = styled.input`
     min-height: 38px;
     outline: 0 !important;
     position: relative;
-    -webkit-transition: all 100ms;
-    transition: all 100ms;
     box-sizing: border-box;
-    border: 1px solid hsl(0, 0%, 80%);
+    border: none;
+    color: ${({ theme }) => theme.color};
     
     &:focus {
-        border: 2px solid ${styles.colorScore0};
-        padding: 0 15px;
+        border: none;
+    }
+    
+    @media only screen and (max-width: 800px) {
+        flex: 1;
+    };
+`;
+
+const Icon = styled.div`
+    background: ${({ theme }) => theme.backgroundSecondary};
+    border-radius: 4px 0 0 4px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-left: 0.5rem;
+    color: ${({ theme }) => theme.colorGray};
+`;
+
+const Close = styled.div`
+    background: ${({ theme }) => theme.backgroundSecondary};
+    border-radius: 0 4px 4px 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 0.5rem;
+    
+    &:hover {
+        cursor: pointer;
     }
 `;
 
 Search.Input = Input;
+Search.Icon = Icon;
+Search.Close = Close;
 
 export default Search;

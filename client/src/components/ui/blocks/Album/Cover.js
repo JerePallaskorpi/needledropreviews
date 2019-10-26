@@ -1,15 +1,13 @@
 import styled, { css } from 'styled-components';
-import * as styles from '../../defaultStyles';
 
 const Cover = styled.div`
     height: 100px;
     width: 100px;
     min-width: 100px;
     padding: 0;
-    border-radius: ${props => (props.fullscreen ? '0' : '5px 0 0 5px')};
+    border-radius: 6px 0 0 6px;
     
     ${({ thumbnail, coverArt }) => css`
-        background-color: ${styles.colorDark};
         background-image: url(${(coverArt ? 'https://66.media.tumblr.com/avatar_91da58554fa4_128.pnj' : thumbnail)});
         background-repeat: no-repeat;
         background-position: center; 
@@ -29,7 +27,7 @@ const Art = styled.div.attrs(props => ({
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
         backgroundSize: 'cover',
-        borderRadius: `${props.fullscreen ? '0' : '5px 0 0 5px'}`,
+        borderRadius: '5px 0 0 5px',
         height: '100%',
         width: '100%',
     },

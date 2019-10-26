@@ -11,7 +11,7 @@ const Rating = styled.div`
     align-items: center;
     color: #282828;
     font-size: 24px;
-    border-radius: ${props => (props.fullscreen ? 0 : '0 5px 5px 0')};
+    border-radius: 0 5px 5px 0;
     background: ${({ rating }) => ratingDetails.some(r => r.score === rating)
     && ratingDetails.find(r => r.score === rating).color};
     max-width: 1100px;
