@@ -20,7 +20,7 @@ const ReviewFullscreen = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(255, 255, 255, 0.5);
+    background: ${({ theme }) => theme.backgroundFloating};
 `;
 
 const ContentWrapper = styled.div`
@@ -29,12 +29,14 @@ const ContentWrapper = styled.div`
     width: 750px;
     height: calc(100% - 50px);
     background: white;
+    background: ${({ theme }) => theme.backgroundSecondary};
     box-shadow: 0 2px 4px 0 hsla(0, 0%, 0%, 0.4);
     z-index: 999;
     left: 50%;
     transform: translateX(-50%);
     border-radius: 5px;
     overflow: auto;
+    color: ${({ theme }) => theme.color};
     
     -webkit-animation: ${FadeIn()} 0.2s forwards;
     -moz-animation: ${FadeIn()} 0.2s forwards;
@@ -61,17 +63,22 @@ const BottomNav = styled.div`
     left: 50%;
     transform: translateX(-50%);
     z-index: 99999999999999999999999;
-    background: #fafafa;
+    background: ${({ theme }) => theme.background};
     border-radius: 0 0 5px 5px;
     box-shadow: 0 2px 4px 0 hsla(0, 0%, 0%, 0.2);
     font-size: 24px;
     width: 750px;
     display: flex;
     justify-content: space-around;
-    border-top: 1px solid #dadada;
+    border-top: 1px solid ${({ theme }) => theme.borderColor};
+    color: ${({ theme }) => theme.color};
     
     i {
         padding: 1rem;
+        
+        &:hover {
+            cursor: pointer;
+        }
     }
     
     @media only screen and (max-height: 800px) {

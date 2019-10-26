@@ -9,7 +9,7 @@ const SingleAlbumWrapper = styled.div`
     flex: 1;
     box-shadow: ${styles.shadowDefault};
     border-radius: 5px;
-    background: #FFFFFF;
+    background: ${({ theme }) => theme.background};
     opacity: ${props => (props.hidden ? 0 : 1)};
     z-index: ${props => (props.hidden ? -1 : 'initial')};
     flex-direction: column;

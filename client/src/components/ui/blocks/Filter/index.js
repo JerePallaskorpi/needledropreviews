@@ -23,6 +23,7 @@ const Filter = styled.div`
     transform: ${props => (props.filterBarActive ? 'translateY(0)' : 'translateY(100%)')};
     transform-origin: bottom;
     transition: 0.4s;
+    color: ${({ theme }) => theme.color};
     
     @media only screen and (min-width: 600px) {
         //max-height: ${props => (props.filterBarActive ? '250px' : 0)};
