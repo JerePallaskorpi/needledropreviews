@@ -1,17 +1,17 @@
 import styled from 'styled-components';
 import * as styles from '../../defaultStyles';
 
-const Header = styled.div`
+const StyledHeader = styled.div`
     display: flex;
     align-items: center;
     position: fixed;
     background: ${props => props.theme.background};
     color: ${props => props.theme.color};
-    width: calc(100% - 2rem);
+    width: calc(100% - 1rem);
     height: 50px;
     top: 0;
     left: 0;
-    padding: 0 1rem;
+    padding: 0 0.5rem;
     -webkit-box-shadow: ${styles.shadowDefault};
     -moz-box-shadow: ${styles.shadowDefault};
     box-shadow: ${styles.shadowDefault};
@@ -61,7 +61,7 @@ const Sort = styled.div`
     }
 `;
 
-Header.Logo = Logo;
-Header.Sort = Sort;
+StyledHeader.Logo = Logo;
+StyledHeader.Sort = Sort;
 
-export default Header;
+export default StyledHeader;

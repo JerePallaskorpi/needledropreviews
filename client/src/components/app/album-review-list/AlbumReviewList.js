@@ -80,6 +80,13 @@ const AlbumReviewList = ({ albumReviews, fetching, reviewYears }: Props) => {
         handleFilterChange();
     };
 
+    const handleTextReset = () => {
+        setActiveFilters({
+            ...activeFilters,
+            search: initialState.activeFilters.search,
+        });
+    };
+
     /**
      * Handles date select change.
      *
@@ -121,7 +128,6 @@ const AlbumReviewList = ({ albumReviews, fetching, reviewYears }: Props) => {
     /** Calls method for getting album reviews during first mount */
     useEffect(() => {
         setFoundResults(albumReviews.length);
-        setFilteredReviews(sortFilteredList(albumReviews, sortBy));
         window.scrollTo(0, 0);
     }, []); // eslint-disable-line
 
@@ -149,6 +155,12 @@ const AlbumReviewList = ({ albumReviews, fetching, reviewYears }: Props) => {
         } else {
             setFilterBarActive(true);
         }
+    };
+
+    const handleChangeSortBy = (sort: string) => {
+        window.scrollTo(0, 0);
+        setPagination(initialState.pagination);
+        setSortBy(sort);
     };
 
     useEffect(() => {
@@ -189,6 +201,7 @@ const AlbumReviewList = ({ albumReviews, fetching, reviewYears }: Props) => {
             <AlbumFilterView
                 handleScoreClick={handleScoreClick}
                 handleTextChange={handleTextChange}
+                handleTextReset={handleTextReset}
                 activeFilters={activeFilters}
                 handleDateChange={handleDateChange}
                 reviewYears={reviewYears}
@@ -198,6 +211,8 @@ const AlbumReviewList = ({ albumReviews, fetching, reviewYears }: Props) => {
                 filterBarActive={filterBarActive}
                 handleFilterToggleClick={handleFilterToggleClick}
                 pagination={pagination}
+                sortBy={sortBy}
+                setSortBy={handleChangeSortBy}
             />
             <AlbumReviewListView
                 handleAlbumClick={handleAlbumClick}

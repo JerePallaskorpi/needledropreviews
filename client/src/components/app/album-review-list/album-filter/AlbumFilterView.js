@@ -3,38 +3,51 @@ import React from 'react';
 import Filter from '../../../ui/blocks/Filter';
 import DateSelectView from './date-select/DateSelectView';
 import ScoreView from './score/ScoreView';
+import SortMenuView from './sort-menu/SortMenuView';
 import TextSearchView from './text-search/TextSearchView';
 
 type Props = {
     handleScoreClick: (score: number) => void,
     handleTextChange: (evt: Object) => void,
+    handleTextReset: () => void,
     handleDateChange: (evt: Object) => void,
     activeFilters: Object,
     reviewYears: string[],
-    resetFilters: () => void,
     foundResults: number,
     fetching: boolean,
     filterBarActive: boolean,
-    handleFilterToggleClick: () => void,
+    sortBy: string,
+    setSortBy: (sortBy: string) => void,
 };
 
 const AlbumFilterView = ({
     handleScoreClick,
     handleTextChange,
+    handleTextReset,
     handleDateChange,
     activeFilters,
     reviewYears,
     foundResults,
     fetching,
     filterBarActive,
+    sortBy,
+    setSortBy,
 }: Props) => (
     <Filter filterBarActive={filterBarActive}>
         <Filter.Handlers>
-            <div>{!fetching ? `${foundResults}` : '...'}</div>
+            <Filter.Handlers.Score>
+                <i className="fas fa-star" />
+                <span>{!fetching ? `${foundResults}` : '...'}</span>
+            </Filter.Handlers.Score>
+            <SortMenuView sortBy={sortBy} setSortBy={setSortBy} />
         </Filter.Handlers>
         <Filter.FilterOptions id="filterOptions">
             <Filter.FilterOptions.Inputs>
-                <TextSearchView handleTextChange={handleTextChange} search={activeFilters.search} />
+                <TextSearchView
+                    handleTextChange={handleTextChange}
+                    handleTextReset={handleTextReset}
+                    search={activeFilters.search}
+                />
                 <DateSelectView
                     handleDateChange={handleDateChange}
                     date={activeFilters.date}
