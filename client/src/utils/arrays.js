@@ -27,6 +27,8 @@ export const sortFilteredList = (reviewList: Object[], sortBy: string) => {
     switch (sortBy) {
         case 'newest':
             return reviewList.sort((a, b) => new Date(b.date) - new Date(a.date));
+        case 'oldest':
+            return reviewList.sort((a, b) => new Date(a.date) - new Date(b.date));
         case 'random':
             return shuffleArray(reviewList);
         default:

@@ -12,11 +12,10 @@ const AlbumWrapper = styled.div`
     margin-top: 50px;
     margin-bottom: ${props => (props.filterBarActive ? '240px' : '0px')};
     background: ${({ theme }) => theme.background};
-    color: ${({ theme }) => theme.color};
     transition: 0.4s;
     
     ${({ theme }) => theme && css`
-        background: ${theme.background};
+        background: ${theme.backgroundSecondary};
         color: ${theme.color};
     `};
     

@@ -79,7 +79,7 @@ const Summary = styled.div`
 `;
 
 const Date = styled.div`
-    color: ${styles.colorGray};
+    color: ${({ theme }) => theme.colorGray};
     padding-bottom: 0.5rem;
     
     -webkit-animation: ${FadeInOpacity()} 0.4s forwards;
@@ -100,7 +100,7 @@ const Cover = styled.div`
     min-width: 75px;
     padding: 0;
     box-shadow: 0 2px 4px 0 hsla(0, 0%, 0%, 0.2);
-    border-radius: 5px;
+    border-radius: 6px;
     
     ${({ thumbnail, coverArt }) => css`
         background-color: ${styles.colorDark};
@@ -158,11 +158,8 @@ const Rating = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #282828;
     font-size: 24px;
-    
-    opacity: 1;
-    transform: scale(0);
+    color: ${({ theme }) => theme.color};
     
     -webkit-animation: ${FadeInOpacity()} 0.4s forwards;
     -moz-animation: ${FadeInOpacity()} 0.4s forwards;

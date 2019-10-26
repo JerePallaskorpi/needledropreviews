@@ -8,7 +8,7 @@ export const ButtonScore = styled.button`
     border: 0;
     padding: 1rem;
     margin: 0.25rem;
-    color: ${styles.colorDark};
+    color: ${({ theme }) => theme.color};
     background: none;
     border-top: 5px solid ${({ rating }) => ratingDetails.some(r => r.score === rating)
         && ratingDetails.find(r => r.score === rating).color};
@@ -31,6 +31,7 @@ export const ButtonScore = styled.button`
         background: ${({ rating }) => ratingDetails.some(r => r.score === rating)
             && ratingDetails.find(r => r.score === rating).color};
         border-top: 5px solid transparent;
+        color: ${styles.colorDark};
     `}
     
     ${props => props.disabled && css`

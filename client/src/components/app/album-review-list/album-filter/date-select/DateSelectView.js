@@ -2,7 +2,6 @@
 import React from 'react';
 import Select from 'react-select';
 import Filter from '../../../../ui/blocks/Filter';
-import { colorScore10, colorScore0 } from '../../../../ui/defaultStyles';
 
 type Props = {
     handleDateChange: (evt: Object) => void,
@@ -23,12 +22,10 @@ const DateSelectView = ({ handleDateChange, date, reviewYears }: Props) => (
             closeMenuOnSelect
             theme={theme => ({
                 ...theme,
-                colors: {
-                    ...theme.colors,
-                    primary25: colorScore10,
-                    primary: colorScore0,
-                },
+                colors: {},
             })}
+            className="react-select-container"
+            classNamePrefix="react-select"
         />
     </Filter.Date>
 );
