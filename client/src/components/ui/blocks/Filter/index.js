@@ -24,6 +24,10 @@ const Filter = styled.div`
     transform-origin: bottom;
     transition: 0.4s;
     color: ${({ theme }) => theme.color};
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     
     @media only screen and (min-width: 600px) {
         //max-height: ${props => (props.filterBarActive ? '250px' : 0)};

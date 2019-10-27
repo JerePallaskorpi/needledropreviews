@@ -50,6 +50,10 @@ const Track = styled.span`
     transition: 3s;
     opacity: 0;
     transform: scale(0);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     
     ${({ nthTrack }) => css`
         -webkit-animation: ${FadeInTrack()} 0.4s forwards linear;
@@ -101,6 +105,10 @@ const Cover = styled.div`
     padding: 0;
     box-shadow: 0 2px 4px 0 hsla(0, 0%, 0%, 0.2);
     border-radius: 6px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     
     ${({ thumbnail, coverArt }) => css`
         background-color: ${styles.colorDark};
@@ -139,6 +147,10 @@ const Text = styled.div`
     letter-spacing: 1px;
     white-space: nowrap;
     overflow: hidden;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     
     span {
         overflow: hidden;
@@ -160,6 +172,10 @@ const Rating = styled.div`
     align-items: center;
     font-size: 24px;
     color: ${({ theme }) => theme.color};
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     
     -webkit-animation: ${FadeInOpacity()} 0.4s forwards;
     -moz-animation: ${FadeInOpacity()} 0.4s forwards;
