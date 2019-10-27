@@ -15,6 +15,10 @@ const Rating = styled.div`
     background: ${({ rating }) => ratingDetails.some(r => r.score === rating)
     && ratingDetails.find(r => r.score === rating).color};
     max-width: 1100px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     
     @media only screen and (max-width: 1100px) {
         height: 75px;

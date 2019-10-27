@@ -1,6 +1,7 @@
 import * as styles from '../../components/ui/defaultStyles';
 
 export const themeLight = {
+    themeName: 'light',
     background: '#ffffff',
     backgroundSecondary: '#fafafa',
     backgroundFloating: 'rgba(255, 255, 255, 0.5)',
@@ -10,6 +11,7 @@ export const themeLight = {
 };
 
 export const themeDark = {
+    themeName: 'dark',
     background: '#353535',
     backgroundSecondary: '#191919',
     backgroundFloating: 'rgba(0, 0, 0, 0.5)',

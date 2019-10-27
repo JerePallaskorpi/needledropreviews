@@ -55,6 +55,7 @@ const Icon = styled.div`
 
 const Close = styled.div`
     background: ${({ theme }) => theme.backgroundSecondary};
+    color: ${({ theme }) => theme.color};
     border-radius: 0 4px 4px 0;
     height: 100%;
     display: flex;

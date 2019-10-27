@@ -9,6 +9,10 @@ const Text = styled.div`
     letter-spacing: 1px;
     white-space: nowrap;
     overflow: hidden;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     
     span {
         overflow: hidden;

@@ -98,6 +98,10 @@ const Video = styled.div`
     justify-content: center;
     align-items: center;
     margin: 0 auto;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     
     iframe {
         width: calc(100% - 50px);
