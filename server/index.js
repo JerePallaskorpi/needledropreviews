@@ -1,6 +1,7 @@
 const dotenv = require('dotenv');
 
-dotenv.load();
+dotenv.config();
+
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
@@ -54,7 +55,7 @@ if (!isDev && cluster.isMaster) {
     });
 
     app.get('*', (req, res) => {
-        res.sendfile(path.join(`${__dirname}\\../client/build/index.html`));
+        res.sendFile(path.join(`${__dirname}\\../client/build/index.html`));
     });
 
     app.listen(PORT);
