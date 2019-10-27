@@ -145,7 +145,9 @@ const AlbumReviewList = ({ albumReviews, fetching, reviewYears }: Props) => {
                 ? searchParameters.searchText.substring(0, 30)
                 : activeFilters.search,
             score: searchParameters.score
-                ? searchParameters.score.split(',').filter(s => (s >= 0 && s <= 10)).map(s => parseInt(s, 10))
+                ? searchParameters.score.split(',')
+                    .filter(s => ((s >= 0 && s <= 10) || s === '-'))
+                    .map(s => (s === '-' ? null : parseInt(s, 10)))
                 : activeFilters.score,
             date: searchParameters.searchDate && reviewYears
                 .some(year => year === parseInt(searchParameters.searchDate, 10))
@@ -230,7 +232,7 @@ const AlbumReviewList = ({ albumReviews, fetching, reviewYears }: Props) => {
     useEffect(() => {
         if (!fetching && reviewYears.length) {
             const score = activeFilters.score.length > 0
-                ? `score=${activeFilters.score.join(',')}`
+                ? `score=${activeFilters.score.map(s => (s === null ? '-' : s)).join(',')}`
                 : null;
 
             const searchText = activeFilters.search.length > 0
