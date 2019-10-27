@@ -10,7 +10,7 @@ const AlbumWrapper = styled.div`
     flex-wrap: wrap;
     justify-content: space-between;
     margin-top: 50px;
-    margin-bottom: ${props => (props.filterBarActive ? '240px' : '0px')};
+    margin-bottom: ${props => (props.filterBarActive ? '250px' : '10px')};
     background: ${({ theme }) => theme.background};
     transition: 0.4s;
     
@@ -20,7 +20,7 @@ const AlbumWrapper = styled.div`
     `};
     
     @media only screen and (min-width: 600px) {
-        margin-bottom: ${props => (props.filterBarActive ? '180px' : '0px')};
+        margin-bottom: ${props => (props.filterBarActive ? '190px' : '0px')};
     }
 `;
 

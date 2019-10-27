@@ -1,6 +1,7 @@
 // @flow
 import React, { useEffect, useState } from 'react';
 import { sortNumber, sortFilteredList } from '../../../utils/arrays';
+import { searchParameters } from '../../../utils/filterParameters';
 import { textFilter, dateFilter, scoreFilter } from '../../../utils/reviewFilter';
 import AlbumFilterView from './album-filter/AlbumFilterView';
 import AlbumReviewListView from './AlbumReviewListView';
@@ -137,7 +138,30 @@ const AlbumReviewList = ({ albumReviews, fetching, reviewYears }: Props) => {
             });
             setSortBy(initialState.sortBy);
         });
-    }, []); // eslint-disable-line
+
+        setActiveFilters({
+            ...activeFilters,
+            search: searchParameters.searchText
+                ? searchParameters.searchText.substring(0, 30)
+                : activeFilters.search,
+            score: searchParameters.score
+                ? searchParameters.score.split(',').filter(s => (s >= 0 && s <= 10)).map(s => parseInt(s, 10))
+                : activeFilters.score,
+            date: searchParameters.searchDate && reviewYears
+                .some(year => year === parseInt(searchParameters.searchDate, 10))
+                ? {
+                    value: parseInt(searchParameters.searchDate, 10),
+                    label: parseInt(searchParameters.searchDate, 10),
+                }
+                : activeFilters.date,
+        });
+
+        const sortByList = ['newest', 'oldest', 'random'];
+        setSortBy(searchParameters.sortBy && sortByList.some(sb => sb === searchParameters.sortBy)
+            ? searchParameters.sortBy
+            : initialState.sortBy);
+
+    }, [reviewYears]); // eslint-disable-line
 
     /** Scoll listener for handling pagination and filter toggle */
     const scrollListener = () => {
@@ -201,6 +225,37 @@ const AlbumReviewList = ({ albumReviews, fetching, reviewYears }: Props) => {
 
         window.scrollTo(0, 0);
     }, [activeFilters, sortBy, albumReviews, reviewYears]);
+
+    /** Change url based on filters. */
+    useEffect(() => {
+        if (!fetching && reviewYears.length) {
+            const score = activeFilters.score.length > 0
+                ? `score=${activeFilters.score.join(',')}`
+                : null;
+
+            const searchText = activeFilters.search.length > 0
+                ? `searchText=${activeFilters.search}`
+                : null;
+
+            const searchDate = activeFilters.date !== null
+                ? `searchDate=${activeFilters.date.value}`
+                : null;
+
+            const paramSortBy = `sortBy=${sortBy}`;
+
+            const searchParams = [paramSortBy, score, searchText, searchDate];
+
+            if (searchParams.filter(param => param !== null).length > 0) {
+                const url = window.location.href;
+                const urlSplit = url.split('?');
+                const obj = { Title: '', Url: `${urlSplit[0]}?${searchParams.filter(param => param !== null).join('&')}` };
+                window.history.pushState(obj, obj.Title, obj.Url);
+            } else {
+                const obj = { Title: '', Url: '/' };
+                window.history.pushState(obj, obj.Title, obj.Url);
+            }
+        }
+    }, [activeFilters, sortBy, fetching, reviewYears]);
 
     const pagedFilteredReviews = filteredReviews.slice(0, pagination * 36);
 
