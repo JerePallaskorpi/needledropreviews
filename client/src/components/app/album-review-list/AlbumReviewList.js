@@ -129,6 +129,14 @@ const AlbumReviewList = ({ albumReviews, fetching, reviewYears }: Props) => {
     useEffect(() => {
         setFoundResults(albumReviews.length);
         window.scrollTo(0, 0);
+
+        // Event listener for header logo. Reset list back to initial state.
+        window.document.getElementById('header__tndr-logo').addEventListener('click', () => {
+            setActiveFilters({
+                ...initialState.activeFilters,
+            });
+            setSortBy(initialState.sortBy);
+        });
     }, []); // eslint-disable-line
 
     /** Scoll listener for handling pagination and filter toggle */

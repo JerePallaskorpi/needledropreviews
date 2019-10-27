@@ -14,7 +14,7 @@ const Header = ({
     handleSwitchTheme, theme,
 }: Props) => (
     <StyledHeader>
-        <StyledHeader.Logo>
+        <StyledHeader.Logo id="header__tndr-logo">
             {smallLogo(() => {})}
         </StyledHeader.Logo>
         <Switch
