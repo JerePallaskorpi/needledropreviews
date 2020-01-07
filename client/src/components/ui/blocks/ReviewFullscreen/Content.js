@@ -112,7 +112,7 @@ const Cover = styled.div`
     
     ${({ thumbnail, coverArt }) => css`
         background-color: ${styles.colorDark};
-        background-image: url(${(coverArt ? 'https://66.media.tumblr.com/avatar_91da58554fa4_128.pnj' : thumbnail)});
+        background-image: url(${(coverArt ? 'http://66.media.tumblr.com/avatar_91da58554fa4_128.pnj' : thumbnail)});
         background-repeat: no-repeat;
         background-position: center; 
         background-size: cover;
